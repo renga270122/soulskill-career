@@ -3,7 +3,6 @@ import { queryOptions, useQueryClient, useSuspenseQuery } from "@tanstack/react-
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { MessageCircle, Trash2, Send } from "lucide-react";
-import { AppShell } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,12 +16,12 @@ export const Route = createFileRoute("/_authenticated/discussions")({
   head: () => pageMeta("Member discussions", "SoulSkill member career conversations and practical encouragement."),
   loader: ({ context }) => context.queryClient.ensureQueryData(discussionsQuery),
   errorComponent: DiscussionError,
-  notFoundComponent: () => <AppShell><p className="p-8">Discussion not found.</p></AppShell>,
+  notFoundComponent: () => <p className="p-8">Discussion not found.</p>,
   component: DiscussionsPage,
 });
 function DiscussionError() {
   const router = useRouter();
-  return <AppShell><div className="p-8"><p role="alert">Discussions couldn’t load right now.</p><Button onClick={() => void router.invalidate()}>Try again</Button></div></AppShell>;
+  return <div className="p-8"><p role="alert">Discussions couldn’t load right now.</p><Button onClick={() => void router.invalidate()}>Try again</Button></div>;
 }
 function DiscussionsPage() {
   const { data } = useSuspenseQuery(discussionsQuery);
@@ -60,7 +59,7 @@ function DiscussionsPage() {
     if (!window.confirm(isPost ? "Delete this discussion and all its replies?" : "Delete this reply?")) return;
     void run(() => remove({ data: { id } }), () => setNotice("Message deleted."));
   }
-  return <AppShell><main className="mx-auto w-full max-w-4xl space-y-8 p-5 md:p-10">
+  return <main className="mx-auto w-full max-w-4xl space-y-8 p-5 md:p-10">
     <header><p className="text-sm text-primary">SoulSkill Community</p><h1 className="mt-2 font-display text-4xl">Member discussions</h1><p className="mt-3 text-muted-foreground">Share a question, a lesson or a little encouragement.</p><Link to="/community" className="text-sm text-primary underline">Community guidelines</Link></header>
     <form onSubmit={submit} className="space-y-4 border-y border-border py-6"><h2 className="font-display text-2xl">Start a conversation</h2>
       <label className="block space-y-2">Display name<Input required minLength={2} maxLength={60} value={name} onChange={e => setName(e.target.value)} autoComplete="nickname" /></label>
@@ -79,5 +78,5 @@ function DiscussionsPage() {
         {replyTo === post.id && <form onSubmit={submitReply} className="mt-3 space-y-3"><label className="block space-y-2">Reply message<Textarea required minLength={5} maxLength={3000} value={replyBody} onChange={e => setReplyBody(e.target.value)} /></label><p className="text-xs text-muted-foreground">Posting as {name || "the display name entered above"}.</p><Button disabled={busy} variant="ink"><Send />Post reply</Button></form>}
       </article>)}
     </section>
-  </main></AppShell>;
+  </main>;
 }

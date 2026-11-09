@@ -1,5 +1,5 @@
 # Milestone 2
-- [ ] Add public FAQs and Community member discussions with signed-in posting/replies, owner deletion and admin moderation; verify desktop/mobile and persistence.
+- [x] Add public FAQs and Community member discussions; verified signed-in posting/replies, persistence, owner deletion, sitemap and desktop/mobile. Admin deletion is enforced by RLS; no admin account was available for an end-to-end moderation check.
 - [x] Phase 1 visual transformation: global ivory/gold design system and inspirational candidate dashboard; no new backend features.
 - [x] Apply shared visual language to landing, auth, career tools and public pages; preserve existing workflows and document presentation.
 - [x] Verify signed-in desktop/mobile navigation, resume saving/preview/export, ten template choices, job discovery, profile/settings and public pages. All 40 tests pass; no overflow on checked screens.
