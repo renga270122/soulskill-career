@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, FileText, Target, ShieldCheck, Users, Briefcase, MessagesSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Brand } from "@/components/Brand";
+import { PublicFooter } from "@/components/PublicPages";
 import { useSession } from "@/lib/auth";
 import heroAsset from "@/assets/hero-collaboration.webp.asset.json";
 import jobDiscoveryAsset from "@/assets/job-discovery.webp.asset.json";
@@ -47,6 +48,8 @@ function Landing() {
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <Brand />
         <nav className="flex items-center gap-2">
+          <Button asChild variant="ghost" className="hidden md:inline-flex"><Link to="/about">About</Link></Button>
+          <Button asChild variant="ghost" className="hidden md:inline-flex"><Link to="/contact">Contact</Link></Button>
           {session ? (
             <Button asChild variant="ink">
               <Link to="/app">Open workspace</Link>
@@ -140,9 +143,7 @@ function Landing() {
         </div>
       </section>
 
-      <footer className="mx-auto max-w-6xl px-6 py-10 text-sm text-muted-foreground">
-        @2026 SoulSkill
-      </footer>
+      <PublicFooter />
     </div>
   );
 }
