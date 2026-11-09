@@ -35,7 +35,7 @@
 ## Wrap-up status
 - Resume flow verified end-to-end while signed in; all 27 tests passed and latest automatic build reports OK.
 - Broader career milestones are partially implemented, not acceptance-complete; remaining verification and refinements are parked at the user's credit check-in stop.
-- AI coaching and tailored-copy end-to-end checks remain unverified; paused at the user's stop.
+- Evidence-grounded AI coaching now verified with real AI output and persisted history; tailored-copy end-to-end checks remain pending.
 - Two-account privacy verification remains blocked by the lack of a second populated candidate account.
 - PWA verification remains pending; paused at the user's stop.
 - Employer application submission occurs on the employer's website; no direct employer integration is implemented.
@@ -43,3 +43,9 @@
 - [x] Replace the two identified test jobs with three live-checked India job listings, preserving Preparing status and existing resumes.
 - [x] Show company, location, checked date and genuine employer application links.
 - [x] Verify the real listings on desktop and phone.
+
+# Evidence-based AI Career Coach
+- [x] Use owned saved profile and selected/default/latest resume; keep goals separate from achievements.
+- [x] Render exact source facts, labeled AI actions, unknowns and next action; do not write profile/resume changes.
+- [x] Preserve opt-in journal privacy, input on errors and private coaching history.
+- [x] Run grounding/privacy tests and verify actual AI output, history reload and phone layout.
