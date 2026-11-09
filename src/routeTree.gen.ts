@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as AuthenticatedCandidateRouteImport } from './routes/_authenticated/candidate'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedRecruiterRouteImport } from './routes/_authenticated/recruiter'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 
@@ -41,6 +42,11 @@ const AuthenticatedCandidateRoute = AuthenticatedCandidateRouteImport.update({
   path: '/candidate',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedRecruiterRoute = AuthenticatedRecruiterRouteImport.update({
   id: '/recruiter',
   path: '/recruiter',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/app': typeof AuthenticatedAppRoute
   '/candidate': typeof AuthenticatedCandidateRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/recruiter': typeof AuthenticatedRecruiterRoute
   '/settings': typeof AuthenticatedSettingsRoute
 }
@@ -65,6 +72,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/app': typeof AuthenticatedAppRoute
   '/candidate': typeof AuthenticatedCandidateRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/recruiter': typeof AuthenticatedRecruiterRoute
   '/settings': typeof AuthenticatedSettingsRoute
 }
@@ -75,14 +83,29 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/app': typeof AuthenticatedAppRoute
   '/_authenticated/candidate': typeof AuthenticatedCandidateRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/recruiter': typeof AuthenticatedRecruiterRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/app' | '/candidate' | '/recruiter' | '/settings'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/app'
+    | '/candidate'
+    | '/profile'
+    | '/recruiter'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/app' | '/candidate' | '/recruiter' | '/settings'
+  to:
+    | '/'
+    | '/auth'
+    | '/app'
+    | '/candidate'
+    | '/profile'
+    | '/recruiter'
+    | '/settings'
   id:
     | '__root__'
     | '/'
@@ -90,6 +113,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/app'
     | '/_authenticated/candidate'
+    | '/_authenticated/profile'
     | '/_authenticated/recruiter'
     | '/_authenticated/settings'
   fileRoutesById: FileRoutesById
@@ -137,6 +161,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCandidateRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/recruiter': {
       id: '/_authenticated/recruiter'
       path: '/recruiter'
@@ -157,6 +188,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAppRoute: typeof AuthenticatedAppRoute
   AuthenticatedCandidateRoute: typeof AuthenticatedCandidateRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedRecruiterRoute: typeof AuthenticatedRecruiterRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
 }
@@ -164,6 +196,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAppRoute: AuthenticatedAppRoute,
   AuthenticatedCandidateRoute: AuthenticatedCandidateRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedRecruiterRoute: AuthenticatedRecruiterRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
 }
