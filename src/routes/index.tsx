@@ -14,6 +14,8 @@ export const Route = createFileRoute("/")({
           "Build a compelling career profile, sharpen your resume, and get discovered — only when you choose to be.",
       },
       { property: "og:title", content: "SoulSkill — Career intelligence by Soulvest.ai" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       {
         property: "og:description",
         content: "Career profiles, resumes, interview prep and consent-based recruiting.",

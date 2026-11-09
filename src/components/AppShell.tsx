@@ -10,13 +10,13 @@ import { useRoles, type AppRole } from "@/lib/auth";
 import { Brand } from "@/components/Brand";
 import { Button } from "@/components/ui/button";
 
-type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/recruiter" | "/settings" };
+type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/profile" | "/resumes" | "/recruiter" | "/settings" };
 
 const NAV: Record<"candidate" | "recruiter", NavItem[]> = {
   candidate: [
     { label: "Dashboard", icon: LayoutDashboard, to: "/candidate" },
-    { label: "Profile", icon: User },
-    { label: "Resumes", icon: FileText },
+    { label: "Profile", icon: User, to: "/profile" },
+    { label: "Resumes", icon: FileText, to: "/resumes" },
     { label: "Job matching", icon: Target },
     { label: "Applications", icon: ListChecks },
     { label: "Interview prep", icon: MessagesSquare },
@@ -89,6 +89,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               </Link>
             );
           })}
+          {sections.includes("candidate") && <><Button variant="ghost" size="sm" asChild><Link to="/profile">Profile</Link></Button><Button variant="ghost" size="sm" asChild><Link to="/resumes">Resumes</Link></Button></>}
           <Link to="/settings" className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-muted-foreground" activeProps={{ className: "bg-accent text-accent-foreground" }}>Privacy</Link>
         </nav>
         <main className="flex-1 px-5 py-8 md:px-10 md:py-12">{children}</main>

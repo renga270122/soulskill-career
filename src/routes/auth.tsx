@@ -21,6 +21,8 @@ export const Route = createFileRoute("/auth")({
       { title: "Sign in — SoulSkill" },
       { name: "description", content: "Sign in or create your SoulSkill account." },
       { property: "og:title", content: "Sign in — SoulSkill" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:description", content: "Access your SoulSkill workspace." },
     ],
   }),

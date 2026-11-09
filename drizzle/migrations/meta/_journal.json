@@ -8,6 +8,13 @@
       "when": 1794241665215,
       "tag": "0000_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794243616075,
+      "tag": "0001_candidate_profiles_and_resumes",
+      "breakpoints": true
     }
   ]
 }

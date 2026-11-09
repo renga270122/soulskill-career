@@ -4,9 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { PageHeader, Panel, Stat } from "@/components/Dash";
 import { DemoBadge } from "@/components/Brand";
 import { Progress } from "@/components/ui/progress";
+import { pageMeta } from "@/lib/page-meta";
 
 export const Route = createFileRoute("/_authenticated/candidate")({
-  head: () => ({ meta: [{ title: "Career dashboard — SoulSkill" }] }),
+  head: () => pageMeta("Career dashboard", "Your SoulSkill career workspace, profile and application overview."),
   component: CandidateDashboard,
 });
 
