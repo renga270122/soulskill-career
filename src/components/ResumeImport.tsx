@@ -1,0 +1,29 @@
+import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Upload, FileText, Download, Trash2 } from "lucide-react";
+import { toast } from "sonner";
+import { importResume, listOriginals, downloadOriginal, deleteOriginal } from "@/lib/resume-import.functions";
+import { validateResumeFile } from "@/lib/resume-import-schema";
+import type { CareerData } from "@/lib/career-schema";
+import { Button } from "./ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
+
+export function ResumeImport({ userId, onReview }: { userId: string; onReview: (data: { content: CareerData; originalId: string; title: string; warnings: string[]; text: string }) => void }) {
+  const [open, setOpen] = useState(false), [busy, setBusy] = useState(false), [error, setError] = useState(""), [dragging, setDragging] = useState(false);
+  const run = useServerFn(importResume), download = useServerFn(downloadOriginal), remove = useServerFn(deleteOriginal); const qc = useQueryClient();
+  const originals = useQuery({ queryKey: ["originals", userId], queryFn: () => listOriginals(), enabled: open });
+  async function upload(file?: File) {
+    if (!file || busy) return; const issue = validateResumeFile(file.name, file.size); if (issue) { setError(issue); return; }
+    setBusy(true); setError("");
+    try {
+      const bytes = new Uint8Array(await file.arrayBuffer()); let raw = ""; for (let i = 0; i < bytes.length; i += 0x8000) raw += String.fromCharCode(...bytes.subarray(i, i+0x8000));
+      const result = await run({ data: { filename: file.name, base64: btoa(raw) } });
+      await qc.invalidateQueries({ queryKey: ["originals", userId] });
+      onReview({ ...result, title: file.name.replace(/\.[^.]+$/, ""), warnings: result.error ? [result.error, ...result.warnings] : result.warnings }); setOpen(false);
+    } catch (e) { setError(e instanceof Error ? e.message : "Upload failed. Try again or enter your resume manually."); }
+    finally { setBusy(false); }
+  }
+  return <><Button variant="outline" onClick={() => setOpen(true)}><Upload className="size-4" />Upload Existing Resume</Button><Dialog open={open} onOpenChange={v => { if (!busy) setOpen(v); }}><DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto"><DialogHeader><DialogTitle>Upload an existing resume</DialogTitle></DialogHeader><div onDragOver={e => { e.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)} onDrop={e => { e.preventDefault(); setDragging(false); void upload(e.dataTransfer.files[0]); }} className={`space-y-4 rounded-md border-2 border-dashed p-8 text-center ${dragging ? "border-primary bg-accent" : "border-border"}`}><Upload className="mx-auto size-8 text-primary" /><p className="font-medium">{busy ? "Reading your resume…" : "Drop your resume here"}</p><p className="text-xs text-muted-foreground">PDF or DOCX · Up to 10 MB · Text-based PDFs up to 30 pages</p><Button variant="outline" asChild disabled={busy}><label htmlFor="resume-upload">Choose file</label></Button><input id="resume-upload" aria-label="Upload resume file" type="file" className="sr-only" accept=".pdf,.docx" disabled={busy} onChange={e => { void upload(e.target.files?.[0]); e.target.value = ""; }} /><p className="text-xs text-muted-foreground">Private original · AI-assisted extraction · Review before saving</p></div>{error && <p role="alert" className="text-sm text-destructive">{error}</p>}<div className="border-t border-border pt-4"><h3 className="font-medium">Original documents</h3>{originals.isPending ? <p role="status" className="mt-3 text-sm text-muted-foreground">Loading…</p> : originals.isError ? <p role="alert">Original files could not load.</p> : !originals.data?.length ? <p className="mt-3 text-sm text-muted-foreground">No original documents uploaded.</p> : <ul className="mt-3 divide-y divide-border">{originals.data.map(o => <li key={o.id} className="flex items-center gap-3 py-3"><FileText className="size-4 shrink-0 text-primary" /><span className="min-w-0 flex-1 break-words text-sm">{o.filename}<span className="block text-xs text-muted-foreground">{(o.size_bytes/1024).toFixed(0)} KB</span></span><Button variant="ghost" size="icon" aria-label={`Download ${o.filename}`} title="Download original" onClick={async () => { try { const result = await download({ data: { id: o.id } }); window.open(`${import.meta.env["VITE_SUPABASE_URL"]}${result.path}`, "_blank", "noopener,noreferrer"); } catch { toast.error("Original download failed"); } }}><Download className="size-4" /></Button><AlertDialog><AlertDialogTrigger asChild><Button variant="ghost" size="icon" aria-label={`Delete original ${o.filename}`} title="Delete original"><Trash2 className="size-4" /></Button></AlertDialogTrigger><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Delete original document?</AlertDialogTitle><AlertDialogDescription>The uploaded file will be deleted. Editable resumes remain available.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Cancel</AlertDialogCancel><AlertDialogAction onClick={async () => { try { await remove({ data: { id: o.id } }); await qc.invalidateQueries({ queryKey: ["originals", userId] }); await qc.invalidateQueries({ queryKey: ["resumes", userId] }); toast.success("Original deleted"); } catch { toast.error("Could not delete original"); } }}>Delete original</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog></li>)}</ul>}</div></DialogContent></Dialog></>;
+}

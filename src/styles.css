@@ -152,3 +152,26 @@
 .resume-font-sans { font-family: "Resume-sans", sans-serif; }
 .resume-font-serif { font-family: "Resume-serif", serif; }
 .resume-font-mono { font-family: "Resume-mono", monospace; }
+.template-thumb { width: 160px; height: 218px; padding: 18px 14px; background: var(--resume-paper); border: 1px solid var(--border); color: var(--resume-ink); position: relative; }
+.thumb-name { height: 8px; width: 78%; background: var(--resume-ink); }
+.thumb-role { height: 3px; width: 55%; background: var(--muted-foreground); margin-top: 5px; }
+.thumb-rule { height: 1px; background: var(--resume-purple); margin: 10px 0; }
+.thumb-section { margin-top: 12px; }
+.thumb-heading { height: 4px; width: 44%; background: var(--resume-purple); margin-bottom: 6px; }
+.thumb-line, .thumb-short { height: 2px; background: var(--border); margin: 4px 0; }
+.thumb-short { width: 70%; }
+.template-modern { border-top: 5px solid var(--resume-purple); }
+.template-executive .thumb-name, .template-executive .thumb-role { margin-left: auto; margin-right: auto; }
+.template-technical .thumb-heading { background: var(--resume-teal); width: 60%; height: 3px; }
+.template-technical .thumb-name { height: 5px; }
+.template-minimal { padding: 24px 19px; }
+.template-minimal .thumb-rule { display: none; }
+.template-minimal .thumb-heading { background: var(--resume-ink); height: 2px; }
+.template-contemporary { border-left: 4px solid var(--resume-teal); }
+.template-creative { border-top: 10px solid var(--resume-ruby); }
+.template-creative .thumb-name { height: 12px; background: var(--resume-ruby); }
+.template-graduate::after { content: ""; width: 8px; height: 8px; background: var(--resume-purple); position: absolute; right: 12px; top: 12px; }
+.template-graduate .thumb-section:first-child { margin-top: 19px; }
+.template-projects .thumb-section { border-left: 2px solid var(--resume-teal); padding-left: 6px; }
+.template-columns .thumb-body { display: grid; grid-template-columns: 1.7fr 1fr; gap: 10px; }
+.template-columns .thumb-section:nth-child(2) { border-left: 1px solid var(--border); padding-left: 7px; }
