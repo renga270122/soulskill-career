@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Roles live in `public.user_roles` (candidate/recruiter/admin); signup may self-select only candidate or recruiter, admin is never assigned from user metadata — prevents privilege escalation.
+- Recruiter access to candidate profiles is gated by RLS on `profiles.discoverable` — consent must be enforced in the database, not the UI.
+- Any sample figures in the UI must carry the "Demo data" badge — the brief forbids implying unbuilt features work.
