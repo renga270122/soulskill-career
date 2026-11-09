@@ -6,11 +6,14 @@ describe("public sitemap", () => {
   it("includes public pages but never authenticated descendants or sign-in", () => {
     const root = createRootRoute({ staticData: { sitemap: false } });
     const home = createRoute({ getParentRoute: () => root, path: "/", staticData: { sitemap: true } });
+    const about = createRoute({ getParentRoute: () => root, path: "about", staticData: { sitemap: true } });
+    const contact = createRoute({ getParentRoute: () => root, path: "contact", staticData: { sitemap: true } });
+    const privacy = createRoute({ getParentRoute: () => root, path: "privacy", staticData: { sitemap: true } });
     const auth = createRoute({ getParentRoute: () => root, path: "auth", staticData: { sitemap: false } });
     const privateLayout = createRoute({ getParentRoute: () => root, id: "_authenticated", staticData: { sitemap: "exclude-subtree" } });
     const resumes = createRoute({ getParentRoute: () => privateLayout, path: "resumes", staticData: { sitemap: true } });
-    const router = createRouter({ routeTree: root.addChildren([home, auth, privateLayout.addChildren([resumes])]) });
-    expect(sitemapStaticPaths(router)).toEqual(["/"]);
+    const router = createRouter({ routeTree: root.addChildren([home, about, contact, privacy, auth, privateLayout.addChildren([resumes])]) });
+    expect(sitemapStaticPaths(router)).toEqual(["/", "/about", "/contact", "/privacy"]);
   });
 
   it("uses the public domain without invented modification dates", () => {
