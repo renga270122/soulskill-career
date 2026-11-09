@@ -135,6 +135,17 @@
 @utility bg-hero {
   background-image: var(--gradient-hero);
 }
+.journey-theme {
+  --primary: oklch(0.35 0.055 260);
+  --primary-foreground: oklch(0.985 0.006 85);
+  --accent: oklch(0.94 0.045 85);
+  --accent-foreground: oklch(0.35 0.055 260);
+  --ring: oklch(0.6 0.09 85);
+}
+.vision-editorial article:nth-child(3n + 1) { grid-column: span 2; }
+.vision-focus article:first-child { grid-column: 1 / -1; }
+@media (max-width: 639px) { .vision-editorial article:nth-child(3n + 1) { grid-column: auto; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 @utility font-display {
   font-family: var(--font-display);
   font-weight: 400;
