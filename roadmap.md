@@ -1,4 +1,5 @@
 # Milestone 2
+- [ ] Harden repeated Google sign-in attempts and session handoff; verify callback return. Original incognito/account-selection failure remains unconfirmed without a real failing Google flow.
 - [x] Add JD-based resume keyword match scoring with matched/missing terms and transparent calculation; verified saved-resume and Resume Studio flows on desktop/mobile, stale-score removal and 16 relevant tests; no resume mutations.
 - [x] Add public FAQs and Community member discussions; verified signed-in posting/replies, persistence, owner deletion, sitemap and desktop/mobile. Admin deletion is enforced by RLS; no admin account was available for an end-to-end moderation check.
 - [x] Phase 1 visual transformation: global ivory/gold design system and inspirational candidate dashboard; no new backend features.

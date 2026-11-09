@@ -30,6 +30,7 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Project rules
+- Sign-in handoff is deferred outside auth callbacks and deduplicated across hydration/events; Google initiation is single-flight so repeated taps cannot start competing login attempts.
 - ATS matching is deterministic browser-side keyword coverage using shared visible resume sections and keyword-extractor stopwords; equal-weight distinct terms, explicit estimated-score limits and no resume mutations prevent misleading employer-score claims.
 - Community conversations live separately from career profiles; authenticated RLS allows member reads, self-owned inserts and owner/admin deletion, keeping private career records out of discussions.
 - Apply visual themes through shared CSS tokens and UI controls; keep resume document layout/fonts/colors independent so visual refreshes never alter saved presentation or exported PDFs.

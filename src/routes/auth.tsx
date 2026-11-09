@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Brand } from "@/components/Brand";
 import { PublicFooter } from "@/components/PublicPages";
+import { createSignInHandoff } from "@/lib/sign-in-flow";
 
 type Search = { mode?: "signin" | "signup" | undefined; as?: "candidate" | "recruiter" | undefined };
 
@@ -46,15 +47,19 @@ function AuthPage() {
   const [fullName, setFullName] = useState("");
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
+  const [googleBusy, setGoogleBusy] = useState(false);
+  const googleInFlight = useRef(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/app", replace: true });
-    });
+    const handoff = createSignInHandoff(() => { void navigate({ to: "/app", replace: true }); });
+    void supabase.auth.getSession().then(({ data, error }) => {
+      if (error) toast.error("Sign-in couldn’t finish. Please try again.");
+      handoff.accept(Boolean(data.session));
+    }).catch(() => toast.error("Sign-in couldn’t finish. Please try again."));
     const { data } = supabase.auth.onAuthStateChange((_e, s) => {
-      if (s) navigate({ to: "/app", replace: true });
+      handoff.accept(Boolean(s));
     });
-    return () => data.subscription.unsubscribe();
+    return () => { handoff.cancel(); data.subscription.unsubscribe(); };
   }, [navigate]);
 
   async function submit(e: React.FormEvent) {
@@ -84,8 +89,15 @@ function AuthPage() {
   }
 
   async function signInWithGoogle() {
-    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/auth" });
-    if (r.error) toast.error(r.error.message ?? "Sign-in failed");
+    if (googleInFlight.current || busy) return;
+    googleInFlight.current = true;
+    setGoogleBusy(true);
+    try {
+      const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/auth" });
+      if (r.redirected) return;
+      if (r.error) toast.error(r.error.message ?? "Sign-in failed");
+    } catch { toast.error("Google sign-in couldn’t finish. Please try again."); }
+    finally { googleInFlight.current = false; setGoogleBusy(false); }
   }
 
   return (
@@ -142,7 +154,7 @@ function AuthPage() {
               )}
 
               <div className="mt-6 space-y-3">
-                <Button type="button" variant="outline" className="h-10 w-full" onClick={signInWithGoogle}>
+                <Button type="button" variant="outline" className="h-10 w-full" disabled={googleBusy || busy} aria-busy={googleBusy} onClick={signInWithGoogle}>
                   <GoogleLogo /> Continue with Google
                 </Button>
                 {mode === "signup" && (
@@ -169,7 +181,7 @@ function AuthPage() {
                   <Label htmlFor="password">Password</Label>
                   <Input id="password" type="password" required minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <Button type="submit" variant="ink" className="h-10 w-full" disabled={busy}>
+                <Button type="submit" variant="ink" className="h-10 w-full" disabled={busy || googleBusy}>
                   {busy ? "Please wait…" : mode === "signup" ? "Create account" : "Sign in"}
                 </Button>
               </form>
