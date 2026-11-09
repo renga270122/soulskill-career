@@ -23,6 +23,7 @@ import { Route as AuthenticatedActionPlanRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAffirmationsRouteImport } from './routes/_authenticated/affirmations'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
+import { Route as AuthenticatedAtsCheckRouteImport } from './routes/_authenticated/ats-check'
 import { Route as AuthenticatedCandidateRouteImport } from './routes/_authenticated/candidate'
 import { Route as AuthenticatedCareerOnboardingRouteImport } from './routes/_authenticated/career-onboarding'
 import { Route as AuthenticatedCoachRouteImport } from './routes/_authenticated/coach'
@@ -110,6 +111,11 @@ const AuthenticatedApplicationsRoute =
     path: '/applications',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAtsCheckRoute = AuthenticatedAtsCheckRouteImport.update({
+  id: '/ats-check',
+  path: '/ats-check',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedCandidateRoute = AuthenticatedCandidateRouteImport.update({
   id: '/candidate',
   path: '/candidate',
@@ -205,6 +211,7 @@ export interface FileRoutesByFullPath {
   '/affirmations': typeof AuthenticatedAffirmationsRoute
   '/app': typeof AuthenticatedAppRoute
   '/applications': typeof AuthenticatedApplicationsRoute
+  '/ats-check': typeof AuthenticatedAtsCheckRoute
   '/candidate': typeof AuthenticatedCandidateRoute
   '/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/coach': typeof AuthenticatedCoachRoute
@@ -235,6 +242,7 @@ export interface FileRoutesByTo {
   '/affirmations': typeof AuthenticatedAffirmationsRoute
   '/app': typeof AuthenticatedAppRoute
   '/applications': typeof AuthenticatedApplicationsRoute
+  '/ats-check': typeof AuthenticatedAtsCheckRoute
   '/candidate': typeof AuthenticatedCandidateRoute
   '/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/coach': typeof AuthenticatedCoachRoute
@@ -267,6 +275,7 @@ export interface FileRoutesById {
   '/_authenticated/affirmations': typeof AuthenticatedAffirmationsRoute
   '/_authenticated/app': typeof AuthenticatedAppRoute
   '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
+  '/_authenticated/ats-check': typeof AuthenticatedAtsCheckRoute
   '/_authenticated/candidate': typeof AuthenticatedCandidateRoute
   '/_authenticated/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/_authenticated/coach': typeof AuthenticatedCoachRoute
@@ -299,6 +308,7 @@ export interface FileRouteTypes {
     | '/affirmations'
     | '/app'
     | '/applications'
+    | '/ats-check'
     | '/candidate'
     | '/career-onboarding'
     | '/coach'
@@ -329,6 +339,7 @@ export interface FileRouteTypes {
     | '/affirmations'
     | '/app'
     | '/applications'
+    | '/ats-check'
     | '/candidate'
     | '/career-onboarding'
     | '/coach'
@@ -360,6 +371,7 @@ export interface FileRouteTypes {
     | '/_authenticated/affirmations'
     | '/_authenticated/app'
     | '/_authenticated/applications'
+    | '/_authenticated/ats-check'
     | '/_authenticated/candidate'
     | '/_authenticated/career-onboarding'
     | '/_authenticated/coach'
@@ -490,6 +502,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedApplicationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/ats-check': {
+      id: '/_authenticated/ats-check'
+      path: '/ats-check'
+      fullPath: '/ats-check'
+      preLoaderRoute: typeof AuthenticatedAtsCheckRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/candidate': {
       id: '/_authenticated/candidate'
       path: '/candidate'
@@ -603,6 +622,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAffirmationsRoute: typeof AuthenticatedAffirmationsRoute
   AuthenticatedAppRoute: typeof AuthenticatedAppRoute
   AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
+  AuthenticatedAtsCheckRoute: typeof AuthenticatedAtsCheckRoute
   AuthenticatedCandidateRoute: typeof AuthenticatedCandidateRoute
   AuthenticatedCareerOnboardingRoute: typeof AuthenticatedCareerOnboardingRoute
   AuthenticatedCoachRoute: typeof AuthenticatedCoachRoute
@@ -625,6 +645,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAffirmationsRoute: AuthenticatedAffirmationsRoute,
   AuthenticatedAppRoute: AuthenticatedAppRoute,
   AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
+  AuthenticatedAtsCheckRoute: AuthenticatedAtsCheckRoute,
   AuthenticatedCandidateRoute: AuthenticatedCandidateRoute,
   AuthenticatedCareerOnboardingRoute: AuthenticatedCareerOnboardingRoute,
   AuthenticatedCoachRoute: AuthenticatedCoachRoute,
