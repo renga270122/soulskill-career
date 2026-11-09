@@ -1,7 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import "@lovable.dev/cloud-auth-js/styles.css";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
@@ -83,8 +82,8 @@ function AuthPage() {
     }
   }
 
-  async function social(provider: "google" | "lovable") {
-    const r = await lovable.auth.signInWithOAuth(provider, { redirect_uri: window.location.origin + "/auth" });
+  async function signInWithGoogle() {
+    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/auth" });
     if (r.error) toast.error(r.error.message ?? "Sign-in failed");
   }
 
@@ -142,12 +141,9 @@ function AuthPage() {
               )}
 
               <div className="mt-6 space-y-3">
-                <Button type="button" variant="outline" className="h-10 w-full" onClick={() => social("google")}>
+                <Button type="button" variant="outline" className="h-10 w-full" onClick={signInWithGoogle}>
                   <GoogleLogo /> Continue with Google
                 </Button>
-                <button type="button" className="lovable-auth-button w-full" onClick={() => social("lovable")}>
-                  Continue with Lovable
-                </button>
                 {mode === "signup" && (
                   <p className="text-xs text-muted-foreground">Social sign-up creates a professional account.</p>
                 )}
