@@ -26,8 +26,8 @@ export const getJobSearch = createServerFn({ method: 'POST' }).middleware([requi
     const c = careerSchema.safeParse(career.data?.content);
     if (c.success) preferences = { ...preferences, designation: c.data.current_role, skills: c.data.skills.map(s => s.name).slice(0, 15), years: c.data.years, locations: c.data.location ? [c.data.location] : [] };
   }
-  const rows = (items.data ?? []).map(i => ({ id: i.id, name: i.name, created_at: i.created_at, content: i.content as { criteria?: z.infer<typeof criteria>; portals?: string[] } }));
-  return { preferences, saved: !!prefRow, savedSearches: rows.filter((_, i) => items.data![i].kind === 'saved_search'), history: rows.filter((_, i) => items.data![i].kind === 'history').slice(0, 15) };
+  const rows = (items.data ?? []).map(i => ({ kind: i.kind, id: i.id, name: i.name, created_at: i.created_at, content: i.content as { criteria?: z.infer<typeof criteria>; portals?: string[] } }));
+  return { preferences, saved: !!prefRow, savedSearches: rows.filter(r => r.kind === 'saved_search'), history: rows.filter(r => r.kind === 'history').slice(0, 15) };
 });
 
 export const saveJobPreferences = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth]).inputValidator(jobSearchPreferences).handler(async ({ context, data }) => {
