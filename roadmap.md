@@ -1,4 +1,5 @@
 # Milestone 2
+- [ ] Add JD-based resume keyword match scoring with matched/missing terms, transparent calculation and desktop/mobile verification; preserve resume facts.
 - [x] Add public FAQs and Community member discussions; verified signed-in posting/replies, persistence, owner deletion, sitemap and desktop/mobile. Admin deletion is enforced by RLS; no admin account was available for an end-to-end moderation check.
 - [x] Phase 1 visual transformation: global ivory/gold design system and inspirational candidate dashboard; no new backend features.
 - [x] Apply shared visual language to landing, auth, career tools and public pages; preserve existing workflows and document presentation.
