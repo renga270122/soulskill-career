@@ -70,12 +70,50 @@ export type Database = {
         }
         Relationships: []
       }
+      resume_originals: {
+        Row: {
+          created_at: string
+          filename: string
+          id: string
+          path: string
+          size_bytes: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          filename: string
+          id?: string
+          path: string
+          size_bytes: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          filename?: string
+          id?: string
+          path?: string
+          size_bytes?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resume_originals_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       resumes: {
         Row: {
           content: Json
           created_at: string
+          design_key: string
           id: string
           is_default: boolean
+          original_id: string | null
+          presentation: Json
           target_role: string
           template: string
           title: string
@@ -85,8 +123,11 @@ export type Database = {
         Insert: {
           content?: Json
           created_at?: string
+          design_key?: string
           id?: string
           is_default?: boolean
+          original_id?: string | null
+          presentation?: Json
           target_role?: string
           template?: string
           title?: string
@@ -96,8 +137,11 @@ export type Database = {
         Update: {
           content?: Json
           created_at?: string
+          design_key?: string
           id?: string
           is_default?: boolean
+          original_id?: string | null
+          presentation?: Json
           target_role?: string
           template?: string
           title?: string
@@ -105,6 +149,13 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "resumes_original_id_fkey"
+            columns: ["original_id"]
+            isOneToOne: false
+            referencedRelation: "resume_originals"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "resumes_user_id_fkey"
             columns: ["user_id"]
