@@ -42,4 +42,4 @@
 # Real job listings
 - [x] Replace the two identified test jobs with three live-checked India job listings, preserving Preparing status and existing resumes.
 - [x] Show company, location, checked date and genuine employer application links.
-- [ ] Verify the real listings on desktop and phone.
+- [x] Verify the real listings on desktop and phone.
