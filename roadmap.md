@@ -22,3 +22,11 @@
 - [x] Disable Lovable auth provider and confirm Google/email remain enabled through hosted configuration tools.
 - [x] Verify sign-in and sign-up screens on desktop and mobile; all 19 existing tests pass.
 - [ ] GitHub sign-in — blocked: not supported by Lovable Cloud.
+
+# SoulSkill 2.0 career transformation
+- [ ] Milestone 1: career intention onboarding, editable future identity, affirmations and real-data journey dashboard.
+- [ ] Milestone 2: private vision board, affirmation history and searchable daily/weekly journal.
+- [ ] Milestone 3: historical 30-day journeys, task tracking, reflections and daily alignment routine.
+- [ ] Milestone 4: authenticated evidence-based AI coach and non-destructive Resume Studio tailoring.
+- [ ] Milestone 5: personal growth reports, export and cohesive candidate navigation/visual positioning.
+- [ ] Verify each milestone: persistence, owner isolation, recruiter privacy, mobile/PWA and existing feature regressions.
