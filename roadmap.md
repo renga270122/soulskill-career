@@ -39,3 +39,7 @@
 - Two-account privacy verification remains blocked by the lack of a second populated candidate account.
 - PWA verification remains pending; paused at the user's stop.
 - Employer application submission occurs on the employer's website; no direct employer integration is implemented.
+# Real job listings
+- [x] Replace the two identified test jobs with three live-checked India job listings, preserving Preparing status and existing resumes.
+- [x] Show company, location, checked date and genuine employer application links.
+- [x] Verify the real listings on desktop and phone.
