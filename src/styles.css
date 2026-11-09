@@ -138,5 +138,10 @@
 @utility font-display {
   font-family: var(--font-display);
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
+.resume-modern .resume-name, .resume-modern .resume-section { color: var(--color-primary); }
+.resume-modern { border-top: 6px solid var(--color-primary); }
+.resume-executive { font-family: Georgia, serif; text-align: center; }
+.resume-executive .resume-name { font-family: var(--font-display); font-weight: 400; }
+.resume-executive .resume-section { border-bottom: 1px solid var(--color-border); padding-bottom: 0.35rem; }
