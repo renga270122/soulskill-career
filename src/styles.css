@@ -153,6 +153,7 @@
 .resume-font-serif { font-family: "Resume-serif", serif; }
 .resume-font-mono { font-family: "Resume-mono", monospace; }
 .template-thumb { width: 160px; height: 218px; padding: 18px 14px; background: var(--resume-paper); border: 1px solid var(--border); color: var(--resume-ink); position: relative; }
+.template-gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 20px; }
 .thumb-name { height: 8px; width: 78%; background: var(--resume-ink); }
 .thumb-role { height: 3px; width: 55%; background: var(--muted-foreground); margin-top: 5px; }
 .thumb-rule { height: 1px; background: var(--resume-purple); margin: 10px 0; }
