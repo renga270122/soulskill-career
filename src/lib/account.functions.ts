@@ -4,6 +4,13 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 export const deleteMyAccount = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    for (;;) {
+      const { data: images, error } = await context.supabase.storage.from("career-vision").list(context.userId, { limit: 100 });
+      if (error) throw new Error("Could not remove your private career images.");
+      if (!images?.length) break;
+      const removed = await context.supabase.storage.from("career-vision").remove(images.map(image => `${context.userId}/${image.name}`));
+      if (removed.error) throw new Error("Could not remove your private career images.");
+    }
     const { data: originals, error: originalsError } = await context.supabase.from("resume_originals").select("path").eq("user_id", context.userId);
     if (originalsError) throw new Error("Could not remove your original resumes.");
     if (originals?.length) {

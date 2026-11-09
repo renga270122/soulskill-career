@@ -1,0 +1,11 @@
+import {describe,it,expect} from 'vitest';import {programTasks,program,taskProgress,journalContext,isoDate,recordInput,applicationInput} from '@/lib/journey-schema';
+describe('Career transformation rules',()=>{
+ it('starts the four-week plan with exact achievement/company/application targets',()=>{const tasks=programTasks('2026-11-09');expect(tasks).toHaveLength(21);expect(program[0]).toContain('Document 10 significant career achievements');expect(program[0]).toContain('Identify 20 target companies');expect(program[1]).toContain('Apply to 10 suitable jobs');expect(program[2]).toContain('Apply to another 10 relevant opportunities');expect(tasks.every(t=>!('completed_at' in t))).toBe(true);});
+ it('preserves exact networking and interview targets',()=>{expect(program[1]).toContain('Connect with 10 engineering managers or recruiters');expect(program[1]).toContain('Contact 5 former colleagues');expect(program[2]).toContain('Prepare two system-design case studies');expect(program[2]).toContain('Practice three technical architect interview scenarios');expect(program[3]).toContain('Complete two mock interviews');});
+ it('calculates progress only from explicit completions',()=>{expect(taskProgress([])).toBe(0);expect(taskProgress([{completed_at:null},{completed_at:'2026-11-09T00:00:00Z'}])).toBe(50);});
+ it('never includes journals without explicit consent',()=>{expect(journalContext(false,['a'],[{id:'a',kind:'journal',content:{text:'private'}}])).toEqual([]);});
+ it('includes only explicitly selected journal entries',()=>{expect(journalContext(true,['a'],[{id:'a',kind:'journal',content:{}},{id:'b',kind:'journal',content:{}},{id:'a',kind:'activity',content:{}}])).toEqual([{id:'a',content:{}}]);});
+ it('rejects impossible deadlines',()=>{expect(isoDate.safeParse('2026-02-30').success).toBe(false);expect(isoDate.safeParse('2026-11-09').success).toBe(true);});
+ it('requires a real journal response',()=>{expect(recordInput.safeParse({kind:'journal',content:{title:'Reflection',text:'',view:'daily'},event_date:'2026-11-09'}).success).toBe(false);});
+ it('rejects executable job URLs',()=>{expect(applicationInput.safeParse({resume_id:null,resume_title:'',role:'Engineer',company:'Example',url:'javascript:alert(1)',status:'Preparing',notes:''}).success).toBe(false);});
+});

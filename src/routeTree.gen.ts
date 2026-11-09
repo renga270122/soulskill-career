@@ -13,12 +13,23 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AuthenticatedActionPlanRouteImport } from './routes/_authenticated/action-plan'
+import { Route as AuthenticatedAffirmationsRouteImport } from './routes/_authenticated/affirmations'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
+import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
 import { Route as AuthenticatedCandidateRouteImport } from './routes/_authenticated/candidate'
+import { Route as AuthenticatedCareerOnboardingRouteImport } from './routes/_authenticated/career-onboarding'
+import { Route as AuthenticatedCoachRouteImport } from './routes/_authenticated/coach'
+import { Route as AuthenticatedGrowthReportRouteImport } from './routes/_authenticated/growth-report'
+import { Route as AuthenticatedInterviewPrepRouteImport } from './routes/_authenticated/interview-prep'
+import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticated/journal'
+import { Route as AuthenticatedJourneyRouteImport } from './routes/_authenticated/journey'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedRecruiterRouteImport } from './routes/_authenticated/recruiter'
 import { Route as AuthenticatedResumesRouteImport } from './routes/_authenticated/resumes'
+import { Route as AuthenticatedRoutineRouteImport } from './routes/_authenticated/routine'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedVisionBoardRouteImport } from './routes/_authenticated/vision-board'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -39,14 +50,64 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedActionPlanRoute = AuthenticatedActionPlanRouteImport.update({
+  id: '/action-plan',
+  path: '/action-plan',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAffirmationsRoute =
+  AuthenticatedAffirmationsRouteImport.update({
+    id: '/affirmations',
+    path: '/affirmations',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
   id: '/app',
   path: '/app',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedApplicationsRoute =
+  AuthenticatedApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedCandidateRoute = AuthenticatedCandidateRouteImport.update({
   id: '/candidate',
   path: '/candidate',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCareerOnboardingRoute =
+  AuthenticatedCareerOnboardingRouteImport.update({
+    id: '/career-onboarding',
+    path: '/career-onboarding',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCoachRoute = AuthenticatedCoachRouteImport.update({
+  id: '/coach',
+  path: '/coach',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedGrowthReportRoute =
+  AuthenticatedGrowthReportRouteImport.update({
+    id: '/growth-report',
+    path: '/growth-report',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedInterviewPrepRoute =
+  AuthenticatedInterviewPrepRouteImport.update({
+    id: '/interview-prep',
+    path: '/interview-prep',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedJournalRoute = AuthenticatedJournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedJourneyRoute = AuthenticatedJourneyRouteImport.update({
+  id: '/journey',
+  path: '/journey',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
@@ -64,33 +125,66 @@ const AuthenticatedResumesRoute = AuthenticatedResumesRouteImport.update({
   path: '/resumes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRoutineRoute = AuthenticatedRoutineRouteImport.update({
+  id: '/routine',
+  path: '/routine',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedVisionBoardRoute =
+  AuthenticatedVisionBoardRouteImport.update({
+    id: '/vision-board',
+    path: '/vision-board',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/action-plan': typeof AuthenticatedActionPlanRoute
+  '/affirmations': typeof AuthenticatedAffirmationsRoute
   '/app': typeof AuthenticatedAppRoute
+  '/applications': typeof AuthenticatedApplicationsRoute
   '/candidate': typeof AuthenticatedCandidateRoute
+  '/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
+  '/coach': typeof AuthenticatedCoachRoute
+  '/growth-report': typeof AuthenticatedGrowthReportRoute
+  '/interview-prep': typeof AuthenticatedInterviewPrepRoute
+  '/journal': typeof AuthenticatedJournalRoute
+  '/journey': typeof AuthenticatedJourneyRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/recruiter': typeof AuthenticatedRecruiterRoute
   '/resumes': typeof AuthenticatedResumesRoute
+  '/routine': typeof AuthenticatedRoutineRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/vision-board': typeof AuthenticatedVisionBoardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/action-plan': typeof AuthenticatedActionPlanRoute
+  '/affirmations': typeof AuthenticatedAffirmationsRoute
   '/app': typeof AuthenticatedAppRoute
+  '/applications': typeof AuthenticatedApplicationsRoute
   '/candidate': typeof AuthenticatedCandidateRoute
+  '/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
+  '/coach': typeof AuthenticatedCoachRoute
+  '/growth-report': typeof AuthenticatedGrowthReportRoute
+  '/interview-prep': typeof AuthenticatedInterviewPrepRoute
+  '/journal': typeof AuthenticatedJournalRoute
+  '/journey': typeof AuthenticatedJourneyRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/recruiter': typeof AuthenticatedRecruiterRoute
   '/resumes': typeof AuthenticatedResumesRoute
+  '/routine': typeof AuthenticatedRoutineRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/vision-board': typeof AuthenticatedVisionBoardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,12 +192,23 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/action-plan': typeof AuthenticatedActionPlanRoute
+  '/_authenticated/affirmations': typeof AuthenticatedAffirmationsRoute
   '/_authenticated/app': typeof AuthenticatedAppRoute
+  '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
   '/_authenticated/candidate': typeof AuthenticatedCandidateRoute
+  '/_authenticated/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
+  '/_authenticated/coach': typeof AuthenticatedCoachRoute
+  '/_authenticated/growth-report': typeof AuthenticatedGrowthReportRoute
+  '/_authenticated/interview-prep': typeof AuthenticatedInterviewPrepRoute
+  '/_authenticated/journal': typeof AuthenticatedJournalRoute
+  '/_authenticated/journey': typeof AuthenticatedJourneyRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/recruiter': typeof AuthenticatedRecruiterRoute
   '/_authenticated/resumes': typeof AuthenticatedResumesRoute
+  '/_authenticated/routine': typeof AuthenticatedRoutineRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/vision-board': typeof AuthenticatedVisionBoardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,35 +216,68 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/sitemap.xml'
+    | '/action-plan'
+    | '/affirmations'
     | '/app'
+    | '/applications'
     | '/candidate'
+    | '/career-onboarding'
+    | '/coach'
+    | '/growth-report'
+    | '/interview-prep'
+    | '/journal'
+    | '/journey'
     | '/profile'
     | '/recruiter'
     | '/resumes'
+    | '/routine'
     | '/settings'
+    | '/vision-board'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/sitemap.xml'
+    | '/action-plan'
+    | '/affirmations'
     | '/app'
+    | '/applications'
     | '/candidate'
+    | '/career-onboarding'
+    | '/coach'
+    | '/growth-report'
+    | '/interview-prep'
+    | '/journal'
+    | '/journey'
     | '/profile'
     | '/recruiter'
     | '/resumes'
+    | '/routine'
     | '/settings'
+    | '/vision-board'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/sitemap.xml'
+    | '/_authenticated/action-plan'
+    | '/_authenticated/affirmations'
     | '/_authenticated/app'
+    | '/_authenticated/applications'
     | '/_authenticated/candidate'
+    | '/_authenticated/career-onboarding'
+    | '/_authenticated/coach'
+    | '/_authenticated/growth-report'
+    | '/_authenticated/interview-prep'
+    | '/_authenticated/journal'
+    | '/_authenticated/journey'
     | '/_authenticated/profile'
     | '/_authenticated/recruiter'
     | '/_authenticated/resumes'
+    | '/_authenticated/routine'
     | '/_authenticated/settings'
+    | '/_authenticated/vision-board'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -179,6 +317,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/action-plan': {
+      id: '/_authenticated/action-plan'
+      path: '/action-plan'
+      fullPath: '/action-plan'
+      preLoaderRoute: typeof AuthenticatedActionPlanRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/affirmations': {
+      id: '/_authenticated/affirmations'
+      path: '/affirmations'
+      fullPath: '/affirmations'
+      preLoaderRoute: typeof AuthenticatedAffirmationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/app': {
       id: '/_authenticated/app'
       path: '/app'
@@ -186,11 +338,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/applications': {
+      id: '/_authenticated/applications'
+      path: '/applications'
+      fullPath: '/applications'
+      preLoaderRoute: typeof AuthenticatedApplicationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/candidate': {
       id: '/_authenticated/candidate'
       path: '/candidate'
       fullPath: '/candidate'
       preLoaderRoute: typeof AuthenticatedCandidateRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/career-onboarding': {
+      id: '/_authenticated/career-onboarding'
+      path: '/career-onboarding'
+      fullPath: '/career-onboarding'
+      preLoaderRoute: typeof AuthenticatedCareerOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/coach': {
+      id: '/_authenticated/coach'
+      path: '/coach'
+      fullPath: '/coach'
+      preLoaderRoute: typeof AuthenticatedCoachRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/growth-report': {
+      id: '/_authenticated/growth-report'
+      path: '/growth-report'
+      fullPath: '/growth-report'
+      preLoaderRoute: typeof AuthenticatedGrowthReportRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/interview-prep': {
+      id: '/_authenticated/interview-prep'
+      path: '/interview-prep'
+      fullPath: '/interview-prep'
+      preLoaderRoute: typeof AuthenticatedInterviewPrepRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/journal': {
+      id: '/_authenticated/journal'
+      path: '/journal'
+      fullPath: '/journal'
+      preLoaderRoute: typeof AuthenticatedJournalRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/journey': {
+      id: '/_authenticated/journey'
+      path: '/journey'
+      fullPath: '/journey'
+      preLoaderRoute: typeof AuthenticatedJourneyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/profile': {
@@ -214,6 +415,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedResumesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/routine': {
+      id: '/_authenticated/routine'
+      path: '/routine'
+      fullPath: '/routine'
+      preLoaderRoute: typeof AuthenticatedRoutineRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings': {
       id: '/_authenticated/settings'
       path: '/settings'
@@ -221,25 +429,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/vision-board': {
+      id: '/_authenticated/vision-board'
+      path: '/vision-board'
+      fullPath: '/vision-board'
+      preLoaderRoute: typeof AuthenticatedVisionBoardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedActionPlanRoute: typeof AuthenticatedActionPlanRoute
+  AuthenticatedAffirmationsRoute: typeof AuthenticatedAffirmationsRoute
   AuthenticatedAppRoute: typeof AuthenticatedAppRoute
+  AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
   AuthenticatedCandidateRoute: typeof AuthenticatedCandidateRoute
+  AuthenticatedCareerOnboardingRoute: typeof AuthenticatedCareerOnboardingRoute
+  AuthenticatedCoachRoute: typeof AuthenticatedCoachRoute
+  AuthenticatedGrowthReportRoute: typeof AuthenticatedGrowthReportRoute
+  AuthenticatedInterviewPrepRoute: typeof AuthenticatedInterviewPrepRoute
+  AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
+  AuthenticatedJourneyRoute: typeof AuthenticatedJourneyRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedRecruiterRoute: typeof AuthenticatedRecruiterRoute
   AuthenticatedResumesRoute: typeof AuthenticatedResumesRoute
+  AuthenticatedRoutineRoute: typeof AuthenticatedRoutineRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedVisionBoardRoute: typeof AuthenticatedVisionBoardRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedActionPlanRoute: AuthenticatedActionPlanRoute,
+  AuthenticatedAffirmationsRoute: AuthenticatedAffirmationsRoute,
   AuthenticatedAppRoute: AuthenticatedAppRoute,
+  AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
   AuthenticatedCandidateRoute: AuthenticatedCandidateRoute,
+  AuthenticatedCareerOnboardingRoute: AuthenticatedCareerOnboardingRoute,
+  AuthenticatedCoachRoute: AuthenticatedCoachRoute,
+  AuthenticatedGrowthReportRoute: AuthenticatedGrowthReportRoute,
+  AuthenticatedInterviewPrepRoute: AuthenticatedInterviewPrepRoute,
+  AuthenticatedJournalRoute: AuthenticatedJournalRoute,
+  AuthenticatedJourneyRoute: AuthenticatedJourneyRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedRecruiterRoute: AuthenticatedRecruiterRoute,
   AuthenticatedResumesRoute: AuthenticatedResumesRoute,
+  AuthenticatedRoutineRoute: AuthenticatedRoutineRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedVisionBoardRoute: AuthenticatedVisionBoardRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
