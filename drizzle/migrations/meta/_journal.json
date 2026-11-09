@@ -22,6 +22,20 @@
       "when": 1794244826802,
       "tag": "0002_resume_marketplace_and_originals",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794247801508,
+      "tag": "0003_career_transformation_workspace",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794247935555,
+      "tag": "0004_private_career_vision_storage",
+      "breakpoints": true
     }
   ]
 }

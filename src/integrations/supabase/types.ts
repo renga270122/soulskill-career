@@ -43,6 +43,240 @@ export type Database = {
           },
         ]
       }
+      career_action_tasks: {
+        Row: {
+          category: string
+          completed_at: string | null
+          created_at: string
+          description: string
+          due_date: string
+          id: string
+          journey_id: string
+          name: string
+          notes: string
+          updated_at: string
+          user_id: string
+          week: number
+        }
+        Insert: {
+          category?: string
+          completed_at?: string | null
+          created_at?: string
+          description?: string
+          due_date: string
+          id?: string
+          journey_id: string
+          name: string
+          notes?: string
+          updated_at?: string
+          user_id: string
+          week?: number
+        }
+        Update: {
+          category?: string
+          completed_at?: string | null
+          created_at?: string
+          description?: string
+          due_date?: string
+          id?: string
+          journey_id?: string
+          name?: string
+          notes?: string
+          updated_at?: string
+          user_id?: string
+          week?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "career_action_tasks_journey_id_user_id_fkey"
+            columns: ["journey_id", "user_id"]
+            isOneToOne: false
+            referencedRelation: "career_journeys"
+            referencedColumns: ["id", "user_id"]
+          },
+          {
+            foreignKeyName: "career_action_tasks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      career_intentions: {
+        Row: {
+          completed_at: string | null
+          content: Json
+          created_at: string
+          id: string
+          onboarding_step: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          content?: Json
+          created_at?: string
+          id?: string
+          onboarding_step?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          content?: Json
+          created_at?: string
+          id?: string
+          onboarding_step?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "career_intentions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      career_journeys: {
+        Row: {
+          archived_at: string | null
+          created_at: string
+          id: string
+          start_date: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          archived_at?: string | null
+          created_at?: string
+          id?: string
+          start_date: string
+          title?: string
+          user_id: string
+        }
+        Update: {
+          archived_at?: string | null
+          created_at?: string
+          id?: string
+          start_date?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "career_journeys_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      career_records: {
+        Row: {
+          content: Json
+          created_at: string
+          dedup_key: string | null
+          event_date: string
+          id: string
+          kind: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: Json
+          created_at?: string
+          dedup_key?: string | null
+          event_date?: string
+          id?: string
+          kind: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          dedup_key?: string | null
+          event_date?: string
+          id?: string
+          kind?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "career_records_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      job_applications: {
+        Row: {
+          applied_at: string | null
+          company: string
+          created_at: string
+          id: string
+          notes: string
+          resume_id: string | null
+          resume_title: string
+          role: string
+          status: string
+          updated_at: string
+          url: string
+          user_id: string
+        }
+        Insert: {
+          applied_at?: string | null
+          company: string
+          created_at?: string
+          id?: string
+          notes?: string
+          resume_id?: string | null
+          resume_title?: string
+          role: string
+          status?: string
+          updated_at?: string
+          url?: string
+          user_id: string
+        }
+        Update: {
+          applied_at?: string | null
+          company?: string
+          created_at?: string
+          id?: string
+          notes?: string
+          resume_id?: string | null
+          resume_title?: string
+          role?: string
+          status?: string
+          updated_at?: string
+          url?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_applications_resume_id_fkey"
+            columns: ["resume_id"]
+            isOneToOne: false
+            referencedRelation: "resumes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "job_applications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -196,6 +430,10 @@ export type Database = {
         Returns: boolean
       }
       set_default_resume: { Args: { resume_id: string }; Returns: undefined }
+      start_career_journey: {
+        Args: { journey_start: string; journey_title: string; task_rows: Json }
+        Returns: string
+      }
     }
     Enums: {
       app_role: "candidate" | "recruiter" | "admin"

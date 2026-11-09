@@ -42,3 +42,7 @@ use the editor.
 - Run document mapping and optional evidence-based suggestions through server-only AI Gateway helpers; no AI result is written without explicit candidate acceptance.
 
 - Derive sitemap URLs from required route-level inclusion decisions and exclude authenticated subtrees; new public pages stay discoverable without exposing private workspaces.
+- Keep private career journey entities in validated typed career records and dedicated intention/journey/task/application tables, not discoverable profiles; owner-and-candidate RLS and parent ownership keep recruiter access separate.
+- Start new action plans through a serialized transactional database function that archives previous journeys; history and incomplete tasks are never discarded or automatically completed.
+- Job applications link only owner resumes and open employer URLs for submission; mark submission only on explicit user confirmation, never imply an employer integration exists.
+- Journal context is excluded from AI queries unless the caller explicitly approves and selects owned entries; tailored resume suggestions create a separate draft copy rather than overwrite originals.
