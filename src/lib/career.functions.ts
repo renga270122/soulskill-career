@@ -32,7 +32,10 @@ export const savePhoto = createServerFn({ method: "POST" }).middleware([requireS
     if (error || !files?.some(f => f.name === filename)) throw new Error("Uploaded photo not found");
   }
   const { data: previous } = await context.supabase.from("candidate_details").select("photo_path").eq("user_id", context.userId).maybeSingle();
-  const { error } = await context.supabase.from("candidate_details").upsert({ user_id: context.userId, photo_path: data.path, updated_at: new Date().toISOString() });
+  const row = { photo_path: data.path, updated_at: new Date().toISOString() };
+  const { error } = previous
+    ? await context.supabase.from("candidate_details").update(row).eq("user_id", context.userId)
+    : await context.supabase.from("candidate_details").insert({ ...row, user_id: context.userId });
   if (error) throw new Error("Could not save your photo");
   if (previous?.photo_path && previous.photo_path !== data.path) await context.supabase.storage.from("candidate-assets").remove([previous.photo_path]);
   return { ok: true };
