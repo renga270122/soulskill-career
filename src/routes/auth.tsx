@@ -9,12 +9,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Brand } from "@/components/Brand";
 
-type Search = { mode?: "signin" | "signup"; as?: "candidate" | "recruiter" };
+type Search = { mode?: "signin" | "signup" | undefined; as?: "candidate" | "recruiter" | undefined };
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (s: Record<string, unknown>): Search => ({
-    mode: s.mode === "signup" ? "signup" : undefined,
-    as: s.as === "recruiter" ? "recruiter" : undefined,
+    mode: s["mode"] === "signup" ? "signup" : undefined,
+    as: s["as"] === "recruiter" ? "recruiter" : undefined,
   }),
   head: () => ({
     meta: [
