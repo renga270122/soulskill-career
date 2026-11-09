@@ -13,7 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FeedbackRouteImport } from './routes/feedback'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -24,6 +26,7 @@ import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authent
 import { Route as AuthenticatedCandidateRouteImport } from './routes/_authenticated/candidate'
 import { Route as AuthenticatedCareerOnboardingRouteImport } from './routes/_authenticated/career-onboarding'
 import { Route as AuthenticatedCoachRouteImport } from './routes/_authenticated/coach'
+import { Route as AuthenticatedDiscussionsRouteImport } from './routes/_authenticated/discussions'
 import { Route as AuthenticatedFindJobsRouteImport } from './routes/_authenticated/find-jobs'
 import { Route as AuthenticatedGrowthReportRouteImport } from './routes/_authenticated/growth-report'
 import { Route as AuthenticatedInterviewPrepRouteImport } from './routes/_authenticated/interview-prep'
@@ -55,9 +58,19 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeedbackRoute = FeedbackRouteImport.update({
@@ -113,6 +126,12 @@ const AuthenticatedCoachRoute = AuthenticatedCoachRouteImport.update({
   path: '/coach',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDiscussionsRoute =
+  AuthenticatedDiscussionsRouteImport.update({
+    id: '/discussions',
+    path: '/discussions',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedFindJobsRoute = AuthenticatedFindJobsRouteImport.update({
   id: '/find-jobs',
   path: '/find-jobs',
@@ -176,7 +195,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/feedback': typeof FeedbackRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -187,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/candidate': typeof AuthenticatedCandidateRoute
   '/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/coach': typeof AuthenticatedCoachRoute
+  '/discussions': typeof AuthenticatedDiscussionsRoute
   '/find-jobs': typeof AuthenticatedFindJobsRoute
   '/growth-report': typeof AuthenticatedGrowthReportRoute
   '/interview-prep': typeof AuthenticatedInterviewPrepRoute
@@ -203,7 +225,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/feedback': typeof FeedbackRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -214,6 +238,7 @@ export interface FileRoutesByTo {
   '/candidate': typeof AuthenticatedCandidateRoute
   '/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/coach': typeof AuthenticatedCoachRoute
+  '/discussions': typeof AuthenticatedDiscussionsRoute
   '/find-jobs': typeof AuthenticatedFindJobsRoute
   '/growth-report': typeof AuthenticatedGrowthReportRoute
   '/interview-prep': typeof AuthenticatedInterviewPrepRoute
@@ -232,7 +257,9 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/feedback': typeof FeedbackRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -243,6 +270,7 @@ export interface FileRoutesById {
   '/_authenticated/candidate': typeof AuthenticatedCandidateRoute
   '/_authenticated/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/_authenticated/coach': typeof AuthenticatedCoachRoute
+  '/_authenticated/discussions': typeof AuthenticatedDiscussionsRoute
   '/_authenticated/find-jobs': typeof AuthenticatedFindJobsRoute
   '/_authenticated/growth-report': typeof AuthenticatedGrowthReportRoute
   '/_authenticated/interview-prep': typeof AuthenticatedInterviewPrepRoute
@@ -261,7 +289,9 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/auth'
+    | '/community'
     | '/contact'
+    | '/faq'
     | '/feedback'
     | '/privacy'
     | '/sitemap.xml'
@@ -272,6 +302,7 @@ export interface FileRouteTypes {
     | '/candidate'
     | '/career-onboarding'
     | '/coach'
+    | '/discussions'
     | '/find-jobs'
     | '/growth-report'
     | '/interview-prep'
@@ -288,7 +319,9 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/auth'
+    | '/community'
     | '/contact'
+    | '/faq'
     | '/feedback'
     | '/privacy'
     | '/sitemap.xml'
@@ -299,6 +332,7 @@ export interface FileRouteTypes {
     | '/candidate'
     | '/career-onboarding'
     | '/coach'
+    | '/discussions'
     | '/find-jobs'
     | '/growth-report'
     | '/interview-prep'
@@ -316,7 +350,9 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/about'
     | '/auth'
+    | '/community'
     | '/contact'
+    | '/faq'
     | '/feedback'
     | '/privacy'
     | '/sitemap.xml'
@@ -327,6 +363,7 @@ export interface FileRouteTypes {
     | '/_authenticated/candidate'
     | '/_authenticated/career-onboarding'
     | '/_authenticated/coach'
+    | '/_authenticated/discussions'
     | '/_authenticated/find-jobs'
     | '/_authenticated/growth-report'
     | '/_authenticated/interview-prep'
@@ -345,7 +382,9 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
+  CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
   FeedbackRoute: typeof FeedbackRoute
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -381,11 +420,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/feedback': {
@@ -456,6 +509,13 @@ declare module '@tanstack/react-router' {
       path: '/coach'
       fullPath: '/coach'
       preLoaderRoute: typeof AuthenticatedCoachRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/discussions': {
+      id: '/_authenticated/discussions'
+      path: '/discussions'
+      fullPath: '/discussions'
+      preLoaderRoute: typeof AuthenticatedDiscussionsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/find-jobs': {
@@ -546,6 +606,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCandidateRoute: typeof AuthenticatedCandidateRoute
   AuthenticatedCareerOnboardingRoute: typeof AuthenticatedCareerOnboardingRoute
   AuthenticatedCoachRoute: typeof AuthenticatedCoachRoute
+  AuthenticatedDiscussionsRoute: typeof AuthenticatedDiscussionsRoute
   AuthenticatedFindJobsRoute: typeof AuthenticatedFindJobsRoute
   AuthenticatedGrowthReportRoute: typeof AuthenticatedGrowthReportRoute
   AuthenticatedInterviewPrepRoute: typeof AuthenticatedInterviewPrepRoute
@@ -567,6 +628,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCandidateRoute: AuthenticatedCandidateRoute,
   AuthenticatedCareerOnboardingRoute: AuthenticatedCareerOnboardingRoute,
   AuthenticatedCoachRoute: AuthenticatedCoachRoute,
+  AuthenticatedDiscussionsRoute: AuthenticatedDiscussionsRoute,
   AuthenticatedFindJobsRoute: AuthenticatedFindJobsRoute,
   AuthenticatedGrowthReportRoute: AuthenticatedGrowthReportRoute,
   AuthenticatedInterviewPrepRoute: AuthenticatedInterviewPrepRoute,
@@ -588,7 +650,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
+  CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
   FeedbackRoute: FeedbackRoute,
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

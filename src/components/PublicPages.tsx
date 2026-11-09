@@ -13,6 +13,8 @@ export function PublicFooter() {
           <Link to="/contact" className="transition-colors hover:text-foreground">Contact</Link>
           <Link to="/privacy" className="transition-colors hover:text-foreground">Privacy</Link>
           <Link to="/feedback" className="transition-colors hover:text-foreground">Feedback</Link>
+          <Link to="/faq" className="transition-colors hover:text-foreground">FAQs</Link>
+          <Link to="/community" className="transition-colors hover:text-foreground">Community</Link>
         </nav>
       </div>
     </footer>
@@ -29,6 +31,8 @@ export function PublicPage({ title, intro, children }: { title: string; intro: s
             <Button asChild variant="ghost"><Link to="/">Home</Link></Button>
             <Button asChild variant="ghost"><Link to="/about">About</Link></Button>
             <Button asChild variant="ghost"><Link to="/contact">Contact</Link></Button>
+            <Button asChild variant="ghost"><Link to="/faq">FAQs</Link></Button>
+            <Button asChild variant="ghost"><Link to="/community">Community</Link></Button>
             <Button asChild variant="ink"><Link to="/auth">Sign in</Link></Button>
           </nav>
         </div>
