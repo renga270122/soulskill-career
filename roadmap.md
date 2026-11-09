@@ -1,7 +1,8 @@
 # Milestone 2
-- [ ] Phase 1 visual transformation: global ivory/gold design system and inspirational candidate dashboard; no new backend features.
-- [ ] Apply shared visual language to landing, auth, career tools and public pages; preserve existing workflows and document presentation.
-- [ ] Verify signed-in desktop/mobile navigation, resume editing/preview/export, job discovery, profile/settings and public pages; check existing installation support.
+- [x] Phase 1 visual transformation: global ivory/gold design system and inspirational candidate dashboard; no new backend features.
+- [x] Apply shared visual language to landing, auth, career tools and public pages; preserve existing workflows and document presentation.
+- [x] Verify signed-in desktop/mobile navigation, resume saving/preview/export, ten template choices, job discovery, profile/settings and public pages. All 40 tests pass; no overflow on checked screens.
+- [ ] PWA installation verification — blocked: no existing manifest, service worker or install handling was found; no new PWA infrastructure added in this UI-only phase.
 - [x] Add public About, Contact and Privacy pages with supplied email; verified navigation, mobile layout and sitemap inclusion.
 - [x] Replace the default website icon with a SoulSkill-branded icon; verified the preview serves the 64px PNG and small-size readability. Awaiting publication.
 - [x] Private candidate profile, validation, completeness and profile photo storage.
