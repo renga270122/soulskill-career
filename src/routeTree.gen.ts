@@ -16,6 +16,7 @@ import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/ap
 import { Route as AuthenticatedCandidateRouteImport } from './routes/_authenticated/candidate'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedRecruiterRouteImport } from './routes/_authenticated/recruiter'
+import { Route as AuthenticatedResumesRouteImport } from './routes/_authenticated/resumes'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 
 const IndexRoute = IndexRouteImport.update({
@@ -52,6 +53,11 @@ const AuthenticatedRecruiterRoute = AuthenticatedRecruiterRouteImport.update({
   path: '/recruiter',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedResumesRoute = AuthenticatedResumesRouteImport.update({
+  id: '/resumes',
+  path: '/resumes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/candidate': typeof AuthenticatedCandidateRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/recruiter': typeof AuthenticatedRecruiterRoute
+  '/resumes': typeof AuthenticatedResumesRoute
   '/settings': typeof AuthenticatedSettingsRoute
 }
 export interface FileRoutesByTo {
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/candidate': typeof AuthenticatedCandidateRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/recruiter': typeof AuthenticatedRecruiterRoute
+  '/resumes': typeof AuthenticatedResumesRoute
   '/settings': typeof AuthenticatedSettingsRoute
 }
 export interface FileRoutesById {
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/_authenticated/candidate': typeof AuthenticatedCandidateRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/recruiter': typeof AuthenticatedRecruiterRoute
+  '/_authenticated/resumes': typeof AuthenticatedResumesRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
 }
 export interface FileRouteTypes {
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/candidate'
     | '/profile'
     | '/recruiter'
+    | '/resumes'
     | '/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/candidate'
     | '/profile'
     | '/recruiter'
+    | '/resumes'
     | '/settings'
   id:
     | '__root__'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/_authenticated/candidate'
     | '/_authenticated/profile'
     | '/_authenticated/recruiter'
+    | '/_authenticated/resumes'
     | '/_authenticated/settings'
   fileRoutesById: FileRoutesById
 }
@@ -175,6 +187,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRecruiterRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/resumes': {
+      id: '/_authenticated/resumes'
+      path: '/resumes'
+      fullPath: '/resumes'
+      preLoaderRoute: typeof AuthenticatedResumesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings': {
       id: '/_authenticated/settings'
       path: '/settings'
@@ -190,6 +209,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCandidateRoute: typeof AuthenticatedCandidateRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedRecruiterRoute: typeof AuthenticatedRecruiterRoute
+  AuthenticatedResumesRoute: typeof AuthenticatedResumesRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
 }
 
@@ -198,6 +218,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCandidateRoute: AuthenticatedCandidateRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedRecruiterRoute: AuthenticatedRecruiterRoute,
+  AuthenticatedResumesRoute: AuthenticatedResumesRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
 }
 

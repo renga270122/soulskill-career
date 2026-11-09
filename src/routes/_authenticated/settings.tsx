@@ -7,13 +7,14 @@ import { deleteMyAccount } from "@/lib/account.functions";
 import { PageHeader, Panel } from "@/components/Dash";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { pageMeta } from "@/lib/page-meta";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/_authenticated/settings")({
-  head: () => ({ meta: [{ title: "Privacy & account — SoulSkill" }] }),
+  head: () => pageMeta("Privacy & account", "Manage recruiter visibility, consent and your SoulSkill account."),
   component: SettingsPage,
 });
 

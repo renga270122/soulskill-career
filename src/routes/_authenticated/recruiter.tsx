@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader, Panel, Stat } from "@/components/Dash";
 import { DemoBadge } from "@/components/Brand";
+import { pageMeta } from "@/lib/page-meta";
 
 export const Route = createFileRoute("/_authenticated/recruiter")({
-  head: () => ({ meta: [{ title: "Hiring dashboard — SoulSkill" }] }),
+  head: () => pageMeta("Hiring dashboard", "Your SoulSkill hiring workspace and recruitment overview."),
   component: RecruiterDashboard,
 });
 
