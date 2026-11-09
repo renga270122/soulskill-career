@@ -35,5 +35,8 @@ use the editor.
 - Any sample figures in the UI must carry the "Demo data" badge — the brief forbids implying unbuilt features work.
 - Store private career details separately from discoverable profile names/headlines; owner RLS prevents contact details leaking to recruiters.
 - Validate career and resume writes with shared Zod schemas in authenticated server functions; explicit user IDs and RLS enforce ownership.
-- Generate resume PDFs in browser event handlers using embedded Unicode fonts and shared document sections; pagination preserves selectable ATS-readable text.
+- Use a shared measured line layout for SVG page previews and browser-generated PDFs with embedded fonts; pagination and template settings stay identical and text remains selectable.
 - Serialize default-resume selection in a database function with an owner lock and unique index; concurrent updates cannot create two defaults.
+- Keep resume presentation separate from content, with an additive design key for legacy clients; switching templates never rewrites career facts.
+- Validate document signatures, byte limits and DOCX expanded sizes server-side before extraction; preserve originals in private owner-scoped storage and require editable review before creating a resume.
+- Run document mapping and optional evidence-based suggestions through server-only AI Gateway helpers; no AI result is written without explicit candidate acceptance.

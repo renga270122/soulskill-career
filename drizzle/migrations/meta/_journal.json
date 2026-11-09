@@ -15,6 +15,13 @@
       "when": 1794243616075,
       "tag": "0001_candidate_profiles_and_resumes",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794244826802,
+      "tag": "0002_resume_marketplace_and_originals",
+      "breakpoints": true
     }
   ]
 }
