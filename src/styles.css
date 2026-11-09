@@ -140,8 +140,15 @@
   font-weight: 400;
   letter-spacing: 0;
 }
-.resume-modern .resume-name, .resume-modern .resume-section { color: var(--color-primary); }
-.resume-modern { border-top: 6px solid var(--color-primary); }
-.resume-executive { font-family: Georgia, serif; text-align: center; }
-.resume-executive .resume-name { font-family: var(--font-display); font-weight: 400; }
-.resume-executive .resume-section { border-bottom: 1px solid var(--color-border); padding-bottom: 0.35rem; }
+:root { --resume-paper: oklch(1 0 0); --resume-ink: oklch(0.23 0 0); --resume-purple: oklch(0.42 0.13 290); --resume-teal: oklch(0.44 0.08 185); --resume-ruby: oklch(0.43 0.14 20); --resume-graphite: oklch(0.3 0 0); }
+.resume-accent-purple { --resume-accent: var(--resume-purple); }
+.resume-accent-teal { --resume-accent: var(--resume-teal); }
+.resume-accent-ruby { --resume-accent: var(--resume-ruby); }
+.resume-accent-graphite { --resume-accent: var(--resume-graphite); }
+.resume-paper-fill { fill: var(--resume-paper); }
+.resume-text-fill { fill: var(--resume-ink); }
+.resume-accent-fill { fill: var(--resume-accent); background: var(--resume-accent); }
+.resume-accent-stroke { stroke: var(--resume-accent); fill: none; }
+.resume-font-sans { font-family: "Resume-sans", sans-serif; }
+.resume-font-serif { font-family: "Resume-serif", serif; }
+.resume-font-mono { font-family: "Resume-mono", monospace; }
