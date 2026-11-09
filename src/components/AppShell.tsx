@@ -10,7 +10,7 @@ import { useRoles, type AppRole } from "@/lib/auth";
 import { Brand } from "@/components/Brand";
 import { Button } from "@/components/ui/button";
 
-type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/profile" | "/resumes" | "/recruiter" | "/settings" | "/journey" | "/vision-board" | "/affirmations" | "/journal" | "/action-plan" | "/routine" | "/coach" | "/applications" | "/interview-prep" | "/growth-report" };
+type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/profile" | "/resumes" | "/recruiter" | "/settings" | "/journey" | "/vision-board" | "/affirmations" | "/journal" | "/action-plan" | "/routine" | "/coach" | "/applications" | "/find-jobs" | "/interview-prep" | "/growth-report" };
 
 const NAV: Record<"candidate" | "recruiter", NavItem[]> = {
   candidate: [
@@ -24,7 +24,7 @@ const NAV: Record<"candidate" | "recruiter", NavItem[]> = {
     { label: "Profile", icon: User, to: "/profile" },
     { label: "Resumes", icon: FileText, to: "/resumes" },
     { label: "AI Career Coach", icon: MessagesSquare, to: "/coach" },
-    { label: "Job matching", icon: Target },
+    { label: "Find Jobs", icon: Search, to: "/find-jobs" },
     { label: "Applications", icon: ListChecks, to: "/applications" },
     { label: "Interview prep", icon: MessagesSquare, to: "/interview-prep" },
     { label: "Growth Report", icon: LayoutDashboard, to: "/growth-report" },
