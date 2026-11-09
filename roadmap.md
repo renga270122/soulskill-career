@@ -19,6 +19,6 @@
 
 # Authentication methods
 - [x] Remove visitor-facing Lovable login without changing platform integrations, accounts or roles.
-- [ ] Disable Lovable auth provider and confirm Google/email remain enabled.
-- [ ] Verify sign-in and sign-up screens on desktop and mobile.
+- [x] Disable Lovable auth provider and confirm Google/email remain enabled through hosted configuration tools.
+- [x] Verify sign-in and sign-up screens on desktop and mobile; all 19 existing tests pass.
 - [ ] GitHub sign-in — blocked: not supported by Lovable Cloud.
