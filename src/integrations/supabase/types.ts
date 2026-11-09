@@ -14,6 +14,35 @@ export type Database = {
   }
   public: {
     Tables: {
+      candidate_details: {
+        Row: {
+          content: Json
+          photo_path: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: Json
+          photo_path?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: Json
+          photo_path?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "candidate_details_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -40,6 +69,50 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      resumes: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          is_default: boolean
+          target_role: string
+          template: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: Json
+          created_at?: string
+          id?: string
+          is_default?: boolean
+          target_role?: string
+          template?: string
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          is_default?: boolean
+          target_role?: string
+          template?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resumes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -71,6 +144,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      set_default_resume: { Args: { resume_id: string }; Returns: undefined }
     }
     Enums: {
       app_role: "candidate" | "recruiter" | "admin"
