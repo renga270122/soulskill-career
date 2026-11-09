@@ -16,3 +16,9 @@
 - [x] Professional workplace imagery: landing hero and feature photos, candidate career-growth banner, recruiter interview banner, Resume Studio empty-state illustration.
 - [x] Optimized WebP CDN assets, lazy loading, alt text, rounded containers; dashboards stay clean.
 - [x] Verified desktop and mobile layouts via screenshots; full test suite passes.
+
+# Authentication methods
+- [x] Remove visitor-facing Lovable login without changing platform integrations, accounts or roles.
+- [x] Disable Lovable auth provider and confirm Google/email remain enabled through hosted configuration tools.
+- [x] Verify sign-in and sign-up screens on desktop and mobile; all 19 existing tests pass.
+- [ ] GitHub sign-in — blocked: not supported by Lovable Cloud.
