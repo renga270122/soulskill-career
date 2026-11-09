@@ -141,7 +141,7 @@ function Landing() {
       </section>
 
       <footer className="mx-auto max-w-6xl px-6 py-10 text-sm text-muted-foreground">
-        © {new Date().getFullYear()} Soulvest.ai · SoulSkill 3.0
+        @2026 SoulSkill
       </footer>
     </div>
   );
