@@ -27,7 +27,7 @@ export const saveCareer = createServerFn({ method: "POST" }).middleware([require
 export const savePhoto = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator(z.object({ path: z.string().max(300).nullable() })).handler(async ({ context, data }) => {
   if (data.path && (!data.path.startsWith(`${context.userId}/`) || !/^[\w/-]+\.(png|jpe?g|webp)$/i.test(data.path))) throw new Error("Invalid photo");
   if (data.path) {
-    const filename = data.path.split("/").at(-1);
+    const filename = data.path.split("/").at(-1) ?? "";
     const { data: files, error } = await context.supabase.storage.from("candidate-assets").list(context.userId, { search: filename });
     if (error || !files?.some(f => f.name === filename)) throw new Error("Uploaded photo not found");
   }
