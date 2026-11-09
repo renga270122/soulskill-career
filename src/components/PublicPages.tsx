@@ -12,6 +12,7 @@ export function PublicFooter() {
           <Link to="/about" className="transition-colors hover:text-foreground">About</Link>
           <Link to="/contact" className="transition-colors hover:text-foreground">Contact</Link>
           <Link to="/privacy" className="transition-colors hover:text-foreground">Privacy</Link>
+          <Link to="/feedback" className="transition-colors hover:text-foreground">Feedback</Link>
         </nav>
       </div>
     </footer>
