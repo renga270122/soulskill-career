@@ -42,7 +42,7 @@ function ResumeStudio() {
     const result = resumeInputSchema.safeParse(value);
     if (!result.success) { setError(result.error.issues.map(i => `${i.path.join(" › ")}: ${i.message}`).join("; ")); return; }
     setBusy(true); setError("");
-    try { const saved = await save({ data: result.data }); setDirty(false); setDraft({ ...result.data, id: saved.id }); await refresh(); toast.success("Resume saved"); return saved.id; }
+    try { const saved = await save({ data: result.data }); setDirty(false); setDraft({ ...result.data, id: saved.id }); await refresh(); toast.success("Resume saved"); }
     catch { setError("Your resume could not be saved. Please try again."); }
     finally { setBusy(false); }
   }
