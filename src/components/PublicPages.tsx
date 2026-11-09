@@ -7,7 +7,7 @@ export function PublicFooter() {
   return (
     <footer className="border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-6 py-10 text-sm text-muted-foreground">
-        <p>@2026 SoulSkill</p>
+        <p>@2026 SoulSkill · Copyrights Reserved</p>
         <nav aria-label="Footer" className="flex flex-wrap gap-6">
           <Link to="/about" className="transition-colors hover:text-foreground">About</Link>
           <Link to="/contact" className="transition-colors hover:text-foreground">Contact</Link>
