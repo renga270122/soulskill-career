@@ -6,6 +6,7 @@ import { Sparkles, Send, FileText } from 'lucide-react';
 import { useJourney, parsedRecords } from './JourneyShared';
 import { Button } from './ui/button';
 import { CoachResumeSuggestions } from './CoachResumeSuggestions';
+import { intentionSchema } from '@/lib/journey-schema';
 import { Textarea } from './ui/textarea';
 import { Checkbox } from './ui/checkbox';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from './ui/select';
@@ -26,7 +27,7 @@ export function GroundedCareerCoach() {
   const [result, setResult] = useState<Awaited<ReturnType<typeof askGroundedCoach>> | null>(null);
   const selected = resumes.find(r => r.id === resumeId);
   const hasEvidence = careerEvidence(profile.content, 'Profile', 'p').length + careerEvidence(selected?.content, 'Resume', 'r').length > 0;
-  const intentRole = (data as { intention?: { content?: { target_role?: string } } | null }).intention?.content?.target_role ?? '';
+  const intentRole = intentionSchema.safeParse(data.intentions[0]?.content).data?.target_role ?? '';
   const journals = [...parsedRecords(data.records, 'journal'), ...parsedRecords(data.records, 'reflection')];
   async function submit() {
     setBusy(true); setError(''); setResult(null);
