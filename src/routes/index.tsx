@@ -3,6 +3,9 @@ import { ArrowRight, FileText, Target, ShieldCheck, Users, Briefcase, MessagesSq
 import { Button } from "@/components/ui/button";
 import { Brand } from "@/components/Brand";
 import { useSession } from "@/lib/auth";
+import heroAsset from "@/assets/hero-collaboration.webp.asset.json";
+import jobDiscoveryAsset from "@/assets/job-discovery.webp.asset.json";
+import coachingAsset from "@/assets/interview-coaching.webp.asset.json";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -83,15 +86,34 @@ function Landing() {
               <Link to="/auth" search={{ mode: "signup", as: "recruiter" }}>I'm hiring</Link>
             </Button>
           </div>
+          <figure className="mt-16 overflow-hidden rounded-2xl border border-border shadow-soft">
+            <img
+              src={heroAsset.url}
+              alt="A team of professionals collaborating around a table in a bright modern office"
+              width={1600}
+              height={1008}
+              className="aspect-[16/9] w-full object-cover"
+            />
+          </figure>
         </div>
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-16 px-6 py-24 md:grid-cols-2">
         {[
-          { label: "For professionals", items: candidate },
-          { label: "For recruiters", items: recruiter },
+          { label: "For professionals", items: candidate, img: jobDiscoveryAsset, alt: "A professional exploring job opportunities on a laptop in a modern coworking lounge" },
+          { label: "For recruiters", items: recruiter, img: coachingAsset, alt: "A career coach mentoring a professional one-on-one in a bright office" },
         ].map((col) => (
           <div key={col.label}>
+            <figure className="mb-8 overflow-hidden rounded-xl border border-border shadow-soft">
+              <img
+                src={col.img.url}
+                alt={col.alt}
+                width={1408}
+                height={912}
+                loading="lazy"
+                className="aspect-[3/2] w-full object-cover"
+              />
+            </figure>
             <h2 className="font-display text-3xl text-foreground">{col.label}</h2>
             <ul className="mt-8 divide-y divide-border border-y border-border">
               {col.items.map(({ icon: Icon, t, d }) => (

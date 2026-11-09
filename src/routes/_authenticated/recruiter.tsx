@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader, Panel, Stat } from "@/components/Dash";
 import { DemoBadge } from "@/components/Brand";
 import { pageMeta } from "@/lib/page-meta";
+import interviewAsset from "@/assets/interview-handshake.webp.asset.json";
 
 export const Route = createFileRoute("/_authenticated/recruiter")({
   staticData: { sitemap: false },
@@ -26,6 +27,23 @@ function RecruiterDashboard() {
     <div className="mx-auto max-w-6xl space-y-10">
       <PageHeader eyebrow="Hiring" title="Hiring overview" />
       <div className="flex items-center gap-2 text-xs text-muted-foreground"><DemoBadge /> Sample figures. Candidate search is not live yet.</div>
+
+      <section className="relative overflow-hidden rounded-2xl border border-border shadow-soft">
+        <img
+          src={interviewAsset.url}
+          alt="A recruiter and a candidate shaking hands at the start of an interview"
+          width={1600}
+          height={912}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="relative flex flex-col gap-3 bg-gradient-to-r from-background via-background/90 to-background/20 p-8 md:max-w-lg md:p-10">
+          <h2 className="font-display text-3xl text-foreground">Great hiring is human.</h2>
+          <p className="text-sm text-muted-foreground">
+            SoulSkill surfaces candidates who chose to be discovered — every shortlist and decision stays with your team.
+          </p>
+        </div>
+      </section>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Stat label="Open roles" value="3" note="Sample" />

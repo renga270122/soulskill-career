@@ -5,6 +5,7 @@ import { PageHeader, Panel, Stat } from "@/components/Dash";
 import { DemoBadge } from "@/components/Brand";
 import { Progress } from "@/components/ui/progress";
 import { pageMeta } from "@/lib/page-meta";
+import bannerAsset from "@/assets/career-growth-banner.webp.asset.json";
 
 export const Route = createFileRoute("/_authenticated/candidate")({
   staticData: { sitemap: false },
@@ -38,6 +39,28 @@ function CandidateDashboard() {
       </PageHeader>
 
       <div className="flex items-center gap-2 text-xs text-muted-foreground"><DemoBadge /> Figures below are sample data until resumes and applications are connected.</div>
+
+      <section className="relative overflow-hidden rounded-2xl border border-border shadow-soft">
+        <img
+          src={bannerAsset.url}
+          alt="A professional reviewing career documents at a bright desk by a window"
+          width={1600}
+          height={640}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="relative flex flex-col gap-4 bg-gradient-to-r from-background via-background/90 to-background/20 p-8 md:max-w-lg md:p-10">
+          <h2 className="font-display text-3xl text-foreground">Your next chapter starts with a strong profile.</h2>
+          <p className="text-sm text-muted-foreground">
+            Complete your experience, skills and projects so your resumes — and your visibility to recruiters — work harder for you.
+          </p>
+          <div>
+            <Link to="/profile" className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">
+              Complete your profile
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Stat label="Profile strength" value="68%" note="Sample" />

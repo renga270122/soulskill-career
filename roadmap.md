@@ -11,3 +11,8 @@
 - [x] Private PDF/DOCX upload, extraction, editable review, original-file management.
 - [x] Optional evidence-based AI suggestions with explicit acceptance.
 - [x] Verify imports, customization, persistence, multipage export, deletion and existing profile/dashboard flows.
+
+# Visual UX enhancement
+- [x] Professional workplace imagery: landing hero and feature photos, candidate career-growth banner, recruiter interview banner, Resume Studio empty-state illustration.
+- [x] Optimized WebP CDN assets, lazy loading, alt text, rounded containers; dashboards stay clean.
+- [x] Verified desktop and mobile layouts via screenshots; full test suite passes.
