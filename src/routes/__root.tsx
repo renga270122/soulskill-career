@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { supabase } from "@/integrations/supabase/client";
 import { Toaster } from "@/components/ui/sonner";
+import { identityTransition } from "@/lib/auth-events";
 
 function NotFoundComponent() {
   return (
@@ -124,10 +125,19 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((event) => {
-      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
-      router.invalidate();
-      if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
+    let identity: string | null | undefined;
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      const next = session?.user.id ?? null;
+      const changed = identityTransition(identity, next);
+      identity = next;
+      if (!changed && event !== "USER_UPDATED") return;
+      // Keep auth calls outside the auth callback's lock, and do not re-run
+      // the route gate when tab focus re-emits SIGNED_IN for the same user.
+      queueMicrotask(() => {
+        void router.invalidate();
+        if (next) void queryClient.invalidateQueries();
+        else { void queryClient.cancelQueries(); queryClient.clear(); }
+      });
     });
     return () => data.subscription.unsubscribe();
   }, [router, queryClient]);
