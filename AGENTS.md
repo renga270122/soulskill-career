@@ -46,3 +46,4 @@ use the editor.
 - Start new action plans through a serialized transactional database function that archives previous journeys; history and incomplete tasks are never discarded or automatically completed.
 - Job applications link only owner resumes and open employer URLs for submission; mark submission only on explicit user confirmation, never imply an employer integration exists.
 - Journal context is excluded from AI queries unless the caller explicitly approves and selects owned entries; tailored resume suggestions create a separate draft copy rather than overwrite originals.
+- Invalidate authenticated navigation only for identity changes or user updates, not repeated same-user SIGNED_IN events; defer invalidation outside auth callbacks to avoid redundant gate checks and auth-lock contention.
