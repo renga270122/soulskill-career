@@ -1,4 +1,5 @@
 # Milestone 2
+- [ ] Add public About, Contact and Privacy pages with supplied email; verify navigation, mobile layout and sitemap inclusion.
 - [x] Replace the default website icon with a SoulSkill-branded icon; verified the preview serves the 64px PNG and small-size readability. Awaiting publication.
 - [x] Private candidate profile, validation, completeness and profile photo storage.
 - [x] Resume CRUD, defaults, three live templates and PDF export.
