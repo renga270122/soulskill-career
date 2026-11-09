@@ -24,6 +24,7 @@
 - [ ] GitHub sign-in — blocked: not supported by Lovable Cloud.
 
 # SoulSkill 2.0 career transformation
+- [ ] Candidate Resumes menu: preserve upload/edit flows and add resume-linked job application access and tracking.
 - [ ] Milestone 1: career intention onboarding, editable future identity, affirmations and real-data journey dashboard.
 - [ ] Milestone 2: private vision board, affirmation history and searchable daily/weekly journal.
 - [ ] Milestone 3: historical 30-day journeys, task tracking, reflections and daily alignment routine.
