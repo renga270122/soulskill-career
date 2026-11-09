@@ -47,3 +47,4 @@ use the editor.
 - Job applications link only owner resumes and open employer URLs for submission; mark submission only on explicit user confirmation, never imply an employer integration exists.
 - Journal context is excluded from AI queries unless the caller explicitly approves and selects owned entries; tailored resume suggestions create a separate draft copy rather than overwrite originals.
 - Invalidate authenticated navigation only for identity changes or user updates, not repeated same-user SIGNED_IN events; defer invalidation outside auth callbacks to avoid redundant gate checks and auth-lock contention.
+- Career coaching renders facts from validated source IDs and exact saved text, separates goals/reflections from evidence, and labels generated actions as suggestions; the dedicated authenticated coach function never mutates profile or resume content.
