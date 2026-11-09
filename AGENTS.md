@@ -30,6 +30,7 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Project rules
+- Keep public information pages in separate sitemap-included routes with a shared public page shell/footer; this makes trust information directly accessible without entering the private workspace.
 - Roles live in `public.user_roles` (candidate/recruiter/admin); signup may self-select only candidate or recruiter, admin is never assigned from user metadata — prevents privilege escalation.
 - Recruiter access to candidate profiles is gated by RLS on `profiles.discoverable` — consent must be enforced in the database, not the UI.
 - Any sample figures in the UI must carry the "Demo data" badge — the brief forbids implying unbuilt features work.
