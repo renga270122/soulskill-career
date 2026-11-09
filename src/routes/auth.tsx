@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Brand } from "@/components/Brand";
+import { PublicFooter } from "@/components/PublicPages";
 
 type Search = { mode?: "signin" | "signup" | undefined; as?: "candidate" | "recruiter" | undefined };
 
@@ -88,13 +89,13 @@ function AuthPage() {
   }
 
   return (
-    <div className="grid min-h-screen md:grid-cols-2">
-      <aside className="hidden flex-col justify-between bg-ink p-12 text-ink-foreground md:flex">
-        <span className="font-display text-2xl">SoulSkill</span>
+    <div className="grid min-h-screen bg-background md:grid-cols-2">
+      <aside className="hidden flex-col justify-between bg-hero p-12 text-foreground md:flex">
+        <Brand />
         <blockquote className="font-display text-4xl leading-tight">
-          “The right opportunity finds you when your story is clear.”
+          Believe in Your Potential.<br /><em>Build Your Future.</em><p className="mt-6 font-sans text-sm text-muted-foreground">Manifest. Believe. Achieve.</p>
         </blockquote>
-        <p className="text-sm text-ink-foreground/60">Private by default. Visible only with your consent.</p>
+        <p className="text-sm text-muted-foreground">Private by default. Visible only with your consent.</p>
       </aside>
       <main className="flex flex-col px-6 py-8">
         <div className="md:hidden"><Brand /></div>
@@ -114,19 +115,19 @@ function AuthPage() {
               </h1>
               <p className="mt-2 text-sm text-muted-foreground">
                 {mode === "signup" ? "Already have an account? " : "New to SoulSkill? "}
-                <button
+                <Button variant="link"
                   type="button"
-                  className="font-medium text-primary underline-offset-4 hover:underline"
+                  className="h-auto p-0 font-medium text-foreground"
                   onClick={() => setMode(mode === "signup" ? "signin" : "signup")}
                 >
                   {mode === "signup" ? "Sign in" : "Create one"}
-                </button>
+                </Button>
               </p>
 
               {mode === "signup" && (
                 <div className="mt-8 grid grid-cols-2 gap-2 rounded-lg bg-secondary p-1" role="radiogroup" aria-label="Account type">
                   {(["candidate", "recruiter"] as const).map((t) => (
-                    <button
+                    <Button variant="ghost"
                       key={t}
                       type="button"
                       role="radio"
@@ -135,7 +136,7 @@ function AuthPage() {
                       className={`rounded-md py-2 text-sm font-medium transition ${accountType === t ? "bg-card text-foreground shadow-soft" : "text-muted-foreground"}`}
                     >
                       {t === "candidate" ? "Professional" : "Recruiter"}
-                    </button>
+                    </Button>
                   ))}
                 </div>
               )}
@@ -175,6 +176,7 @@ function AuthPage() {
             </>
           )}
         </div>
+        <PublicFooter />
       </main>
     </div>
   );

@@ -78,7 +78,7 @@ function ResumeStudio() {
         {view === "templates" && <TemplateGallery selected={draft.template} content={draft.content} presentation={draft.presentation} onSelect={template => update({ ...draft, template, presentation: selectDesign(draft.presentation, template) })} />}
 
       </section>
-      <section className="min-w-0 lg:sticky lg:top-8 lg:self-start"><p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Live preview</p><ResumePreview content={draft.content} template={draft.template} presentation={draft.presentation} /></section>
+      <section className="min-w-0 lg:sticky lg:top-28 lg:self-start"><p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Live preview</p><ResumePreview content={draft.content} template={draft.template} presentation={draft.presentation} /></section>
     </div>}
     {!draft && <TemplateGallery content={career.content} onSelect={template => { setDraft({ title: "New resume", target_role: "", template, content: structuredClone(career.content), presentation: selectDesign(defaultPresentation(), template), original_id: null }); setDirty(true); }} />}
   </div>;

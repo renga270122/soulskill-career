@@ -7,18 +7,19 @@ import { useSession } from "@/lib/auth";
 import heroAsset from "@/assets/hero-collaboration.webp.asset.json";
 import jobDiscoveryAsset from "@/assets/job-discovery.webp.asset.json";
 import coachingAsset from "@/assets/interview-coaching.webp.asset.json";
+import { BeliefJourney } from "@/components/BeliefJourney";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "SoulSkill — Career intelligence for professionals & recruiters" },
+      { title: "SoulSkill — Believe in Your Potential. Build Your Future." },
       {
         name: "description",
         content:
           "Build a compelling career profile, sharpen your resume, and get discovered — only when you choose to be.",
       },
-      { property: "og:title", content: "SoulSkill — Career intelligence by Soulvest.ai" },
+      { property: "og:title", content: "SoulSkill — Believe in Your Potential. Build Your Future." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       {
@@ -45,9 +46,9 @@ function Landing() {
   const { session } = useSession();
   return (
     <div className="min-h-screen bg-background">
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <Brand />
-        <nav className="flex items-center gap-2">
+      <header className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-5 py-5 md:flex md:justify-between md:px-6">
+        <div className="min-w-0"><Brand /></div>
+        <nav className="flex shrink-0 items-center gap-1">
           <Button asChild variant="ghost" className="hidden md:inline-flex"><Link to="/about">About</Link></Button>
           <Button asChild variant="ghost" className="hidden md:inline-flex"><Link to="/contact">Contact</Link></Button>
           {session ? (
@@ -56,7 +57,7 @@ function Landing() {
             </Button>
           ) : (
             <>
-              <Button asChild variant="ghost">
+              <Button asChild variant="ghost" className="hidden sm:inline-flex">
                 <Link to="/auth">Sign in</Link>
               </Button>
               <Button asChild variant="ink">
@@ -67,17 +68,17 @@ function Landing() {
         </nav>
       </header>
 
-      <section className="bg-hero">
-        <div className="mx-auto max-w-6xl px-6 pb-24 pt-16 md:pt-28">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary">Career intelligence</p>
-          <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.02] text-foreground md:text-7xl">
-            Manifest your career.
-            <br />
-            <em className="text-primary">Build your future.</em>
-          </h1>
+      <section className="relative isolate overflow-hidden">
+        <img src={heroAsset.url} alt="Professionals collaborating in a bright office" width={1600} height={1008} className="absolute inset-0 -z-20 h-full w-full object-cover" />
+        <div className="absolute inset-0 -z-10 bg-background/90" />
+        <div className="soul-enter mx-auto max-w-6xl px-6 py-16 md:py-24">
+          <p className="text-xs font-semibold uppercase text-muted-foreground">Manifest. Believe. Achieve.</p>
+          <h1 className="mt-5 font-display text-6xl leading-tight text-foreground md:text-7xl">SoulSkill</h1>
+          <p className="mt-5 max-w-3xl font-display text-4xl leading-tight text-foreground md:text-5xl">
+            Believe in Your Potential.<br /><em>Build Your Future.</em>
+          </p>
           <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-            SoulSkill helps professionals craft profiles and resumes that land — and gives recruiters a
-            respectful, consent-based way to find them.
+            Turn career clarity into confident action. Shape your resume, explore possibilities and take your next meaningful step — on your terms.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Button asChild size="lg" variant="ink">
@@ -89,17 +90,10 @@ function Landing() {
               <Link to="/auth" search={{ mode: "signup", as: "recruiter" }}>I'm hiring</Link>
             </Button>
           </div>
-          <figure className="mt-16 overflow-hidden rounded-2xl border border-border shadow-soft">
-            <img
-              src={heroAsset.url}
-              alt="A team of professionals collaborating around a table in a bright modern office"
-              width={1600}
-              height={1008}
-              className="aspect-[16/9] w-full object-cover"
-            />
-          </figure>
         </div>
       </section>
+
+      <div className="mx-auto max-w-6xl px-6 pt-8"><BeliefJourney /></div>
 
       <section className="mx-auto grid max-w-6xl gap-16 px-6 py-24 md:grid-cols-2">
         {[

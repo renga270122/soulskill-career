@@ -22,7 +22,7 @@ export function PublicPage({ title, intro, children }: { title: string; intro: s
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <header className="border-b border-border">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
+        <div className="mx-auto grid max-w-6xl gap-4 px-6 py-6 sm:flex sm:items-center sm:justify-between">
           <Brand />
           <nav aria-label="Main navigation" className="flex flex-wrap items-center gap-1">
             <Button asChild variant="ghost"><Link to="/">Home</Link></Button>

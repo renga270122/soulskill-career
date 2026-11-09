@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "theme-color", content: "#f9f7f2" },
+      { name: "theme-color", content: "#F8F5EF" },
       { title: "SoulSkill — Career intelligence by Soulvest.ai" },
       { name: "description", content: "Career profiles, resumes and consent-based recruiting." },
       { name: "author", content: "Soulvest.ai" },
