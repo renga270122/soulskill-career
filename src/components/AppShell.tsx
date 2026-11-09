@@ -97,7 +97,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               </Link>
             );
           })}
-          {sections.includes("candidate") && NAV.candidate.filter(item => item.to && item.to !== "/candidate").map(item => <Button key={item.label} variant="ghost" size="sm" asChild><Link to={item.to}>{item.label}</Link></Button>)}
+          {sections.includes("candidate") && NAV.candidate.flatMap(item => item.to && item.to !== "/candidate" ? [{ ...item, to: item.to }] : []).map(item => <Button key={item.label} variant="ghost" size="sm" asChild><Link to={item.to}>{item.label}</Link></Button>)}
           <Link to="/settings" className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-muted-foreground" activeProps={{ className: "bg-accent text-accent-foreground" }}>Privacy</Link>
         </nav>
         <main className="flex-1 px-5 py-8 md:px-10 md:py-12">{children}</main>
