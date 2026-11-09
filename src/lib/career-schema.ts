@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { designKeys, presentationSchema } from "./resume-design";
 
 const short = z.string().trim().max(200);
 const long = z.string().trim().max(6000);
@@ -19,9 +20,9 @@ export const careerSchema = z.object({
   education: z.array(educationSchema).max(30), projects: z.array(projectSchema).max(50), certifications: z.array(certificationSchema).max(50),
 });
 export type CareerData = z.infer<typeof careerSchema>;
-export const templateSchema = z.enum(["classic", "modern", "executive"]);
+export const templateSchema = z.enum(designKeys);
 export type ResumeTemplate = z.infer<typeof templateSchema>;
-export const resumeInputSchema = z.object({ id: z.string().uuid().optional(), title: short.min(1, "Resume title is required"), target_role: short, template: templateSchema, content: careerSchema });
+export const resumeInputSchema = z.object({ id: z.string().uuid().optional(), title: short.min(1, "Resume title is required"), target_role: short, template: templateSchema, content: careerSchema, presentation: presentationSchema.default({}), original_id: z.string().uuid().nullable().default(null) });
 export function emptyCareer(): CareerData {
   return { full_name: "", headline: "", location: "", email: "", phone: "", years: 0, current_role: "", summary: "", linkedin: "", github: "", portfolio: "", skills: [], experience: [], education: [], projects: [], certifications: [] };
 }

@@ -46,7 +46,11 @@ export const listResumes = createServerFn({ method: "POST" }).middleware([requir
   return data;
 });
 export const saveResume = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator(resumeInputSchema).handler(async ({ context, data }) => {
-  const row = { title: data.title, target_role: data.target_role, template: data.template, content: data.content, updated_at: new Date().toISOString() };
+  if (data.original_id) {
+    const { data: original } = await context.supabase.from("resume_originals").select("id").eq("id", data.original_id).eq("user_id", context.userId).maybeSingle();
+    if (!original) throw new Error("Original document not found");
+  }
+  const row = { title: data.title, target_role: data.target_role, design_key: data.template, presentation: data.presentation, original_id: data.original_id, content: data.content, updated_at: new Date().toISOString() };
   const result = data.id
     ? await context.supabase.from("resumes").update(row).eq("id", data.id).eq("user_id", context.userId).select("id").single()
     : await context.supabase.from("resumes").insert({ ...row, user_id: context.userId }).select("id").single();
