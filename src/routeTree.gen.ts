@@ -20,6 +20,7 @@ import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authent
 import { Route as AuthenticatedCandidateRouteImport } from './routes/_authenticated/candidate'
 import { Route as AuthenticatedCareerOnboardingRouteImport } from './routes/_authenticated/career-onboarding'
 import { Route as AuthenticatedCoachRouteImport } from './routes/_authenticated/coach'
+import { Route as AuthenticatedFindJobsRouteImport } from './routes/_authenticated/find-jobs'
 import { Route as AuthenticatedGrowthReportRouteImport } from './routes/_authenticated/growth-report'
 import { Route as AuthenticatedInterviewPrepRouteImport } from './routes/_authenticated/interview-prep'
 import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticated/journal'
@@ -88,6 +89,11 @@ const AuthenticatedCoachRoute = AuthenticatedCoachRouteImport.update({
   path: '/coach',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedFindJobsRoute = AuthenticatedFindJobsRouteImport.update({
+  id: '/find-jobs',
+  path: '/find-jobs',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedGrowthReportRoute =
   AuthenticatedGrowthReportRouteImport.update({
     id: '/growth-report',
@@ -153,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/candidate': typeof AuthenticatedCandidateRoute
   '/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/coach': typeof AuthenticatedCoachRoute
+  '/find-jobs': typeof AuthenticatedFindJobsRoute
   '/growth-report': typeof AuthenticatedGrowthReportRoute
   '/interview-prep': typeof AuthenticatedInterviewPrepRoute
   '/journal': typeof AuthenticatedJournalRoute
@@ -175,6 +182,7 @@ export interface FileRoutesByTo {
   '/candidate': typeof AuthenticatedCandidateRoute
   '/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/coach': typeof AuthenticatedCoachRoute
+  '/find-jobs': typeof AuthenticatedFindJobsRoute
   '/growth-report': typeof AuthenticatedGrowthReportRoute
   '/interview-prep': typeof AuthenticatedInterviewPrepRoute
   '/journal': typeof AuthenticatedJournalRoute
@@ -199,6 +207,7 @@ export interface FileRoutesById {
   '/_authenticated/candidate': typeof AuthenticatedCandidateRoute
   '/_authenticated/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/_authenticated/coach': typeof AuthenticatedCoachRoute
+  '/_authenticated/find-jobs': typeof AuthenticatedFindJobsRoute
   '/_authenticated/growth-report': typeof AuthenticatedGrowthReportRoute
   '/_authenticated/interview-prep': typeof AuthenticatedInterviewPrepRoute
   '/_authenticated/journal': typeof AuthenticatedJournalRoute
@@ -223,6 +232,7 @@ export interface FileRouteTypes {
     | '/candidate'
     | '/career-onboarding'
     | '/coach'
+    | '/find-jobs'
     | '/growth-report'
     | '/interview-prep'
     | '/journal'
@@ -245,6 +255,7 @@ export interface FileRouteTypes {
     | '/candidate'
     | '/career-onboarding'
     | '/coach'
+    | '/find-jobs'
     | '/growth-report'
     | '/interview-prep'
     | '/journal'
@@ -268,6 +279,7 @@ export interface FileRouteTypes {
     | '/_authenticated/candidate'
     | '/_authenticated/career-onboarding'
     | '/_authenticated/coach'
+    | '/_authenticated/find-jobs'
     | '/_authenticated/growth-report'
     | '/_authenticated/interview-prep'
     | '/_authenticated/journal'
@@ -366,6 +378,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCoachRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/find-jobs': {
+      id: '/_authenticated/find-jobs'
+      path: '/find-jobs'
+      fullPath: '/find-jobs'
+      preLoaderRoute: typeof AuthenticatedFindJobsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/growth-report': {
       id: '/_authenticated/growth-report'
       path: '/growth-report'
@@ -447,6 +466,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCandidateRoute: typeof AuthenticatedCandidateRoute
   AuthenticatedCareerOnboardingRoute: typeof AuthenticatedCareerOnboardingRoute
   AuthenticatedCoachRoute: typeof AuthenticatedCoachRoute
+  AuthenticatedFindJobsRoute: typeof AuthenticatedFindJobsRoute
   AuthenticatedGrowthReportRoute: typeof AuthenticatedGrowthReportRoute
   AuthenticatedInterviewPrepRoute: typeof AuthenticatedInterviewPrepRoute
   AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
@@ -467,6 +487,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCandidateRoute: AuthenticatedCandidateRoute,
   AuthenticatedCareerOnboardingRoute: AuthenticatedCareerOnboardingRoute,
   AuthenticatedCoachRoute: AuthenticatedCoachRoute,
+  AuthenticatedFindJobsRoute: AuthenticatedFindJobsRoute,
   AuthenticatedGrowthReportRoute: AuthenticatedGrowthReportRoute,
   AuthenticatedInterviewPrepRoute: AuthenticatedInterviewPrepRoute,
   AuthenticatedJournalRoute: AuthenticatedJournalRoute,
