@@ -11,7 +11,7 @@ import { Brand } from "@/components/Brand";
 import { Button } from "@/components/ui/button";
 import { PublicFooter } from "@/components/PublicPages";
 
-type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/profile" | "/resumes" | "/recruiter" | "/settings" | "/journey" | "/vision-board" | "/affirmations" | "/journal" | "/action-plan" | "/routine" | "/coach" | "/applications" | "/find-jobs" | "/interview-prep" | "/growth-report" };
+type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/profile" | "/resumes" | "/recruiter" | "/settings" | "/journey" | "/vision-board" | "/affirmations" | "/journal" | "/action-plan" | "/routine" | "/coach" | "/applications" | "/find-jobs" | "/interview-prep" | "/growth-report" | "/ats-check" };
 
 const NAV: Record<"candidate" | "recruiter", NavItem[]> = {
   candidate: [
@@ -24,6 +24,7 @@ const NAV: Record<"candidate" | "recruiter", NavItem[]> = {
     { label: "Daily Routine", icon: Workflow, to: "/routine" },
     { label: "Profile", icon: User, to: "/profile" },
     { label: "Resumes", icon: FileText, to: "/resumes" },
+    { label: "ATS keyword match", icon: Search, to: "/ats-check" },
     { label: "AI Career Coach", icon: MessagesSquare, to: "/coach" },
     { label: "Find Jobs", icon: Search, to: "/find-jobs" },
     { label: "Applications", icon: ListChecks, to: "/applications" },
