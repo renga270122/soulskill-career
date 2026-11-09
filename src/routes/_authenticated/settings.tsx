@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/_authenticated/settings")({
+  staticData: { sitemap: false },
   head: () => pageMeta("Privacy & account", "Manage recruiter visibility, consent and your SoulSkill account."),
   component: SettingsPage,
 });

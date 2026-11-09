@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { pageMeta } from "@/lib/page-meta";
 
 export const Route = createFileRoute("/_authenticated/candidate")({
+  staticData: { sitemap: false },
   head: () => pageMeta("Career dashboard", "Your SoulSkill career workspace, profile and application overview."),
   component: CandidateDashboard,
 });

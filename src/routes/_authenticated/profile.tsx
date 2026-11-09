@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
 export const Route = createFileRoute("/_authenticated/profile")({
+  staticData: { sitemap: false },
   head: () => pageMeta("Candidate profile", "Manage your private career details, skills, experience and professional profile."),
   loader: ({ context }) => context.queryClient.ensureQueryData(careerQuery(context.user.id)),
   pendingComponent: () => <p role="status">Loading your profile…</p>,
