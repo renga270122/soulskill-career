@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export function CareerFeatureCards() {
   const tools = [
     { title: "AI Resume Builder", text: "Shape your real experience into a clear professional story.", icon: FileText, to: "/resumes", cta: "Open Resume Studio" },
-    { title: "ATS Resume Analysis", text: "Review structure and readability in Resume Studio. Automated ATS scoring is not available.", icon: ScanText, to: "/resumes", cta: "Review resume" },
+    { title: "ATS Resume Analysis", text: "Compare your resume with a job description and review matched and missing keywords. Estimated keyword coverage, not an employer ATS result.", icon: ScanText, to: "/ats-check", cta: "Check keyword match" },
     { title: "Job Discovery", text: "Explore opportunities through trusted external job portals.", icon: Search, to: "/find-jobs", cta: "Find jobs" },
     { title: "Career Recommendations", text: "Explore next steps grounded in your profile and resume.", icon: Compass, to: "/coach", cta: "Meet your coach" },
     { title: "Interview Preparation", text: "Organize thoughtful preparation for your next conversation.", icon: MessagesSquare, to: "/interview-prep", cta: "Prepare for interviews" },
