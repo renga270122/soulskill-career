@@ -25,6 +25,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 
 type Draft = { id?: string; title: string; target_role: string; template: ResumeTemplate; content: CareerData; presentation: Presentation; original_id: string | null };
 export const Route = createFileRoute("/_authenticated/resumes")({
+  staticData: { sitemap: false },
   head: () => pageMeta("Resume Studio", "Create, preview and export private resumes for different target roles."),
   loader: async ({ context }) => Promise.all([context.queryClient.ensureQueryData(resumesQuery(context.user.id)), context.queryClient.ensureQueryData(careerQuery(context.user.id))]),
   pendingComponent: () => <p role="status">Loading Resume Studio…</p>,

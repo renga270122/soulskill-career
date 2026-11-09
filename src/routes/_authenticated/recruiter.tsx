@@ -4,6 +4,7 @@ import { DemoBadge } from "@/components/Brand";
 import { pageMeta } from "@/lib/page-meta";
 
 export const Route = createFileRoute("/_authenticated/recruiter")({
+  staticData: { sitemap: false },
   head: () => pageMeta("Hiring dashboard", "Your SoulSkill hiring workspace and recruitment overview."),
   component: RecruiterDashboard,
 });

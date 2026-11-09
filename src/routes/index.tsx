@@ -5,6 +5,7 @@ import { Brand } from "@/components/Brand";
 import { useSession } from "@/lib/auth";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "SoulSkill — Career intelligence for professionals & recruiters" },

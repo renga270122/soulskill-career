@@ -40,3 +40,5 @@ use the editor.
 - Keep resume presentation separate from content, with an additive design key for legacy clients; switching templates never rewrites career facts.
 - Validate document signatures, byte limits and DOCX expanded sizes server-side before extraction; preserve originals in private owner-scoped storage and require editable review before creating a resume.
 - Run document mapping and optional evidence-based suggestions through server-only AI Gateway helpers; no AI result is written without explicit candidate acceptance.
+
+- Derive sitemap URLs from required route-level inclusion decisions and exclude authenticated subtrees; new public pages stay discoverable without exposing private workspaces.

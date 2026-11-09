@@ -12,6 +12,7 @@ import { Brand } from "@/components/Brand";
 type Search = { mode?: "signin" | "signup" | undefined; as?: "candidate" | "recruiter" | undefined };
 
 export const Route = createFileRoute("/auth")({
+  staticData: { sitemap: false },
   validateSearch: (s: Record<string, unknown>): Search => ({
     mode: s["mode"] === "signup" ? "signup" : undefined,
     as: s["as"] === "recruiter" ? "recruiter" : undefined,
