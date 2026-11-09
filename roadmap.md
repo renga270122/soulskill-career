@@ -1,5 +1,5 @@
 # Milestone 2
-- [ ] Replace the default website icon with a SoulSkill-branded icon and verify preview delivery.
+- [x] Replace the default website icon with a SoulSkill-branded icon; verified the preview serves the 64px PNG and small-size readability. Awaiting publication.
 - [x] Private candidate profile, validation, completeness and profile photo storage.
 - [x] Resume CRUD, defaults, three live templates and PDF export.
 - [x] Working sidebar and mobile navigation; preserve dashboards.
