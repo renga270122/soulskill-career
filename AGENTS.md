@@ -48,3 +48,4 @@ use the editor.
 - Journal context is excluded from AI queries unless the caller explicitly approves and selects owned entries; tailored resume suggestions create a separate draft copy rather than overwrite originals.
 - Invalidate authenticated navigation only for identity changes or user updates, not repeated same-user SIGNED_IN events; defer invalidation outside auth callbacks to avoid redundant gate checks and auth-lock contention.
 - Career coaching renders facts from validated source IDs and exact saved text, separates goals/reflections from evidence, and labels generated actions as suggestions; the dedicated authenticated coach function never mutates profile or resume content.
+- The authenticated route gate reads the local auto-refreshed session, not a network user lookup; transient network failures must not sign users out, and server functions still verify tokens.
