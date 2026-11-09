@@ -5,13 +5,13 @@ import { getDocumentProxy, extractText } from "unpdf";
 export async function extractResume(bytes: Uint8Array, filename: string): Promise<string> {
   if (/\.pdf$/i.test(filename)) {
     if (new TextDecoder().decode(bytes.slice(0, 5)) !== "%PDF-") throw new Error("This file is not a valid PDF.");
-    const document = await getDocumentProxy(bytes, { isEvalSupported: false, useSystemFonts: false });
+    const document = await getDocumentProxy(bytes, { useSystemFonts: false });
     try {
       if (document.numPages > 30) throw new Error("Upload a resume with at most 30 pages.");
       const result = await extractText(document, { mergePages: true });
       if (!result.text.trim()) throw new Error("This PDF has no readable text. Upload a text-based PDF or DOCX, or enter your resume manually.");
       return result.text.slice(0, 40000);
-    } finally { await document.destroy(); }
+    } finally { await document.loadingTask.destroy(); }
   }
   if (bytes[0] !== 80 || bytes[1] !== 75) throw new Error("This file is not a valid DOCX.");
   let expanded = 0;

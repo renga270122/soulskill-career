@@ -7,7 +7,7 @@ import { resumeContact, resumeSections } from "./resume-document";
 
 export type LayoutLine = { text: string; x: number; y: number; size: number; accent: boolean; center: boolean };
 export type LayoutPage = { lines: LayoutLine[] };
-let cachedFonts: Partial<Record<Presentation["font"], string>> = {};
+const cachedFonts: Partial<Record<Presentation["font"], string>> = {};
 export async function buildResume(content: CareerData, template: ResumeTemplate, presentation = defaultPresentation()) {
   const { jsPDF } = await import("jspdf");
   const pdf = new jsPDF({ unit: "pt", format: "a4" });
