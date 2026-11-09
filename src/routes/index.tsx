@@ -68,9 +68,9 @@ function Landing() {
         <div className="mx-auto max-w-6xl px-6 pb-24 pt-16 md:pt-28">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary">Career intelligence</p>
           <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.02] text-foreground md:text-7xl">
-            Your career, told clearly.
+            Manifest your career.
             <br />
-            <em className="text-primary">Discovered on your terms.</em>
+            <em className="text-primary">Build your future.</em>
           </h1>
           <p className="mt-8 max-w-xl text-lg text-muted-foreground">
             SoulSkill helps professionals craft profiles and resumes that land — and gives recruiters a
