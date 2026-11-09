@@ -36,7 +36,7 @@ function FeedbackPage() {
     e.preventDefault();
     setError("");
     const parsed = schema.safeParse(form);
-    if (!parsed.success) return setError(parsed.error.issues[0].message);
+    if (!parsed.success) return setError(parsed.error.issues[0]?.message ?? "Please check the form");
     setStatus("sending");
     const { data } = await supabase.auth.getSession();
     const v = parsed.data;
