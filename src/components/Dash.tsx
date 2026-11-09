@@ -3,10 +3,10 @@ import { DemoBadge } from "@/components/Brand";
 
 export function PageHeader({ eyebrow, title, children }: { eyebrow: string; title: string; children?: ReactNode }) {
   return (
-    <div className="flex flex-wrap items-end justify-between gap-4">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary">{eyebrow}</p>
-        <h1 className="mt-3 font-display text-4xl text-foreground md:text-5xl">{title}</h1>
+    <div className="grid min-w-0 gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+      <div className="min-w-0">
+        <p className="text-xs font-semibold uppercase tracking-normal text-primary">{eyebrow}</p>
+        <h1 className="mt-3 break-words font-display text-4xl leading-tight text-foreground md:text-5xl">{title}</h1>
       </div>
       {children}
     </div>
