@@ -1,14 +1,15 @@
 import { Link, useNavigate, useRouteContext } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import {
   LayoutDashboard, User, FileText, Target, ListChecks, MessagesSquare,
-  Building2, Briefcase, Search, Star, Workflow, Settings, LogOut,
+  Building2, Briefcase, Search, Star, Workflow, Settings, LogOut, Menu, X,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useRoles, type AppRole } from "@/lib/auth";
 import { Brand } from "@/components/Brand";
 import { Button } from "@/components/ui/button";
+import { PublicFooter } from "@/components/PublicPages";
 
 type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/profile" | "/resumes" | "/recruiter" | "/settings" | "/journey" | "/vision-board" | "/affirmations" | "/journal" | "/action-plan" | "/routine" | "/coach" | "/applications" | "/find-jobs" | "/interview-prep" | "/growth-report" };
 
@@ -44,6 +45,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const { data: roles = [] } = useRoles(user.id);
   const navigate = useNavigate();
   const qc = useQueryClient();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const sections: ("candidate" | "recruiter")[] = [];
   if (roles.includes("candidate") || roles.includes("admin")) sections.push("candidate");
@@ -58,7 +60,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <aside className="hidden w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar p-5 md:flex">
+      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col overflow-y-auto border-r border-sidebar-border bg-sidebar p-5 md:flex">
         <Brand />
         <nav className="mt-10 flex-1 space-y-8">
           {sections.map((s) => (
@@ -75,32 +77,30 @@ export function AppShell({ children }: { children: ReactNode }) {
         <ul className="space-y-0.5 border-t border-sidebar-border pt-4">
           <NavRow item={{ label: "Privacy & account", icon: Settings, to: "/settings" }} />
           <li>
-            <button onClick={signOut} className="flex w-full items-center gap-3 rounded-md px-2 py-2 text-sm text-sidebar-foreground/80 hover:bg-sidebar-accent">
+            <Button variant="ghost" onClick={signOut} className="w-full justify-start px-2 text-sidebar-foreground">
               <LogOut className="size-4" /> Sign out
-            </button>
+            </Button>
           </li>
         </ul>
         <p className="mt-4 truncate px-2 text-xs text-muted-foreground">{user.email}</p>
         <RoleTag roles={roles} />
       </aside>
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex items-center justify-between border-b border-border px-5 py-4 md:hidden">
-          <Brand />
-          <Button size="sm" variant="ghost" onClick={signOut}>Sign out</Button>
+        <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur-sm">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-4 md:flex md:justify-between md:px-10">
+            <div className="min-w-0"><div className="md:hidden"><Brand /></div><p className="hidden text-xs text-muted-foreground md:block">Believe in your potential. Build your future.</p></div>
+            <div className="flex shrink-0 items-center gap-2">
+              <Button asChild variant="ghost" size="icon" className="rounded-full bg-secondary" title="Your profile"><Link to={sections.includes("candidate") ? "/profile" : "/settings"} aria-label="Your profile"><User /></Link></Button>
+              <Button variant="ghost" size="icon" className="md:hidden" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
+            </div>
+          </div>
         </header>
-        <nav className="flex gap-1 overflow-x-auto border-b border-border px-4 py-2 md:hidden">
-          {sections.map((s) => {
-            const to = s === "candidate" ? "/candidate" : "/recruiter";
-            return (
-              <Link key={s} to={to} className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-muted-foreground" activeProps={{ className: "bg-accent text-accent-foreground" }}>
-                {s === "candidate" ? "Career" : "Hiring"}
-              </Link>
-            );
-          })}
-          {sections.includes("candidate") && NAV.candidate.flatMap(item => item.to && item.to !== "/candidate" ? [{ ...item, to: item.to }] : []).map(item => <Button key={item.label} variant="ghost" size="sm" asChild><Link to={item.to}>{item.label}</Link></Button>)}
-          <Link to="/settings" className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-muted-foreground" activeProps={{ className: "bg-accent text-accent-foreground" }}>Privacy</Link>
-        </nav>
-        <main className="flex-1 px-5 py-8 md:px-10 md:py-12">{children}</main>
+        {menuOpen && <nav id="mobile-navigation" aria-label="Mobile navigation" className="border-b border-border bg-sidebar p-4 md:hidden">
+          <ul className="grid gap-1 min-[380px]:grid-cols-2" onClick={() => setMenuOpen(false)}>{sections.flatMap(s => NAV[s]).map(item => <NavRow key={item.label} item={item} />)}<NavRow item={{label:"Privacy & account",icon:Settings,to:"/settings"}} /></ul>
+          <Button variant="ghost" onClick={signOut} className="mt-3"><LogOut />Sign out</Button>
+        </nav>}
+        <main className="min-w-0 flex-1 px-5 py-8 md:px-10 md:py-10">{children}</main>
+        <PublicFooter />
       </div>
     </div>
   );
@@ -125,10 +125,10 @@ function NavRow({ item }: { item: NavItem }) {
     <li>
       <Link
         to={item.to}
-        className="flex items-center gap-3 rounded-md px-2 py-2 text-sm text-sidebar-foreground/80 hover:bg-sidebar-accent"
+        className="flex min-h-11 min-w-0 items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground transition-colors hover:bg-sidebar-accent"
         activeProps={{ className: "bg-sidebar-accent text-sidebar-accent-foreground font-medium" }}
       >
-        <Icon className="size-4" /> {item.label}
+        <Icon className="size-4 shrink-0" /> <span className="min-w-0">{item.label}</span>
       </Link>
     </li>
   );
