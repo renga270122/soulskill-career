@@ -222,8 +222,10 @@ export type Database = {
           applied_at: string | null
           company: string
           created_at: string
+          follow_up_date: string | null
           id: string
           notes: string
+          portal: string
           resume_id: string | null
           resume_title: string
           role: string
@@ -236,8 +238,10 @@ export type Database = {
           applied_at?: string | null
           company: string
           created_at?: string
+          follow_up_date?: string | null
           id?: string
           notes?: string
+          portal?: string
           resume_id?: string | null
           resume_title?: string
           role: string
@@ -250,8 +254,10 @@ export type Database = {
           applied_at?: string | null
           company?: string
           created_at?: string
+          follow_up_date?: string | null
           id?: string
           notes?: string
+          portal?: string
           resume_id?: string | null
           resume_title?: string
           role?: string
@@ -270,6 +276,44 @@ export type Database = {
           },
           {
             foreignKeyName: "job_applications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      job_search_items: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          kind: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: Json
+          created_at?: string
+          id?: string
+          kind: string
+          name?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          kind?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_search_items_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
