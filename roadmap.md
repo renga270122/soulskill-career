@@ -74,3 +74,10 @@
 - [x] Render exact source facts, labeled AI actions, unknowns and next action; do not write profile/resume changes.
 - [x] Preserve opt-in journal privacy, input on errors and private coaching history.
 - [x] Run grounding/privacy tests and verify actual AI output, history reload and phone layout.
+
+# Social-impact pricing
+- [x] Free Career Support self-declaration (category + timestamp only, correctable, 6 months, no auto-charge); verified on preview.
+- [x] Premium ₹99/₹299/₹499/₹699 one-time plans from the database, savings/expiry display, Popular/Best Value; pricing page + Plans & billing dashboard.
+- [x] Server-side gating: AI tools (50/month fair use), premium templates, multiple resumes; ATS behind upgrade prompt. Tests for prices, access, expiry, signatures.
+- [ ] Live Razorpay checkout, webhook and all four paid durations end-to-end — blocked: Razorpay test keys not yet provided.
+- [ ] Cover letter generation — not built yet (feature does not exist in the app).
