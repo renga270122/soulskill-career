@@ -1,21 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { Building2, Briefcase, Search, Star, Workflow, Settings, ShieldCheck } from "lucide-react";
+import { Settings, ShieldCheck } from "lucide-react";
 import { PageHeader } from "@/components/Dash";
 import { Button } from "@/components/ui/button";
 import { pageMeta } from "@/lib/page-meta";
 import interviewAsset from "@/assets/interview-handshake.webp.asset.json";
+import { hiringGroups } from "@/lib/hiring-presentation";
 
 export const Route = createFileRoute("/_authenticated/recruiter")({
   staticData: { sitemap: false },
-  head: () => pageMeta("Hiring dashboard", "Your SoulSkill hiring workspace and recruitment overview."),
+  head: () => pageMeta("Recruiter hiring workspace", "Review SoulSkill hiring options for job requisitions, candidate sourcing, screening, interviews and hiring decisions."),
   component: RecruiterDashboard,
 });
 
 function RecruiterDashboard() {
   return (
     <div className="mx-auto max-w-6xl space-y-10">
-      <PageHeader eyebrow="Recruiter workspace" title="Build your next great team."><Button asChild variant="outline"><Link to="/settings"><Settings className="size-4" />Account settings</Link></Button></PageHeader>
+      <PageHeader eyebrow="Recruiter workspace" title="Hiring overview"><Button asChild variant="outline"><Link to="/settings"><Settings className="size-4" />Account settings</Link></Button></PageHeader>
       <p className="text-sm text-muted-foreground">Hiring overview · Recruitment tools are not available yet.</p>
 
       <section className="relative min-h-64 overflow-hidden border-y border-border">
@@ -35,18 +36,12 @@ function RecruiterDashboard() {
         </div>
       </section>
 
-      <section aria-labelledby="hiring-tools" className="space-y-5">
-        <h2 id="hiring-tools" className="font-display text-3xl">Your hiring workspace</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { title: "Company", icon: Building2, text: "Company profiles and hiring-team management are not available yet." },
-            { title: "Open roles", icon: Briefcase, text: "Job posting is not available yet. No live roles are displayed." },
-            { title: "Candidate discovery", icon: Search, text: "Candidate search is not available yet. No candidate directory is displayed." },
-            { title: "Shortlist", icon: Star, text: "Saved candidate shortlists are not available yet." },
-            { title: "Interview pipeline", icon: Workflow, text: "Interview tracking is not available yet. No pipeline activity is displayed." },
-          ].map(({ title, icon: Icon, text }) => <article key={title} className="rounded-lg border border-border bg-card p-6 shadow-soft"><div className="flex items-center justify-between gap-3"><Icon className="size-5 text-primary" /><span className="text-xs text-muted-foreground">Unavailable</span></div><h3 className="mt-5 font-display text-xl">{title}</h3><p className="mt-2 text-sm text-muted-foreground">{text}</p></article>)}
+      {hiringGroups.map(group => <section key={group.title} aria-label={group.title} className="space-y-5">
+        <h2 className="font-display text-3xl">{group.title}</h2>
+        <div className="grid gap-4 lg:grid-cols-2">
+          {group.tools.map(({ title, icon: Icon, options, unavailable }) => <article key={title} className="min-w-0 rounded-lg border border-border bg-card p-6 shadow-soft"><div className="flex items-center justify-between gap-3"><Icon className="size-5 text-primary" /><span className="text-xs text-muted-foreground">Unavailable</span></div><h3 className="mt-5 break-words font-display text-2xl">{title}</h3><ul className="mt-4 divide-y divide-border">{options.map(option => <li key={option} className="py-2 text-sm text-foreground">{option}</li>)}</ul><p className="mt-4 border-t border-border pt-4 text-sm text-muted-foreground">{unavailable}</p></article>)}
         </div>
-      </section>
+      </section>)}
       <section className="flex items-start gap-4 border-t border-border pt-6"><ShieldCheck className="mt-1 size-5 shrink-0 text-primary" /><div><h2 className="font-display text-xl">Consent comes first</h2><p className="mt-2 text-sm text-muted-foreground">Professionals choose whether their name and headline are discoverable. Private resumes, contact details, journals and reflections are not shared with recruiters.</p></div></section>
     </div>
   );

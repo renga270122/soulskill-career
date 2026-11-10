@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
 import {
   LayoutDashboard, User, FileText, Target, ListChecks, MessagesSquare,
-  Building2, Briefcase, Search, Star, Workflow, Settings, LogOut, Menu, X,
+  Search, Star, Workflow, Settings, LogOut, Menu, X,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useRoles, type AppRole } from "@/lib/auth";
@@ -11,6 +11,7 @@ import { Brand } from "@/components/Brand";
 import { Button } from "@/components/ui/button";
 import { PublicFooter } from "@/components/PublicPages";
 import { workspacePresentation } from "@/lib/workspace-presentation";
+import { hiringGroups } from "@/lib/hiring-presentation";
 
 type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/profile" | "/resumes" | "/recruiter" | "/settings" | "/journey" | "/vision-board" | "/affirmations" | "/journal" | "/action-plan" | "/routine" | "/coach" | "/applications" | "/find-jobs" | "/interview-prep" | "/growth-report" | "/ats-check" };
 
@@ -34,11 +35,6 @@ const NAV: Record<"candidate" | "recruiter", NavItem[]> = {
   ],
   recruiter: [
     { label: "Hiring overview", icon: LayoutDashboard, to: "/recruiter" },
-    { label: "Company", icon: Building2 },
-    { label: "Jobs", icon: Briefcase },
-    { label: "Candidate discovery", icon: Search },
-    { label: "Shortlist", icon: Star },
-    { label: "Pipeline", icon: Workflow },
   ],
 };
 
@@ -74,6 +70,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <ul className="mt-2 space-y-0.5">
                 {NAV[s].map((item) => <NavRow key={item.label} item={item} />)}
               </ul>
+              {s === "recruiter" && hiringGroups.map(group => <div key={group.title} className="mt-6"><p className="px-2 text-xs font-medium text-muted-foreground">{group.title}</p><ul className="mt-2 space-y-1">{group.tools.map(tool => <NavRow key={tool.title} item={{ label: tool.title, icon: tool.icon }} />)}</ul></div>)}
             </div>
           ))}
         </nav>
@@ -101,6 +98,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         {menuOpen && <nav id="mobile-navigation" aria-label="Mobile navigation" className="border-b border-border bg-sidebar p-4 md:hidden">
           {canSwitch && <Button asChild variant="outline" className="mb-3" onClick={() => setMenuOpen(false)}><Link to={workspace === "recruiter" ? "/candidate" : "/recruiter"}>{workspace === "recruiter" ? "Professional workspace" : "Recruiter workspace"}</Link></Button>}
           <ul className="grid gap-1 min-[380px]:grid-cols-2" onClick={() => setMenuOpen(false)}>{sections.flatMap(s => NAV[s]).map(item => <NavRow key={item.label} item={item} />)}<NavRow item={{label:"Privacy & account",icon:Settings,to:"/settings"}} /></ul>
+          {workspace === "recruiter" && hiringGroups.map(group => <div key={group.title} className="mt-4"><p className="px-2 text-xs font-medium text-muted-foreground">{group.title}</p><ul className="mt-2 grid gap-1">{group.tools.map(tool => <NavRow key={tool.title} item={{ label: tool.title, icon: tool.icon }} />)}</ul></div>)}
           <Button variant="ghost" onClick={signOut} className="mt-3"><LogOut />Sign out</Button>
         </nav>}
         <main className="min-w-0 flex-1 px-5 py-8 md:px-10 md:py-10">{children}</main>
@@ -119,9 +117,8 @@ function NavRow({ item }: { item: NavItem }) {
   const Icon = item.icon;
   if (!item.to) {
     return (
-      <li className="flex items-center justify-between rounded-md px-2 py-2 text-sm text-muted-foreground/70">
-        <span className="flex items-center gap-3"><Icon className="size-4" /> {item.label}</span>
-        <span className="text-[10px] uppercase tracking-wider">Unavailable</span>
+      <li aria-disabled="true" className="flex min-w-0 items-start gap-3 rounded-md px-2 py-2 text-sm text-muted-foreground/70">
+        <Icon className="mt-1 size-4 shrink-0" /><span className="min-w-0 flex-1"><span className="block break-words">{item.label}</span><span className="mt-1 block text-[10px] uppercase tracking-wider">Unavailable</span></span>
       </li>
     );
   }
