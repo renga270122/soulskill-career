@@ -21,7 +21,7 @@ describe("multipage layout", () => {
   it("breaks long resumes into numbered pages without clipping", async () => {
     const a4 = await buildResume(content, "classic", defaultPresentation());
     expect(a4.pages.length).toBeGreaterThan(1);
-    const lastLine = a4.pages[0].lines.at(-1);
+    const lastLine = a4.pages[0]?.lines.at(-1);
     expect(lastLine?.text).toBe(`Page 1 of ${a4.pages.length}`);
     for (const p of a4.pages) for (const l of p.lines) expect(l.y).toBeLessThan(a4.height - 20);
   }, 30000);
