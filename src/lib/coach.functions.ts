@@ -30,6 +30,8 @@ export const askGroundedCoach = createServerFn({ method: 'POST' }).middleware([r
   const goals = parsedIntention.success ? { target_role: parsedIntention.data.target_role, future_role: parsedIntention.data.future_role, desired_skills: parsedIntention.data.skills, commitment: parsedIntention.data.commitment } : null;
   const payload = JSON.stringify({ question: data.question, mode: data.mode, evidence, goals_not_achievements: goals, resume_target_not_experience: resume?.target_role ?? '', private_reflections_not_verified_facts: journals });
   if (payload.length > 100000) throw new Error('This career context is too large. Use a shorter resume or fewer journal entries.');
+  const { consumeAiAction } = await import('./ai-quota.server');
+  await consumeAiAction(supabase);
   const { resumeJson } = await import('./resume-ai.server');
   let guidance;
   try {
