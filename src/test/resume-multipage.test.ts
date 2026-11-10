@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { buildResume } from "@/lib/resume-layout";
 import { emptyCareer } from "@/lib/career-schema";
 import { defaultPresentation } from "@/lib/resume-design";
@@ -12,6 +12,10 @@ const content = {
   experience: Array.from({ length: 12 }, (_, i) => ({ role: `Staff Engineer ${i + 1}`, company: "Acme Systems", start: "2010-01", end: "2012-01", description: long.repeat(3) })),
   skills: Array.from({ length: 20 }, (_, i) => ({ name: `Skill ${i + 1}`, level: "Advanced" as const })),
 };
+
+// Font asset pointers are relative URLs; resolve them against the dev server in tests.
+const realFetch = globalThis.fetch;
+beforeAll(() => { globalThis.fetch = ((input: RequestInfo | URL, init?: RequestInit) => realFetch(new URL(String(input), "http://localhost:8080"), init)) as typeof fetch; });
 
 describe("multipage layout", () => {
   it("breaks long resumes into numbered pages without clipping", async () => {
