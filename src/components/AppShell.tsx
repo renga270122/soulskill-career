@@ -13,7 +13,7 @@ import { PublicFooter } from "@/components/PublicPages";
 import { workspacePresentation } from "@/lib/workspace-presentation";
 import { hiringGroups } from "@/lib/hiring-presentation";
 
-type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/profile" | "/resumes" | "/recruiter" | "/settings" | "/journey" | "/vision-board" | "/affirmations" | "/journal" | "/action-plan" | "/routine" | "/coach" | "/applications" | "/find-jobs" | "/interview-prep" | "/growth-report" | "/ats-check" };
+type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/profile" | "/resumes" | "/recruiter" | "/settings" | "/journey" | "/vision-board" | "/affirmations" | "/journal" | "/action-plan" | "/routine" | "/coach" | "/applications" | "/find-jobs" | "/interview-prep" | "/growth-report" | "/ats-check" | "/billing" };
 
 const NAV: Record<"candidate" | "recruiter", NavItem[]> = {
   candidate: [
@@ -75,6 +75,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           ))}
         </nav>
         <ul className="space-y-0.5 border-t border-sidebar-border pt-4">
+          {workspace === "candidate" && <NavRow item={{ label: "Plans & billing", icon: Star, to: "/billing" }} />}
           <NavRow item={{ label: "Privacy & account", icon: Settings, to: "/settings" }} />
           <li>
             <Button variant="ghost" onClick={signOut} className="w-full justify-start px-2 text-sidebar-foreground">
