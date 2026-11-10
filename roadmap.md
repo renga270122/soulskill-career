@@ -1,3 +1,14 @@
+# Premium International Resume Studio redesign (uploaded spec)
+- [ ] Audit existing resume builder: routes, data model, templates, PDF/DOCX export, ATS, AI integrations (explore agent running).
+- [ ] Eight distinct premium templates: Classic, Modern, Executive, Tech Professional, Innovator, Corporate, Creative, Graduate — distinct layouts, not recolours.
+- [ ] Resume Studio interface: premium template gallery with thumbnails, live preview, autosave indicators, desktop split view, mobile preview mode.
+- [ ] ATS Professional vs Visual Professional output modes; honest ATS analysis (no guaranteed scores).
+- [ ] Multi-page support: automatic page breaks, A4 + US Letter, no clipped/orphaned content.
+- [ ] PDF + DOCX export: preview-matching, selectable text, real DOCX (not renamed PDF).
+- [ ] Controlled customization: accent colour, approved font pairs, font size limits, section order/visibility, page size.
+- [ ] Premium preview screen: template name, page count, zoom, page navigation, change-template/edit/download actions.
+- [ ] QA: test all 8 templates with fresher/experienced/senior/career-transition content, 1–3 pages, missing sections; verify no regressions.
+
 # Milestone 2
 - [x] Refine recruiter menu and screens into hiring-specific stages and options; six tool panels grouped into role definition, sourcing/assessment and interview/decision stages. Verified signed-in desktop/phone menus, no overflow/runtime errors, four regression tests pass; presentation only, no new hiring functionality.
 - [x] Separate recruiter presentation from professional workspace: hiring-focused dashboard/navigation and role-appropriate account settings; seven tests pass, desktop/phone hiring view and professional regression verified, no runtime errors. No saved roles changed.
