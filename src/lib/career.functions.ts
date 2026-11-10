@@ -50,6 +50,15 @@ export const saveResume = createServerFn({ method: "POST" }).middleware([require
     const { data: original } = await context.supabase.from("resume_originals").select("id").eq("id", data.original_id).eq("user_id", context.userId).maybeSingle();
     if (!original) throw new Error("Original document not found");
   }
+  const { data: full } = await context.supabase.rpc("has_full_access", { _user_id: context.userId });
+  if (!full) {
+    const { BASIC_TEMPLATES, BASIC_RESUME_LIMIT } = await import("./pricing");
+    if (!(BASIC_TEMPLATES as readonly string[]).includes(data.template)) throw new Error("This template is part of Career Support and Premium access. Choose Classic or Modern, or see Plans & billing.");
+    if (!data.id) {
+      const { count } = await context.supabase.from("resumes").select("id", { count: "exact", head: true }).eq("user_id", context.userId);
+      if ((count ?? 0) >= BASIC_RESUME_LIMIT) throw new Error("The basic plan includes one resume. Career Support and Premium access unlock multiple versions.");
+    }
+  }
   const row = { title: data.title, target_role: data.target_role, design_key: data.template, presentation: data.presentation, original_id: data.original_id, content: data.content, updated_at: new Date().toISOString() };
   const result = data.id
     ? await context.supabase.from("resumes").update(row).eq("id", data.id).eq("user_id", context.userId).select("id").single()

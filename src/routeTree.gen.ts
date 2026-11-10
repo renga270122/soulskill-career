@@ -17,6 +17,7 @@ import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FeedbackRouteImport } from './routes/feedback'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedActionPlanRouteImport } from './routes/_authenticated/action-plan'
@@ -24,6 +25,7 @@ import { Route as AuthenticatedAffirmationsRouteImport } from './routes/_authent
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
 import { Route as AuthenticatedAtsCheckRouteImport } from './routes/_authenticated/ats-check'
+import { Route as AuthenticatedBillingRouteImport } from './routes/_authenticated/billing'
 import { Route as AuthenticatedCandidateRouteImport } from './routes/_authenticated/candidate'
 import { Route as AuthenticatedCareerOnboardingRouteImport } from './routes/_authenticated/career-onboarding'
 import { Route as AuthenticatedCoachRouteImport } from './routes/_authenticated/coach'
@@ -39,6 +41,7 @@ import { Route as AuthenticatedResumesRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedRoutineRouteImport } from './routes/_authenticated/routine'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedVisionBoardRouteImport } from './routes/_authenticated/vision-board'
+import { Route as ApiPublicRazorpayWebhookRouteImport } from './routes/api/public/razorpay-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -79,6 +82,11 @@ const FeedbackRoute = FeedbackRouteImport.update({
   path: '/feedback',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -114,6 +122,11 @@ const AuthenticatedApplicationsRoute =
 const AuthenticatedAtsCheckRoute = AuthenticatedAtsCheckRouteImport.update({
   id: '/ats-check',
   path: '/ats-check',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedBillingRoute = AuthenticatedBillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCandidateRoute = AuthenticatedCandidateRouteImport.update({
@@ -196,6 +209,12 @@ const AuthenticatedVisionBoardRoute =
     path: '/vision-board',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiPublicRazorpayWebhookRoute =
+  ApiPublicRazorpayWebhookRouteImport.update({
+    id: '/api/public/razorpay-webhook',
+    path: '/api/public/razorpay-webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -205,6 +224,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/feedback': typeof FeedbackRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/action-plan': typeof AuthenticatedActionPlanRoute
@@ -212,6 +232,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AuthenticatedAppRoute
   '/applications': typeof AuthenticatedApplicationsRoute
   '/ats-check': typeof AuthenticatedAtsCheckRoute
+  '/billing': typeof AuthenticatedBillingRoute
   '/candidate': typeof AuthenticatedCandidateRoute
   '/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/coach': typeof AuthenticatedCoachRoute
@@ -227,6 +248,7 @@ export interface FileRoutesByFullPath {
   '/routine': typeof AuthenticatedRoutineRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/vision-board': typeof AuthenticatedVisionBoardRoute
+  '/api/public/razorpay-webhook': typeof ApiPublicRazorpayWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -236,6 +258,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/feedback': typeof FeedbackRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/action-plan': typeof AuthenticatedActionPlanRoute
@@ -243,6 +266,7 @@ export interface FileRoutesByTo {
   '/app': typeof AuthenticatedAppRoute
   '/applications': typeof AuthenticatedApplicationsRoute
   '/ats-check': typeof AuthenticatedAtsCheckRoute
+  '/billing': typeof AuthenticatedBillingRoute
   '/candidate': typeof AuthenticatedCandidateRoute
   '/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/coach': typeof AuthenticatedCoachRoute
@@ -258,6 +282,7 @@ export interface FileRoutesByTo {
   '/routine': typeof AuthenticatedRoutineRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/vision-board': typeof AuthenticatedVisionBoardRoute
+  '/api/public/razorpay-webhook': typeof ApiPublicRazorpayWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -269,6 +294,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/feedback': typeof FeedbackRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/action-plan': typeof AuthenticatedActionPlanRoute
@@ -276,6 +302,7 @@ export interface FileRoutesById {
   '/_authenticated/app': typeof AuthenticatedAppRoute
   '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
   '/_authenticated/ats-check': typeof AuthenticatedAtsCheckRoute
+  '/_authenticated/billing': typeof AuthenticatedBillingRoute
   '/_authenticated/candidate': typeof AuthenticatedCandidateRoute
   '/_authenticated/career-onboarding': typeof AuthenticatedCareerOnboardingRoute
   '/_authenticated/coach': typeof AuthenticatedCoachRoute
@@ -291,6 +318,7 @@ export interface FileRoutesById {
   '/_authenticated/routine': typeof AuthenticatedRoutineRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/vision-board': typeof AuthenticatedVisionBoardRoute
+  '/api/public/razorpay-webhook': typeof ApiPublicRazorpayWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -302,6 +330,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/feedback'
+    | '/pricing'
     | '/privacy'
     | '/sitemap.xml'
     | '/action-plan'
@@ -309,6 +338,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/applications'
     | '/ats-check'
+    | '/billing'
     | '/candidate'
     | '/career-onboarding'
     | '/coach'
@@ -324,6 +354,7 @@ export interface FileRouteTypes {
     | '/routine'
     | '/settings'
     | '/vision-board'
+    | '/api/public/razorpay-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -333,6 +364,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/feedback'
+    | '/pricing'
     | '/privacy'
     | '/sitemap.xml'
     | '/action-plan'
@@ -340,6 +372,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/applications'
     | '/ats-check'
+    | '/billing'
     | '/candidate'
     | '/career-onboarding'
     | '/coach'
@@ -355,6 +388,7 @@ export interface FileRouteTypes {
     | '/routine'
     | '/settings'
     | '/vision-board'
+    | '/api/public/razorpay-webhook'
   id:
     | '__root__'
     | '/'
@@ -365,6 +399,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/feedback'
+    | '/pricing'
     | '/privacy'
     | '/sitemap.xml'
     | '/_authenticated/action-plan'
@@ -372,6 +407,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app'
     | '/_authenticated/applications'
     | '/_authenticated/ats-check'
+    | '/_authenticated/billing'
     | '/_authenticated/candidate'
     | '/_authenticated/career-onboarding'
     | '/_authenticated/coach'
@@ -387,6 +423,7 @@ export interface FileRouteTypes {
     | '/_authenticated/routine'
     | '/_authenticated/settings'
     | '/_authenticated/vision-board'
+    | '/api/public/razorpay-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -398,8 +435,10 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   FeedbackRoute: typeof FeedbackRoute
+  PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiPublicRazorpayWebhookRoute: typeof ApiPublicRazorpayWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -460,6 +499,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeedbackRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -507,6 +553,13 @@ declare module '@tanstack/react-router' {
       path: '/ats-check'
       fullPath: '/ats-check'
       preLoaderRoute: typeof AuthenticatedAtsCheckRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/billing': {
+      id: '/_authenticated/billing'
+      path: '/billing'
+      fullPath: '/billing'
+      preLoaderRoute: typeof AuthenticatedBillingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/candidate': {
@@ -614,6 +667,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVisionBoardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/razorpay-webhook': {
+      id: '/api/public/razorpay-webhook'
+      path: '/api/public/razorpay-webhook'
+      fullPath: '/api/public/razorpay-webhook'
+      preLoaderRoute: typeof ApiPublicRazorpayWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -623,6 +683,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAppRoute: typeof AuthenticatedAppRoute
   AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
   AuthenticatedAtsCheckRoute: typeof AuthenticatedAtsCheckRoute
+  AuthenticatedBillingRoute: typeof AuthenticatedBillingRoute
   AuthenticatedCandidateRoute: typeof AuthenticatedCandidateRoute
   AuthenticatedCareerOnboardingRoute: typeof AuthenticatedCareerOnboardingRoute
   AuthenticatedCoachRoute: typeof AuthenticatedCoachRoute
@@ -646,6 +707,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAppRoute: AuthenticatedAppRoute,
   AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
   AuthenticatedAtsCheckRoute: AuthenticatedAtsCheckRoute,
+  AuthenticatedBillingRoute: AuthenticatedBillingRoute,
   AuthenticatedCandidateRoute: AuthenticatedCandidateRoute,
   AuthenticatedCareerOnboardingRoute: AuthenticatedCareerOnboardingRoute,
   AuthenticatedCoachRoute: AuthenticatedCoachRoute,
@@ -675,8 +737,10 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   FeedbackRoute: FeedbackRoute,
+  PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiPublicRazorpayWebhookRoute: ApiPublicRazorpayWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

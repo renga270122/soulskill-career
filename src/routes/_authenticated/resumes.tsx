@@ -20,6 +20,7 @@ import { TemplateGallery } from "@/components/TemplateGallery";
 import { ResumeCustomization } from "@/components/ResumeCustomization";
 import { ResumeImport } from "@/components/ResumeImport";
 import { ResumeAssistant } from "@/components/ResumeAssistant";
+import { AccessGate } from "@/components/AccessGate";
 import { ATSChecker } from "@/components/ATSChecker";
 import { templates, defaultPresentation, presentationSchema, selectDesign, type Presentation } from "@/lib/resume-design";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -98,7 +99,7 @@ function ResumeStudio() {
         {review && <section className="space-y-3 border-l-2 border-primary bg-accent p-4"><h2 className="font-semibold">Review imported information</h2><ul className="list-disc space-y-1 pl-5 text-sm">{review.warnings.map((w,i) => <li key={i}>{w}</li>)}</ul><details><summary className="cursor-pointer text-sm font-medium">Extracted original text</summary><pre className="mt-3 max-h-60 overflow-y-auto whitespace-pre-wrap break-words text-xs">{review.text || "No readable text extracted."}</pre></details><p className="text-xs">Correct missing or uncertain information, then save as a new resume.</p></section>}
         {view === "content" && <CareerEditor value={draft.content} onChange={content => update({ ...draft, content })} />}
         {view === "customize" && <ResumeCustomization value={draft.presentation} onChange={presentation => update({ ...draft, presentation })} />}
-        {view === "ats" && <ATSChecker key={draft.id ?? "draft"} content={draft.content} presentation={draft.presentation} />}
+        {view === "ats" && <AccessGate feature="ATS analysis"><ATSChecker key={draft.id ?? "draft"} content={draft.content} presentation={draft.presentation} /></AccessGate>}
         {view === "assistant" && <ResumeAssistant content={draft.content} targetRole={draft.target_role} onChange={content => update({ ...draft, content })} onTailoredCopy={content => { const { id: _id, ...copy } = draft; setDraft({ ...copy, title: `${draft.title} tailored`.slice(0,200), content }); setDirty(true); }} />}
         {view === "templates" && <TemplateGallery selected={draft.template} content={draft.content} presentation={draft.presentation} onSelect={template => update({ ...draft, template, presentation: selectDesign(draft.presentation, template) })} />}
 
