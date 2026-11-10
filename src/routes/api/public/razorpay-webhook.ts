@@ -4,6 +4,7 @@ import { z } from "zod";
 const event = z.object({ event: z.string(), payload: z.object({ payment: z.object({ entity: z.object({ id: z.string(), order_id: z.string().nullable() }) }).optional() }) });
 
 export const Route = createFileRoute("/api/public/razorpay-webhook")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {
