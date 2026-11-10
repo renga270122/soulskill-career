@@ -1,5 +1,6 @@
 # Milestone 2
-- [ ] Separate recruiter presentation from professional workspace: hiring-focused dashboard/navigation and role-appropriate account settings; preserve existing roles and honest unavailable states.
+- [x] Separate recruiter presentation from professional workspace: hiring-focused dashboard/navigation and role-appropriate account settings; seven tests pass, desktop/phone hiring view and professional regression verified, no runtime errors. No saved roles changed.
+- [ ] Verify recruiter-only account settings and dual-role workspace switching end-to-end — blocked: only a professional account exists; presentation rules tested without inventing or changing account roles.
 - [x] Remove demo labels, fabricated recruiter figures and sample dashboard inspiration; verified signed-in candidate/recruiter screens on desktop/phone, no overflow, 15 relevant tests pass. Existing saved user records were preserved.
 - [x] Harden repeated Google sign-in attempts and session handoff; six relevant tests pass and Google-style callback reaches the workspace.
 - [ ] Verify original incognito/account-selection failure — blocked: real Google account-selection failure was not reproducible; needs a live retry after publication.
