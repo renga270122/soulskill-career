@@ -39,6 +39,7 @@ import { Route as AuthenticatedResumesRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedRoutineRouteImport } from './routes/_authenticated/routine'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedVisionBoardRouteImport } from './routes/_authenticated/vision-board'
+import { Route as ApiPublicRazorpayWebhookRouteImport } from './routes/api/public/razorpay-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -196,6 +197,12 @@ const AuthenticatedVisionBoardRoute =
     path: '/vision-board',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiPublicRazorpayWebhookRoute =
+  ApiPublicRazorpayWebhookRouteImport.update({
+    id: '/api/public/razorpay-webhook',
+    path: '/api/public/razorpay-webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -227,6 +234,7 @@ export interface FileRoutesByFullPath {
   '/routine': typeof AuthenticatedRoutineRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/vision-board': typeof AuthenticatedVisionBoardRoute
+  '/api/public/razorpay-webhook': typeof ApiPublicRazorpayWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -258,6 +266,7 @@ export interface FileRoutesByTo {
   '/routine': typeof AuthenticatedRoutineRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/vision-board': typeof AuthenticatedVisionBoardRoute
+  '/api/public/razorpay-webhook': typeof ApiPublicRazorpayWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -291,6 +300,7 @@ export interface FileRoutesById {
   '/_authenticated/routine': typeof AuthenticatedRoutineRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/vision-board': typeof AuthenticatedVisionBoardRoute
+  '/api/public/razorpay-webhook': typeof ApiPublicRazorpayWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -324,6 +334,7 @@ export interface FileRouteTypes {
     | '/routine'
     | '/settings'
     | '/vision-board'
+    | '/api/public/razorpay-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -355,6 +366,7 @@ export interface FileRouteTypes {
     | '/routine'
     | '/settings'
     | '/vision-board'
+    | '/api/public/razorpay-webhook'
   id:
     | '__root__'
     | '/'
@@ -387,6 +399,7 @@ export interface FileRouteTypes {
     | '/_authenticated/routine'
     | '/_authenticated/settings'
     | '/_authenticated/vision-board'
+    | '/api/public/razorpay-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -400,6 +413,7 @@ export interface RootRouteChildren {
   FeedbackRoute: typeof FeedbackRoute
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiPublicRazorpayWebhookRoute: typeof ApiPublicRazorpayWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -614,6 +628,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVisionBoardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/razorpay-webhook': {
+      id: '/api/public/razorpay-webhook'
+      path: '/api/public/razorpay-webhook'
+      fullPath: '/api/public/razorpay-webhook'
+      preLoaderRoute: typeof ApiPublicRazorpayWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -677,6 +698,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeedbackRoute: FeedbackRoute,
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiPublicRazorpayWebhookRoute: ApiPublicRazorpayWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
