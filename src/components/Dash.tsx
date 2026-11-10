@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { DemoBadge } from "@/components/Brand";
 
 export function PageHeader({ eyebrow, title, children }: { eyebrow: string; title: string; children?: ReactNode }) {
   return (
@@ -23,12 +22,11 @@ export function Stat({ label, value, note }: { label: string; value: string; not
   );
 }
 
-export function Panel({ title, demo, children }: { title: string; demo?: boolean; children: ReactNode }) {
+export function Panel({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="rounded-lg border border-border bg-card p-6 shadow-soft">
       <div className="mb-4 flex items-center justify-between gap-2">
         <h2 className="font-semibold text-foreground">{title}</h2>
-        {demo && <DemoBadge />}
       </div>
       {children}
     </section>

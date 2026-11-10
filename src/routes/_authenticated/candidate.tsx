@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { FileText, Upload, ArrowRight, Sun } from "lucide-react";
 import { Stat } from "@/components/Dash";
 import { Button } from "@/components/ui/button";
-import { DailyInspiration } from "@/components/DailyInspiration";
 import { CareerFeatureCards } from "@/components/CareerFeatureCards";
 import { BeliefJourney } from "@/components/BeliefJourney";
 import { careerQuery, resumesQuery } from "@/lib/career-queries";
@@ -42,7 +41,6 @@ function CandidateDashboard() {
       </div>
       <Button asChild variant="outline"><Link to={data.intentions[0]?.completed_at ? "/journey" : "/career-onboarding"}>Continue my journey <ArrowRight /></Link></Button>
     </header>
-    <DailyInspiration />
     <CareerFeatureCards />
     <section><h2 className="mb-5 font-display text-3xl">Small steps. Real progress.</h2><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <Stat label="Profile completeness" value={`${completeness(career.content)}%`} note="Based on your saved profile" />

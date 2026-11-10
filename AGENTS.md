@@ -34,11 +34,10 @@ use the editor.
 - ATS matching is deterministic browser-side keyword coverage using shared visible resume sections and keyword-extractor stopwords; equal-weight distinct terms, explicit estimated-score limits and no resume mutations prevent misleading employer-score claims.
 - Community conversations live separately from career profiles; authenticated RLS allows member reads, self-owned inserts and owner/admin deletion, keeping private career records out of discussions.
 - Apply visual themes through shared CSS tokens and UI controls; keep resume document layout/fonts/colors independent so visual refreshes never alter saved presentation or exported PDFs.
-- Keep dashboard inspiration in static presentation components and reuse existing career links; no tracking writes or new ATS-score claims are introduced by inspirational UI.
+- Dashboard metrics must derive from owned saved records; unavailable recruitment tools render explicit unavailable states without fabricated counts or records.
 - Keep public information pages in separate sitemap-included routes with a shared public page shell/footer; this makes trust information directly accessible without entering the private workspace.
 - Roles live in `public.user_roles` (candidate/recruiter/admin); signup may self-select only candidate or recruiter, admin is never assigned from user metadata — prevents privilege escalation.
 - Recruiter access to candidate profiles is gated by RLS on `profiles.discoverable` — consent must be enforced in the database, not the UI.
-- Any sample figures in the UI must carry the "Demo data" badge — the brief forbids implying unbuilt features work.
 - Store private career details separately from discoverable profile names/headlines; owner RLS prevents contact details leaking to recruiters.
 - Validate career and resume writes with shared Zod schemas in authenticated server functions; explicit user IDs and RLS enforce ownership.
 - Use a shared measured line layout for SVG page previews and browser-generated PDFs with embedded fonts; pagination and template settings stay identical and text remains selectable.
