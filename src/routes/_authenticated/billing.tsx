@@ -71,7 +71,7 @@ function BillingPage() {
         handler: async (r: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
           try {
             const ent = await confirm({ data: { orderId: r.razorpay_order_id, paymentId: r.razorpay_payment_id, signature: r.razorpay_signature } });
-            toast.success(`Payment confirmed. Premium is active until ${fmt(ent.expires_at)}.`);
+            toast.success(`Payment confirmed. Premium is active until ${fmt(ent?.expires_at)}.`);
           } catch (e) { toast.error(e instanceof Error ? e.message : "Verification pending"); }
           await refresh(); setBusy(null);
         },
