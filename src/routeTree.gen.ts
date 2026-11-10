@@ -17,6 +17,7 @@ import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FeedbackRouteImport } from './routes/feedback'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedActionPlanRouteImport } from './routes/_authenticated/action-plan'
@@ -78,6 +79,11 @@ const FaqRoute = FaqRouteImport.update({
 const FeedbackRoute = FeedbackRouteImport.update({
   id: '/feedback',
   path: '/feedback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -212,6 +218,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/feedback': typeof FeedbackRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/action-plan': typeof AuthenticatedActionPlanRoute
@@ -244,6 +251,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/feedback': typeof FeedbackRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/action-plan': typeof AuthenticatedActionPlanRoute
@@ -278,6 +286,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/feedback': typeof FeedbackRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/action-plan': typeof AuthenticatedActionPlanRoute
@@ -312,6 +321,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/feedback'
+    | '/pricing'
     | '/privacy'
     | '/sitemap.xml'
     | '/action-plan'
@@ -344,6 +354,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/feedback'
+    | '/pricing'
     | '/privacy'
     | '/sitemap.xml'
     | '/action-plan'
@@ -377,6 +388,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/feedback'
+    | '/pricing'
     | '/privacy'
     | '/sitemap.xml'
     | '/_authenticated/action-plan'
@@ -411,6 +423,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   FeedbackRoute: typeof FeedbackRoute
+  PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicRazorpayWebhookRoute: typeof ApiPublicRazorpayWebhookRoute
@@ -472,6 +485,13 @@ declare module '@tanstack/react-router' {
       path: '/feedback'
       fullPath: '/feedback'
       preLoaderRoute: typeof FeedbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -696,6 +716,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   FeedbackRoute: FeedbackRoute,
+  PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicRazorpayWebhookRoute: ApiPublicRazorpayWebhookRoute,
