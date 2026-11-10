@@ -1,4 +1,5 @@
 # Milestone 2
+- [ ] Refine recruiter menu and screens into hiring-specific stages and options; presentation only, no new hiring functionality.
 - [x] Separate recruiter presentation from professional workspace: hiring-focused dashboard/navigation and role-appropriate account settings; seven tests pass, desktop/phone hiring view and professional regression verified, no runtime errors. No saved roles changed.
 - [ ] Verify recruiter-only account settings and dual-role workspace switching end-to-end — blocked: only a professional account exists; presentation rules tested without inventing or changing account roles.
 - [x] Remove demo labels, fabricated recruiter figures and sample dashboard inspiration; verified signed-in candidate/recruiter screens on desktop/phone, no overflow, 15 relevant tests pass. Existing saved user records were preserved.
