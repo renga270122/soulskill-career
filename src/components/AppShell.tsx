@@ -98,7 +98,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </header>
         {menuOpen && <nav id="mobile-navigation" aria-label="Mobile navigation" className="border-b border-border bg-sidebar p-4 md:hidden">
           {canSwitch && <Button asChild variant="outline" className="mb-3" onClick={() => setMenuOpen(false)}><Link to={workspace === "recruiter" ? "/candidate" : "/recruiter"}>{workspace === "recruiter" ? "Professional workspace" : "Recruiter workspace"}</Link></Button>}
-          <ul className="grid gap-1 min-[380px]:grid-cols-2" onClick={() => setMenuOpen(false)}>{sections.flatMap(s => NAV[s]).map(item => <NavRow key={item.label} item={item} />)}<NavRow item={{label:"Privacy & account",icon:Settings,to:"/settings"}} /></ul>
+          <ul className="grid gap-1 min-[380px]:grid-cols-2" onClick={() => setMenuOpen(false)}>{sections.flatMap(s => NAV[s]).map(item => <NavRow key={item.label} item={item} />)}{workspace === "candidate" && <NavRow item={{label:"Plans & billing",icon:Star,to:"/billing"}} />}<NavRow item={{label:"Privacy & account",icon:Settings,to:"/settings"}} /></ul>
           {workspace === "recruiter" && hiringGroups.map(group => <div key={group.title} className="mt-4"><p className="px-2 text-xs font-medium text-muted-foreground">{group.title}</p><ul className="mt-2 grid gap-1">{group.tools.map(tool => <NavRow key={tool.title} item={{ label: tool.title, icon: tool.icon }} />)}</ul></div>)}
           <Button variant="ghost" onClick={signOut} className="mt-3"><LogOut />Sign out</Button>
         </nav>}

@@ -30,6 +30,7 @@ export function PublicPage({ title, intro, children }: { title: string; intro: s
           <Brand />
           <nav aria-label="Main navigation" className="flex flex-wrap items-center gap-1">
             <Button asChild variant="ghost"><Link to="/">Home</Link></Button>
+            <Button asChild variant="ghost"><Link to="/pricing">Pricing</Link></Button>
             <Button asChild variant="ghost"><Link to="/about">About</Link></Button>
             <Button asChild variant="ghost"><Link to="/contact">Contact</Link></Button>
             <Button asChild variant="ghost"><Link to="/faq">FAQs</Link></Button>
