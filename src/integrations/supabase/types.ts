@@ -14,6 +14,32 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_usage: {
+        Row: {
+          month: string
+          used: number
+          user_id: string
+        }
+        Insert: {
+          month: string
+          used?: number
+          user_id: string
+        }
+        Update: {
+          month?: string
+          used?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_usage_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       candidate_details: {
         Row: {
           content: Json
@@ -255,6 +281,38 @@ export type Database = {
           },
         ]
       }
+      eligibility_declarations: {
+        Row: {
+          category: string
+          declared: boolean
+          declared_at: string
+          expires_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          declared?: boolean
+          declared_at?: string
+          expires_at: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          declared?: boolean
+          declared_at?: string
+          expires_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "eligibility_declarations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       feedback: {
         Row: {
           created_at: string
@@ -388,6 +446,138 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      payment_orders: {
+        Row: {
+          amount_paise: number
+          created_at: string
+          duration_days: number
+          id: string
+          paid_at: string | null
+          plan_id: string
+          plan_name: string
+          razorpay_order_id: string
+          razorpay_payment_id: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          amount_paise: number
+          created_at?: string
+          duration_days: number
+          id?: string
+          paid_at?: string | null
+          plan_id: string
+          plan_name: string
+          razorpay_order_id: string
+          razorpay_payment_id?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          amount_paise?: number
+          created_at?: string
+          duration_days?: number
+          id?: string
+          paid_at?: string | null
+          plan_id?: string
+          plan_name?: string
+          razorpay_order_id?: string
+          razorpay_payment_id?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_orders_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "premium_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_orders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      premium_entitlements: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          order_id: string
+          plan_name: string
+          starts_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at: string
+          id?: string
+          order_id: string
+          plan_name: string
+          starts_at: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          order_id?: string
+          plan_name?: string
+          starts_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "premium_entitlements_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: true
+            referencedRelation: "payment_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "premium_entitlements_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      premium_plans: {
+        Row: {
+          active: boolean
+          badge: string | null
+          duration_days: number
+          id: string
+          name: string
+          price_paise: number
+          sort_order: number
+        }
+        Insert: {
+          active?: boolean
+          badge?: string | null
+          duration_days: number
+          id: string
+          name: string
+          price_paise: number
+          sort_order?: number
+        }
+        Update: {
+          active?: boolean
+          badge?: string | null
+          duration_days?: number
+          id?: string
+          name?: string
+          price_paise?: number
+          sort_order?: number
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -534,6 +724,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      activate_paid_order: {
+        Args: { _razorpay_order_id: string; _razorpay_payment_id: string }
+        Returns: string
+      }
+      consume_ai_action: { Args: { _limit: number }; Returns: number }
+      declare_eligibility: { Args: { _category: string }; Returns: undefined }
+      has_full_access: { Args: { _user_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -546,6 +743,7 @@ export type Database = {
         Args: { journey_start: string; journey_title: string; task_rows: Json }
         Returns: string
       }
+      withdraw_eligibility: { Args: never; Returns: undefined }
     }
     Enums: {
       app_role: "candidate" | "recruiter" | "admin"
