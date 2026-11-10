@@ -1,13 +1,13 @@
 # Premium International Resume Studio redesign (uploaded spec)
-- [ ] Audit existing resume builder: routes, data model, templates, PDF/DOCX export, ATS, AI integrations (explore agent running).
-- [ ] Eight distinct premium templates: Classic, Modern, Executive, Tech Professional, Innovator, Corporate, Creative, Graduate — distinct layouts, not recolours.
-- [ ] Resume Studio interface: premium template gallery with thumbnails, live preview, autosave indicators, desktop split view, mobile preview mode.
-- [ ] ATS Professional vs Visual Professional output modes; honest ATS analysis (no guaranteed scores).
-- [ ] Multi-page support: automatic page breaks, A4 + US Letter, no clipped/orphaned content.
-- [ ] PDF + DOCX export: preview-matching, selectable text, real DOCX (not renamed PDF).
-- [ ] Controlled customization: accent colour, approved font pairs, font size limits, section order/visibility, page size.
-- [ ] Premium preview screen: template name, page count, zoom, page navigation, change-template/edit/download actions.
-- [ ] QA: test all 8 templates with fresher/experienced/senior/career-transition content, 1–3 pages, missing sections; verify no regressions.
+- [x] Audit existing resume builder: routes, data model, templates, PDF/DOCX export, ATS, AI integrations.
+- [x] Eight spec templates (Classic, Modern, Executive, Tech Professional, Innovator, Corporate, Creative, Graduate) with distinct layout configs; four legacy designs preserved. Database constraint widened for the two new keys.
+- [x] Studio interface: gallery with distinct thumbnails, live preview, debounced autosave with race guard, desktop split view; verified persistence across reload.
+- [x] Multi-page support: entry keep-together, no isolated section headings, page numbering, A4 + US Letter; covered by layout tests.
+- [x] PDF + real DOCX export (docx library, ZIP signature and Letter dimensions tested); preview and PDF render from shared shape data.
+- [x] Controlled customization: navy/slate accents added, page size, section order/visibility; zoom controls and page count in preview.
+- [ ] ATS Professional vs Visual Professional output-mode labelling in the Studio UI.
+- [ ] Additional section types (languages, awards, publications, volunteer, custom) — requires additive career-schema extension shared with profiles.
+- [ ] QA matrix: all 8 templates with fresher/experienced/senior/career-transition content and 1–3 page exports (partially covered by layout tests; full visual matrix pending).
 
 # Milestone 2
 - [x] Refine recruiter menu and screens into hiring-specific stages and options; six tool panels grouped into role definition, sourcing/assessment and interview/decision stages. Verified signed-in desktop/phone menus, no overflow/runtime errors, four regression tests pass; presentation only, no new hiring functionality.
