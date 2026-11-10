@@ -1,5 +1,5 @@
 # Milestone 2
-- [ ] Remove demo labels and fabricated recruiter figures; remove sample dashboard inspiration and verify genuine-data screens.
+- [x] Remove demo labels, fabricated recruiter figures and sample dashboard inspiration; verified signed-in candidate/recruiter screens on desktop/phone, no overflow, 15 relevant tests pass. Existing saved user records were preserved.
 - [x] Harden repeated Google sign-in attempts and session handoff; six relevant tests pass and Google-style callback reaches the workspace.
 - [ ] Verify original incognito/account-selection failure — blocked: real Google account-selection failure was not reproducible; needs a live retry after publication.
 - [x] Add JD-based resume keyword match scoring with matched/missing terms and transparent calculation; verified saved-resume and Resume Studio flows on desktop/mobile, stale-score removal and 16 relevant tests; no resume mutations.
