@@ -145,7 +145,9 @@
   font-weight: 400;
   letter-spacing: 0;
 }
-:root { --resume-paper: oklch(1 0 0); --resume-ink: oklch(0.23 0 0); --resume-purple: oklch(0.42 0.13 290); --resume-teal: oklch(0.44 0.08 185); --resume-ruby: oklch(0.43 0.14 20); --resume-graphite: oklch(0.3 0 0); }
+:root { --resume-paper: oklch(1 0 0); --resume-ink: oklch(0.23 0 0); --resume-purple: oklch(0.42 0.13 290); --resume-teal: oklch(0.44 0.08 185); --resume-ruby: oklch(0.43 0.14 20); --resume-graphite: oklch(0.3 0 0); --resume-navy: oklch(0.35 0.07 255); --resume-slate: oklch(0.46 0.02 250); }
+.resume-accent-navy { --resume-accent: var(--resume-navy); }
+.resume-accent-slate { --resume-accent: var(--resume-slate); }
 .resume-accent-purple { --resume-accent: var(--resume-purple); }
 .resume-accent-teal { --resume-accent: var(--resume-teal); }
 .resume-accent-ruby { --resume-accent: var(--resume-ruby); }
@@ -170,6 +172,10 @@
 .template-executive .thumb-name, .template-executive .thumb-role { margin-left: auto; margin-right: auto; }
 .template-technical .thumb-heading { background: var(--resume-teal); width: 60%; height: 3px; }
 .template-technical .thumb-name { height: 5px; }
+.template-innovator .thumb-name { height: 9px; background: var(--resume-navy); }
+.template-innovator .thumb-heading { background: var(--resume-navy); border-bottom: 2px solid var(--resume-navy); width: 55%; }
+.template-corporate .thumb-heading { background: var(--resume-graphite); border-bottom: 2px solid var(--resume-graphite); width: 62%; }
+.template-corporate .thumb-rule { background: var(--resume-graphite); }
 .template-minimal { padding: 24px 19px; }
 .template-minimal .thumb-rule { display: none; }
 .template-minimal .thumb-heading { background: var(--resume-ink); height: 2px; }
