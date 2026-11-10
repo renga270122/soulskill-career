@@ -4,7 +4,8 @@ import { emptyCareer, resumeInputSchema } from "@/lib/career-schema";
 import { resumeSections } from "@/lib/resume-document";
 import { validateResumeFile, MAX_RESUME_BYTES } from "@/lib/resume-import-schema";
 describe("Resume marketplace rules", () => {
-  it("offers ten distinct reusable templates", () => expect(new Set(templates.map(t => t.key)).size).toBe(10));
+  it("offers twelve distinct reusable templates", () => expect(new Set(templates.map(t => t.key)).size).toBe(12));
+  it("includes the eight premium international templates", () => { for (const key of ["classic", "modern", "executive", "technical", "innovator", "corporate", "creative", "graduate"]) expect(templates.some(t => t.key === key)).toBe(true); });
   it("switches templates without changing resume facts", () => { const content = { ...emptyCareer(), full_name: "Candidate", summary: "Built software" }; for (const t of templates) { const saved = resumeInputSchema.parse({ title: "Resume", target_role: "", content, template: t.key, presentation: selectDesign(defaultPresentation(), t.key) }); expect(saved.content).toEqual(content); } });
   it("rejects duplicate section order", () => expect(presentationSchema.safeParse({ order: ["summary","summary","education","skills","projects","certifications"] }).success).toBe(false));
   it("hides optional sections without deleting their content", () => { const content = { ...emptyCareer(), summary: "Actual summary" }; expect(resumeSections(content, { ...defaultPresentation(), hidden: ["summary"] })).toEqual([]); expect(content.summary).toBe("Actual summary"); });

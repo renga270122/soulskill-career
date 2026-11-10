@@ -1,0 +1,2 @@
+ALTER TABLE public.resumes DROP CONSTRAINT resume_design_keys;
+ALTER TABLE public.resumes ADD CONSTRAINT resume_design_keys CHECK (design_key IN ('classic','modern','executive','technical','innovator','corporate','creative','graduate','minimal','contemporary','projects','columns'));
