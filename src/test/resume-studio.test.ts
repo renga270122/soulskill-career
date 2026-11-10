@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Packer } from "docx";
+import { unzipSync } from "fflate";
 import { defaultPresentation, presentationSchema, selectDesign } from "@/lib/resume-design";
 import { emptyCareer } from "@/lib/career-schema";
 import { buildResumeDocx } from "@/lib/resume-docx";
@@ -32,7 +33,8 @@ describe("Resume Studio upgrade rules", () => {
   it("uses US Letter dimensions in DOCX when selected", async () => {
     const content = { ...emptyCareer(), full_name: "Asha Rao" };
     const base64 = await Packer.toBase64String(buildResumeDocx(content, "modern", { ...defaultPresentation(), pageSize: "letter" }));
-    const xml = atob(base64);
+    const files = unzipSync(Uint8Array.from(atob(base64), c => c.charCodeAt(0)));
+    const xml = new TextDecoder().decode(files["word/document.xml"]);
     expect(xml).toContain('w:w="12240"');
     expect(xml).toContain('w:h="15840"');
   });
