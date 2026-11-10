@@ -1,4 +1,4 @@
-import { Link, useNavigate, useRouteContext } from "@tanstack/react-router";
+import { Link, useNavigate, useRouteContext, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
 import {
@@ -10,6 +10,7 @@ import { useRoles, type AppRole } from "@/lib/auth";
 import { Brand } from "@/components/Brand";
 import { Button } from "@/components/ui/button";
 import { PublicFooter } from "@/components/PublicPages";
+import { workspacePresentation } from "@/lib/workspace-presentation";
 
 type NavItem = { label: string; icon: typeof User; to?: "/candidate" | "/profile" | "/resumes" | "/recruiter" | "/settings" | "/journey" | "/vision-board" | "/affirmations" | "/journal" | "/action-plan" | "/routine" | "/coach" | "/applications" | "/find-jobs" | "/interview-prep" | "/growth-report" | "/ats-check" };
 
@@ -32,10 +33,10 @@ const NAV: Record<"candidate" | "recruiter", NavItem[]> = {
     { label: "Growth Report", icon: LayoutDashboard, to: "/growth-report" },
   ],
   recruiter: [
-    { label: "Dashboard", icon: LayoutDashboard, to: "/recruiter" },
+    { label: "Hiring overview", icon: LayoutDashboard, to: "/recruiter" },
     { label: "Company", icon: Building2 },
     { label: "Jobs", icon: Briefcase },
-    { label: "Discover", icon: Search },
+    { label: "Candidate discovery", icon: Search },
     { label: "Shortlist", icon: Star },
     { label: "Pipeline", icon: Workflow },
   ],
@@ -47,10 +48,9 @@ export function AppShell({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const qc = useQueryClient();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const sections: ("candidate" | "recruiter")[] = [];
-  if (roles.includes("candidate") || roles.includes("admin")) sections.push("candidate");
-  if (roles.includes("recruiter") || roles.includes("admin")) sections.push("recruiter");
+  const pathname = useRouterState({ select: state => state.location.pathname });
+  const { workspace, canSwitch } = workspacePresentation(roles, pathname);
+  const sections = [workspace];
 
   async function signOut() {
     await qc.cancelQueries();
@@ -63,6 +63,8 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen bg-background">
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col overflow-y-auto border-r border-sidebar-border bg-sidebar p-5 md:flex">
         <Brand />
+        <p className="mt-4 border-b border-sidebar-border pb-4 text-sm font-medium text-sidebar-foreground">{workspace === "recruiter" ? "Recruiter workspace" : "Professional workspace"}</p>
+        {canSwitch && <Button asChild variant="outline" size="sm" className="mt-4"><Link to={workspace === "recruiter" ? "/candidate" : "/recruiter"}>{workspace === "recruiter" ? "Professional workspace" : "Recruiter workspace"}</Link></Button>}
         <nav className="mt-10 flex-1 space-y-8">
           {sections.map((s) => (
             <div key={s}>
@@ -89,14 +91,15 @@ export function AppShell({ children }: { children: ReactNode }) {
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur-sm">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-4 md:flex md:justify-between md:px-10">
-            <div className="min-w-0"><div className="md:hidden"><Brand /></div><p className="hidden text-xs text-muted-foreground md:block">Believe in your potential. Build your future.</p></div>
+            <div className="min-w-0"><div className="md:hidden"><Brand /><p className="mt-1 text-xs text-muted-foreground">{workspace === "recruiter" ? "Recruiter workspace" : "Professional workspace"}</p></div><p className="hidden text-xs text-muted-foreground md:block">{workspace === "recruiter" ? "Find potential. Build your team." : "Believe in your potential. Build your future."}</p></div>
             <div className="flex shrink-0 items-center gap-2">
-              <Button asChild variant="ghost" size="icon" className="rounded-full bg-secondary" title="Your profile"><Link to={sections.includes("candidate") ? "/profile" : "/settings"} aria-label="Your profile"><User /></Link></Button>
+              <Button asChild variant="ghost" size="icon" className="rounded-full bg-secondary" title={workspace === "recruiter" ? "Account settings" : "Your profile"}><Link to={workspace === "candidate" ? "/profile" : "/settings"} aria-label={workspace === "recruiter" ? "Account settings" : "Your profile"}>{workspace === "recruiter" ? <Settings /> : <User />}</Link></Button>
               <Button variant="ghost" size="icon" className="md:hidden" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
             </div>
           </div>
         </header>
         {menuOpen && <nav id="mobile-navigation" aria-label="Mobile navigation" className="border-b border-border bg-sidebar p-4 md:hidden">
+          {canSwitch && <Button asChild variant="outline" className="mb-3" onClick={() => setMenuOpen(false)}><Link to={workspace === "recruiter" ? "/candidate" : "/recruiter"}>{workspace === "recruiter" ? "Professional workspace" : "Recruiter workspace"}</Link></Button>}
           <ul className="grid gap-1 min-[380px]:grid-cols-2" onClick={() => setMenuOpen(false)}>{sections.flatMap(s => NAV[s]).map(item => <NavRow key={item.label} item={item} />)}<NavRow item={{label:"Privacy & account",icon:Settings,to:"/settings"}} /></ul>
           <Button variant="ghost" onClick={signOut} className="mt-3"><LogOut />Sign out</Button>
         </nav>}
@@ -118,7 +121,7 @@ function NavRow({ item }: { item: NavItem }) {
     return (
       <li className="flex items-center justify-between rounded-md px-2 py-2 text-sm text-muted-foreground/70">
         <span className="flex items-center gap-3"><Icon className="size-4" /> {item.label}</span>
-        <span className="text-[10px] uppercase tracking-wider">Soon</span>
+        <span className="text-[10px] uppercase tracking-wider">Unavailable</span>
       </li>
     );
   }

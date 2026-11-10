@@ -8,6 +8,8 @@ import { PageHeader, Panel } from "@/components/Dash";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { pageMeta } from "@/lib/page-meta";
+import { useRoles } from "@/lib/auth";
+import { workspacePresentation } from "@/lib/workspace-presentation";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -24,6 +26,8 @@ function SettingsPage() {
   const qc = useQueryClient();
   const navigate = useNavigate();
   const del = useServerFn(deleteMyAccount);
+  const { data: roles = [] } = useRoles(user.id);
+  const { showCareerConsent, workspace } = workspacePresentation(roles, "/settings");
 
   const { data: profile } = useQuery({
     queryKey: ["profile", user.id],
@@ -58,8 +62,9 @@ function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
-      <PageHeader eyebrow="Account" title="Privacy & consent" />
-      <Panel title="Recruiter visibility">
+      <PageHeader eyebrow={workspace === "recruiter" ? "Recruiter account" : "Account"} title={workspace === "recruiter" ? "Account & privacy" : "Privacy & consent"} />
+      {workspace === "recruiter" && <section className="space-y-3 border-b border-border pb-6"><h2 className="font-display text-2xl">Recruiter account</h2><p className="break-words text-sm text-muted-foreground">{user.email}</p><p className="text-sm text-muted-foreground">Professional resumes, contact details and personal reflections remain private. Company management and hiring tools are not available yet.</p></section>}
+      {showCareerConsent && <Panel title="Recruiter visibility">
         <div className="flex items-start justify-between gap-6">
           <p className="text-sm text-muted-foreground">
             When on, recruiters on SoulSkill can find your name and headline. Your resumes and contact details
@@ -72,7 +77,7 @@ function SettingsPage() {
             aria-label="Allow recruiters to discover me"
           />
         </div>
-      </Panel>
+      </Panel>}
       <Panel title="Delete account">
         <p className="text-sm text-muted-foreground">
           Permanently deletes your account, profile and all associated data. This cannot be undone.

@@ -35,6 +35,7 @@ use the editor.
 - Community conversations live separately from career profiles; authenticated RLS allows member reads, self-owned inserts and owner/admin deletion, keeping private career records out of discussions.
 - Apply visual themes through shared CSS tokens and UI controls; keep resume document layout/fonts/colors independent so visual refreshes never alter saved presentation or exported PDFs.
 - Dashboard metrics must derive from owned saved records; unavailable recruitment tools render explicit unavailable states without fabricated counts or records.
+- Keep active workspace navigation and account presentation role-specific through a browser-safe presentation helper; dual-role users switch workspaces rather than mixing career and hiring menus, without changing authorization or saved roles.
 - Keep public information pages in separate sitemap-included routes with a shared public page shell/footer; this makes trust information directly accessible without entering the private workspace.
 - Roles live in `public.user_roles` (candidate/recruiter/admin); signup may self-select only candidate or recruiter, admin is never assigned from user metadata — prevents privilege escalation.
 - Recruiter access to candidate profiles is gated by RLS on `profiles.discoverable` — consent must be enforced in the database, not the UI.
