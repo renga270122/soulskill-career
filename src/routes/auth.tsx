@@ -9,14 +9,14 @@ import { Label } from "@/components/ui/label";
 import { Brand } from "@/components/Brand";
 import { PublicFooter } from "@/components/PublicPages";
 import { createSignInHandoff } from "@/lib/sign-in-flow";
+import { careerSignupMetadata } from "@/lib/auth";
 
-type Search = { mode?: "signin" | "signup" | undefined; as?: "candidate" | "recruiter" | undefined };
+type Search = { mode?: "signin" | "signup" | undefined };
 
 export const Route = createFileRoute("/auth")({
   staticData: { sitemap: false },
   validateSearch: (s: Record<string, unknown>): Search => ({
     mode: s["mode"] === "signup" ? "signup" : undefined,
-    as: s["as"] === "recruiter" ? "recruiter" : undefined,
   }),
   head: () => ({
     meta: [
@@ -41,7 +41,6 @@ function AuthPage() {
   const search = Route.useSearch();
   const navigate = useNavigate();
   const [mode, setMode] = useState<"signin" | "signup">(search.mode ?? "signin");
-  const [accountType, setAccountType] = useState<"candidate" | "recruiter">(search.as ?? "candidate");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -72,7 +71,7 @@ function AuthPage() {
           password,
           options: {
             emailRedirectTo: window.location.origin + "/app",
-            data: { full_name: fullName, account_type: accountType },
+            data: careerSignupMetadata(fullName),
           },
         });
         if (error) throw error;
@@ -107,7 +106,7 @@ function AuthPage() {
         <blockquote className="font-display text-4xl leading-tight">
           Believe in Your Potential.<br /><em>Build Your Future.</em><p className="mt-6 font-sans text-sm text-muted-foreground">Manifest. Believe. Achieve.</p>
         </blockquote>
-        <p className="text-sm text-muted-foreground">Private by default. Visible only with your consent.</p>
+        <p className="text-sm text-muted-foreground">Your career work stays in your personal workspace.</p>
       </aside>
       <main className="flex flex-col px-6 py-8">
         <div className="md:hidden"><Brand /></div>
@@ -135,23 +134,6 @@ function AuthPage() {
                   {mode === "signup" ? "Sign in" : "Create one"}
                 </Button>
               </p>
-
-              {mode === "signup" && (
-                <div className="mt-8 grid grid-cols-2 gap-2 rounded-lg bg-secondary p-1" role="radiogroup" aria-label="Account type">
-                  {(["candidate", "recruiter"] as const).map((t) => (
-                    <Button variant="ghost"
-                      key={t}
-                      type="button"
-                      role="radio"
-                      aria-checked={accountType === t}
-                      onClick={() => setAccountType(t)}
-                      className={`rounded-md py-2 text-sm font-medium transition ${accountType === t ? "bg-card text-foreground shadow-soft" : "text-muted-foreground"}`}
-                    >
-                      {t === "candidate" ? "Professional" : "Recruiter"}
-                    </Button>
-                  ))}
-                </div>
-              )}
 
               <div className="mt-6 space-y-3">
                 <Button type="button" variant="outline" className="h-10 w-full" disabled={googleBusy || busy} aria-busy={googleBusy} onClick={signInWithGoogle}>

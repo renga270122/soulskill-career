@@ -1,12 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, FileText, Target, ShieldCheck, Users, Briefcase, MessagesSquare } from "lucide-react";
+import { ArrowRight, FileText, Target, MessagesSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Brand } from "@/components/Brand";
 import { PublicFooter } from "@/components/PublicPages";
 import { useSession } from "@/lib/auth";
 import heroAsset from "@/assets/hero-collaboration.webp.asset.json";
 import jobDiscoveryAsset from "@/assets/job-discovery.webp.asset.json";
-import coachingAsset from "@/assets/interview-coaching.webp.asset.json";
 import { BeliefJourney } from "@/components/BeliefJourney";
 
 export const Route = createFileRoute("/")({
@@ -17,14 +16,14 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Build a compelling career profile, sharpen your resume, and get discovered — only when you choose to be.",
+          "An affordable AI-powered career platform for individual job seekers and professionals: build resumes, explore jobs and plan your next step.",
       },
       { property: "og:title", content: "SoulSkill — Believe in Your Potential. Build Your Future." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       {
         property: "og:description",
-        content: "Career profiles, resumes, interview prep and consent-based recruiting.",
+        content: "AI-powered resume tools, ATS keyword matching, job discovery and career guidance for individuals.",
       },
     ],
   }),
@@ -36,12 +35,6 @@ const candidate = [
   { icon: Target, t: "Match to the role", d: "Compare your experience against any job description." },
   { icon: MessagesSquare, t: "Prepare with intent", d: "Track applications and rehearse for interviews." },
 ];
-const recruiter = [
-  { icon: Briefcase, t: "Structured roles", d: "Create and manage openings with clear requirements." },
-  { icon: Users, t: "Consent-based discovery", d: "Only candidates who opt in are ever visible." },
-  { icon: ShieldCheck, t: "Humans decide", d: "No automated rejection. Shortlists stay in your hands." },
-];
-
 function Landing() {
   const { session } = useSession();
   return (
@@ -83,24 +76,21 @@ function Landing() {
           <div className="mt-10 flex flex-wrap gap-3">
             <Button asChild size="lg" variant="ink">
               <Link to="/auth" search={{ mode: "signup" }}>
-                I'm a professional <ArrowRight />
+                Build my career <ArrowRight />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link to="/auth" search={{ mode: "signup", as: "recruiter" }}>I'm hiring</Link>
-            </Button>
+
           </div>
         </div>
       </section>
 
       <div className="mx-auto max-w-6xl px-6 pt-8"><BeliefJourney /></div>
 
-      <section className="mx-auto grid max-w-6xl gap-16 px-6 py-24 md:grid-cols-2">
+      <section className="mx-auto max-w-6xl px-6 py-16">
         {[
           { label: "For professionals", items: candidate, img: jobDiscoveryAsset, alt: "A professional exploring job opportunities on a laptop in a modern coworking lounge" },
-          { label: "For recruiters", items: recruiter, img: coachingAsset, alt: "A career coach mentoring a professional one-on-one in a bright office" },
         ].map((col) => (
-          <div key={col.label}>
+          <div key={col.label} className="grid items-start gap-10 md:grid-cols-2">
             <figure className="mb-8 overflow-hidden rounded-xl border border-border shadow-soft">
               <img
                 src={col.img.url}
@@ -111,7 +101,7 @@ function Landing() {
                 className="aspect-[3/2] w-full object-cover"
               />
             </figure>
-            <h2 className="font-display text-3xl text-foreground">{col.label}</h2>
+            <div><h2 className="font-display text-3xl text-foreground">{col.label}</h2>
             <ul className="mt-8 divide-y divide-border border-y border-border">
               {col.items.map(({ icon: Icon, t, d }) => (
                 <li key={t} className="flex gap-4 py-6">
@@ -122,7 +112,7 @@ function Landing() {
                   </div>
                 </li>
               ))}
-            </ul>
+            </ul></div>
           </div>
         ))}
       </section>
@@ -131,8 +121,8 @@ function Landing() {
         <div className="mx-auto max-w-6xl px-6 py-20">
           <h2 className="max-w-2xl font-display text-4xl">Privacy is the default, not a setting.</h2>
           <p className="mt-6 max-w-2xl text-ink-foreground/70">
-            Your resumes and personal details stay private. Recruiters see you only after you opt into
-            visibility — and you can withdraw consent or delete your account at any time.
+            Your resumes, career details and personal reflections belong to your personal workspace.
+            You choose when to export documents and share them outside SoulSkill.
           </p>
         </div>
       </section>

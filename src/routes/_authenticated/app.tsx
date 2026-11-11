@@ -9,5 +9,5 @@ export const Route = createFileRoute("/_authenticated/app")({
     const { data } = await supabase.from("user_roles").select("role").eq("user_id", context.user.id);
     throw redirect({ to: homeForRoles((data ?? []).map((r) => r.role as AppRole)), replace: true });
   },
-  head: () => pageMeta("Workspace", "Open your personal SoulSkill career or hiring workspace."),
+  head: () => pageMeta("Workspace", "Open your personal SoulSkill career workspace."),
 });

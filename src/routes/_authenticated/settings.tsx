@@ -1,15 +1,12 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { deleteMyAccount } from "@/lib/account.functions";
 import { PageHeader, Panel } from "@/components/Dash";
-import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { pageMeta } from "@/lib/page-meta";
-import { useRoles } from "@/lib/auth";
-import { workspacePresentation } from "@/lib/workspace-presentation";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -17,7 +14,7 @@ import {
 
 export const Route = createFileRoute("/_authenticated/settings")({
   staticData: { sitemap: false },
-  head: () => pageMeta("Privacy & account", "Manage recruiter visibility, consent and your SoulSkill account."),
+  head: () => pageMeta("Privacy & account", "Manage your personal SoulSkill account and privacy."),
   component: SettingsPage,
 });
 
@@ -26,29 +23,6 @@ function SettingsPage() {
   const qc = useQueryClient();
   const navigate = useNavigate();
   const del = useServerFn(deleteMyAccount);
-  const { data: roles = [] } = useRoles(user.id);
-  const { showCareerConsent, workspace } = workspacePresentation(roles, "/settings");
-
-  const { data: profile } = useQuery({
-    queryKey: ["profile", user.id],
-    queryFn: async () => {
-      const { data } = await supabase.from("profiles").select("*").eq("id", user.id).maybeSingle();
-      return data;
-    },
-  });
-
-  const toggle = useMutation({
-    mutationFn: async (discoverable: boolean) => {
-      const { error } = await supabase.from("profiles").update({ discoverable, updated_at: new Date().toISOString() }).eq("id", user.id);
-      if (error) throw error;
-    },
-    onSuccess: (_d, v) => {
-      qc.invalidateQueries({ queryKey: ["profile", user.id] });
-      toast.success(v ? "You're now visible to recruiters" : "Consent withdrawn — you're hidden from recruiters");
-    },
-    onError: (e) => toast.error(e.message),
-  });
-
   const remove = useMutation({
     mutationFn: () => del(),
     onSuccess: async () => {
@@ -62,22 +36,8 @@ function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
-      <PageHeader eyebrow={workspace === "recruiter" ? "Recruiter account" : "Account"} title={workspace === "recruiter" ? "Account & privacy" : "Privacy & consent"} />
-      {workspace === "recruiter" && <section className="space-y-3 border-b border-border pb-6"><h2 className="font-display text-2xl">Recruiter account</h2><p className="break-words text-sm text-muted-foreground">{user.email}</p><p className="text-sm text-muted-foreground">Professional resumes, contact details and personal reflections remain private. Company management and hiring tools are not available yet.</p></section>}
-      {showCareerConsent && <Panel title="Recruiter visibility">
-        <div className="flex items-start justify-between gap-6">
-          <p className="text-sm text-muted-foreground">
-            When on, recruiters on SoulSkill can find your name and headline. Your resumes and contact details
-            stay private. Turn this off at any time to withdraw consent.
-          </p>
-          <Switch
-            checked={!!profile?.discoverable}
-            disabled={!profile || toggle.isPending}
-            onCheckedChange={(v) => toggle.mutate(v)}
-            aria-label="Allow recruiters to discover me"
-          />
-        </div>
-      </Panel>}
+      <PageHeader eyebrow="Account" title="Privacy & account" />
+      <Panel title="Personal workspace"><p className="break-words text-sm text-muted-foreground">{user.email}</p><p className="mt-3 text-sm text-muted-foreground">Your career details, resumes and personal reflections stay in your personal workspace. You choose when to export and share your documents.</p></Panel>
       <Panel title="Delete account">
         <p className="text-sm text-muted-foreground">
           Permanently deletes your account, profile and all associated data. This cannot be undone.

@@ -28,7 +28,7 @@ export function taskProgress(tasks:{completed_at:string|null}[]) { return tasks.
 export const weekNames=['Clarity and self-belief','Visibility and opportunities','Strengthen capabilities','Inspired action'];
 export const program = [
  ['Document 10 significant career achievements','Identify strongest technical and leadership skills','Define ideal target role','Finalize resume','Update LinkedIn profile','Identify 20 target companies'],
- ['Apply to 10 suitable jobs','Connect with 10 engineering managers or recruiters','Contact 5 former colleagues','Publish one LinkedIn technical post','Practice explaining professional experience'],
+ ['Apply to 10 suitable jobs','Connect with 10 professionals in your target field','Contact 5 former colleagues','Publish one LinkedIn technical post','Practice explaining professional experience'],
  ['Prepare two system-design case studies','Document a significant engineering project',"Explore AI opportunities in your domain",'Practice three technical architect interview scenarios','Apply to another 10 relevant opportunities'],
  ['Follow up on applications','Complete two mock interviews','Refine resume based on job descriptions','Identify skill gaps from feedback','Review progress and create the next 30-day plan']
 ];
