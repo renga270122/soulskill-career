@@ -34,11 +34,11 @@ use the editor.
 - ATS matching is deterministic browser-side keyword coverage using shared visible resume sections and keyword-extractor stopwords; equal-weight distinct terms, explicit estimated-score limits and no resume mutations prevent misleading employer-score claims.
 - Community conversations live separately from career profiles; authenticated RLS allows member reads, self-owned inserts and owner/admin deletion, keeping private career records out of discussions.
 - Apply visual themes through shared CSS tokens and UI controls; keep resume document layout/fonts/colors independent so visual refreshes never alter saved presentation or exported PDFs.
-- Dashboard metrics must derive from owned saved records; unavailable recruitment tools render explicit unavailable states without fabricated counts or records.
-- Keep active workspace navigation and account presentation role-specific through a browser-safe presentation helper; dual-role users switch workspaces rather than mixing career and hiring menus, without changing authorization or saved roles.
-- Use one display-only hiring catalogue for recruiter navigation and dashboard stages; consistent availability labels must not imply operational recruitment tools.
+- Dashboard metrics must derive from owned saved records; unavailable career features must not show fabricated counts or records.
+- Resolve post-login destinations with homeForRoles: career-role users open the candidate dashboard, historical non-career-role users open their owned profile; never change saved authorization roles to choose a screen.
+- Keep the retired workspace URL as a redirect-only compatibility route, with no discovery catalogue or visibility integration; published bookmarks remain usable without a retired screen.
 - Keep public information pages in separate sitemap-included routes with a shared public page shell/footer; this makes trust information directly accessible without entering the private workspace.
-- Roles live in `public.user_roles` (candidate/recruiter/admin); signup may self-select only candidate or recruiter, admin is never assigned from user metadata — prevents privilege escalation.
+- Roles live in `public.user_roles` (candidate/recruiter/admin); active signup always sends candidate, admin is never assigned from user metadata — prevents privilege escalation.
 - Recruiter access to candidate profiles is gated by RLS on `profiles.discoverable` — consent must be enforced in the database, not the UI.
 - Store private career details separately from discoverable profile names/headlines; owner RLS prevents contact details leaking to recruiters.
 - Validate career and resume writes with shared Zod schemas in authenticated server functions; explicit user IDs and RLS enforce ownership.

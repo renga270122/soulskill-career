@@ -17,18 +17,18 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return <PublicPage title="About SoulSkill" intro="From career clarity to confidence, from confidence to action.">
     <section><h2>Manifest your career. Build your future.</h2>
-      <p>SoulSkill is a career-development platform by Soulvest.ai, built for professionals who want to present their experience clearly and take purposeful steps toward their next opportunity.</p>
+      <p>SoulSkill is an affordable AI-powered career platform by Soulvest.ai, built for individual job seekers and professionals who want to present their experience clearly and take purposeful steps toward their next opportunity.</p>
       <p>Our approach brings visualization, affirmations and reflection together with practical career work: developing a resume, exploring opportunities, preparing for interviews and tracking next steps.</p>
     </section>
     <section><h2>Real experience, purposeful action</h2>
       <p>Resume Studio helps you upload, review, edit and export resumes. The AI Career Coach offers suggestions grounded in your saved profile and resume. Goals are aspirations, not achievements, and AI suggestions require your review.</p>
-      <p>Find Jobs opens external job portals. Applications are submitted on the employer’s or portal’s website; SoulSkill helps you track your progress, not submit applications on your behalf.</p>
+      <p>Find Jobs opens external job portals. Applications are submitted on the company’s or portal’s website; SoulSkill helps you track your progress, not submit applications on your behalf.</p>
     </section>
     <section><h2>Your career, your choice</h2>
-      <p>Recruiter discovery is opt-in. Your private career reflections and journals are separate from your discoverable profile. Read our <Link to="/privacy">Privacy Policy</Link> for how information is handled.</p>
+      <p>Your career work belongs in your personal workspace. Export and share your documents only when you choose. Read our <Link to="/privacy">Privacy Policy</Link> for how information is handled.</p>
     </section>
     <section><h2>No promises of guaranteed outcomes</h2>
-      <p>Mindset practices support reflection and action; they do not guarantee a job, interview, salary or other result. SoulSkill is not an employer or a job-placement guarantee service.</p>
+      <p>Mindset practices support reflection and action; they do not guarantee a job, interview, salary or other result. SoulSkill is not a job-placement guarantee service.</p>
       <p>Questions or feedback? <Link to="/contact">Contact SoulSkill</Link>.</p>
     </section>
   </PublicPage>;

@@ -1,15 +1,22 @@
 import { describe, expect, it } from "vitest";
-import { workspacePresentation } from "@/lib/workspace-presentation";
+import { homeForRoles } from "@/lib/auth";
 
-describe("Role-specific workspace presentation", () => {
-  it("keeps recruiter-only accounts hiring-focused including account settings", () => {
-    expect(workspacePresentation(["recruiter"], "/settings")).toEqual({ workspace: "recruiter", canSwitch: false, showCareerConsent: false });
+describe("Personal career destinations without role mutations", () => {
+  it("opens the candidate workspace for job seekers", () => {
+    expect(homeForRoles(["candidate"])).toBe("/candidate");
   });
-  it("keeps professional accounts in their career workspace", () => {
-    expect(workspacePresentation(["candidate"], "/candidate")).toEqual({ workspace: "candidate", canSwitch: false, showCareerConsent: true });
+  it("opens a personal profile for historical non-career accounts", () => {
+    const roles = ["recruiter"] as const;
+    expect(homeForRoles([...roles])).toBe("/profile");
+    expect(roles).toEqual(["recruiter"]);
   });
-  it("separates hiring navigation for accounts with both roles", () => {
-    expect(workspacePresentation(["candidate", "recruiter"], "/recruiter")).toEqual({ workspace: "recruiter", canSwitch: true, showCareerConsent: true });
-    expect(workspacePresentation(["candidate", "recruiter"], "/candidate").workspace).toBe("candidate");
+  it("opens career tools for dual-role accounts", () => {
+    expect(homeForRoles(["candidate", "recruiter"])).toBe("/candidate");
+  });
+  it("keeps administrative accounts on owned profile tools", () => {
+    expect(homeForRoles(["admin"])).toBe("/profile");
+  });
+  it("defaults new accounts to the job-seeker destination", () => {
+    expect(homeForRoles([])).toBe("/candidate");
   });
 });
