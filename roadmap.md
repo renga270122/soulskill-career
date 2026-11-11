@@ -1,3 +1,7 @@
+# B2C-only application
+- [ ] Remove hiring entry points, registration choices, dashboards, navigation and discovery integrations; retain legacy URL redirect and all saved data.
+- [ ] Update public information and career copy; test career routing, registration payload, signed-in desktop/mobile navigation and preserved tools.
+
 # Premium International Resume Studio redesign (uploaded spec)
 - [x] Audit existing resume builder: routes, data model, templates, PDF/DOCX export, ATS, AI integrations.
 - [x] Eight spec templates (Classic, Modern, Executive, Tech Professional, Innovator, Corporate, Creative, Graduate) with distinct layout configs; four legacy designs preserved. Database constraint widened for the two new keys.
@@ -12,7 +16,7 @@
 # Milestone 2
 - [x] Refine recruiter menu and screens into hiring-specific stages and options; six tool panels grouped into role definition, sourcing/assessment and interview/decision stages. Verified signed-in desktop/phone menus, no overflow/runtime errors, four regression tests pass; presentation only, no new hiring functionality.
 - [x] Separate recruiter presentation from professional workspace: hiring-focused dashboard/navigation and role-appropriate account settings; seven tests pass, desktop/phone hiring view and professional regression verified, no runtime errors. No saved roles changed.
-- [ ] Verify recruiter-only account settings and dual-role workspace switching end-to-end — blocked: only a professional account exists; presentation rules tested without inventing or changing account roles.
+- [x] Recruiter-only settings and workspace switching retired by the B2C-only request; historical roles remain unchanged.
 - [x] Remove demo labels, fabricated recruiter figures and sample dashboard inspiration; verified signed-in candidate/recruiter screens on desktop/phone, no overflow, 15 relevant tests pass. Existing saved user records were preserved.
 - [x] Harden repeated Google sign-in attempts and session handoff; six relevant tests pass and Google-style callback reaches the workspace.
 - [ ] Verify original incognito/account-selection failure — blocked: real Google account-selection failure was not reproducible; needs a live retry after publication.
