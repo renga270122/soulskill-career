@@ -1,6 +1,6 @@
 # B2C-only application
-- [ ] Remove hiring entry points, registration choices, dashboards, navigation and discovery integrations; retain legacy URL redirect and all saved data.
-- [ ] Update public information and career copy; test career routing, registration payload, signed-in desktop/mobile navigation and preserved tools.
+- [x] Remove hiring entry points, registration choices, dashboards, navigation and discovery integrations; retain redirect-only legacy URL and all saved data. No database migrations or account mutations.
+- [x] Update public information and career copy; verify candidate-only registration payload without creating a test account, signed-in career tools and desktop/mobile navigation. Real Google/email sign-in and historical non-career account end-to-end checks not exercised; existing auth preserved, routing rules tested.
 
 # Premium International Resume Studio redesign (uploaded spec)
 - [x] Audit existing resume builder: routes, data model, templates, PDF/DOCX export, ATS, AI integrations.

@@ -37,7 +37,11 @@ export function AppShell({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const qc = useQueryClient();
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigation = NAV.map(item => item.to === "/candidate" ? { ...item, to: homeForRoles(roles) } : item);
+  // Historical non-career roles retain owned document tools, not links to
+  // journey features whose existing permissions require the candidate role.
+  const personalTools = new Set(["/candidate", "/profile", "/resumes", "/ats-check"]);
+  const navigation = NAV.filter(item => roles.includes("candidate") || (item.to && personalTools.has(item.to)))
+    .map(item => item.to === "/candidate" ? { ...item, to: homeForRoles(roles) } : item);
 
   async function signOut() {
     await qc.cancelQueries();

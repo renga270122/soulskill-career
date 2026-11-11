@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { homeForRoles } from "@/lib/auth";
+import { homeForRoles, careerSignupMetadata } from "@/lib/auth";
 
 describe("Personal career destinations without role mutations", () => {
+  it("registers new users exclusively as job seekers", () => {
+    expect(careerSignupMetadata("New Professional")).toEqual({ full_name: "New Professional", account_type: "candidate" });
+  });
   it("opens the candidate workspace for job seekers", () => {
     expect(homeForRoles(["candidate"])).toBe("/candidate");
   });

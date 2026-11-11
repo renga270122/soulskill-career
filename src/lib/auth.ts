@@ -5,6 +5,10 @@ import { supabase } from "@/integrations/supabase/client";
 
 export type AppRole = "candidate" | "recruiter" | "admin";
 
+export function careerSignupMetadata(fullName: string) {
+  return { full_name: fullName, account_type: "candidate" } as const;
+}
+
 export function useSession() {
   const [session, setSession] = useState<Session | null>(null);
   const [ready, setReady] = useState(false);

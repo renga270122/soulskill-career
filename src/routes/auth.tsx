@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Brand } from "@/components/Brand";
 import { PublicFooter } from "@/components/PublicPages";
 import { createSignInHandoff } from "@/lib/sign-in-flow";
+import { careerSignupMetadata } from "@/lib/auth";
 
 type Search = { mode?: "signin" | "signup" | undefined };
 
@@ -70,7 +71,7 @@ function AuthPage() {
           password,
           options: {
             emailRedirectTo: window.location.origin + "/app",
-            data: { full_name: fullName, account_type: "candidate" },
+            data: careerSignupMetadata(fullName),
           },
         });
         if (error) throw error;
